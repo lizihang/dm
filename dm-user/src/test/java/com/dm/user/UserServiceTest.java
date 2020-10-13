@@ -47,4 +47,21 @@ public class UserServiceTest
 		user.setAddr("北京市西城区");
 		userService.save(user);
 	}
+
+	@Test
+	public void testUpdate(){
+		User user = new User();
+		user.setId(1);
+		user.setName("管理员");
+		user.setGender("男");
+		user.setBirth(new Date());
+		user.setAddr("北京市西城区");
+		userService.update(user);
+	}
+
+	@Test
+	public void testDeleteById()
+	{
+		userService.deleteById(4);
+	}
 }

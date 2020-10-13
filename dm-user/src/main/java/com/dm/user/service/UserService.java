@@ -21,4 +21,8 @@ public interface UserService
 	List<User> findAll();
 
 	void save(User user);
+
+	void deleteById(int id);
+
+	void update(User user);
 }

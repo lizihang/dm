@@ -4,6 +4,7 @@ import com.dm.user.dao.UserDAO;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService
 	UserDAO userDAO;
 
 	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public List<User> findAll()
 	{
 		return userDAO.findAll();
@@ -38,5 +40,17 @@ public class UserServiceImpl implements UserService
 	public void save(User user)
 	{
 		userDAO.save(user);
+	}
+
+	@Override
+	public void deleteById(int id)
+	{
+		userDAO.deleteById(id);
+	}
+
+	@Override
+	public void update(User user)
+	{
+		userDAO.update(user);
 	}
 }

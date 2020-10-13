@@ -44,8 +44,43 @@ public class UserController
 			result.setMsg("保存成功");
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			result.setStatus(false);
 			result.setMsg("保存失败");
+		}
+		return result;
+	}
+
+	@DeleteMapping("deleteById")
+	public Result deleteById(int id)
+	{
+		Result result = new Result();
+		try
+		{
+			userService.deleteById(id);
+			result.setMsg("删除成功，用户id：" + id);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			result.setStatus(false);
+			result.setMsg("删除失败");
+		}
+		return result;
+	}
+
+	@PostMapping("update")
+	public Result update(@RequestBody User user)
+	{
+		Result result = new Result();
+		try
+		{
+			userService.update(user);
+			result.setMsg("修改成功");
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			result.setStatus(false);
+			result.setMsg("修改失败");
 		}
 		return result;
 	}
