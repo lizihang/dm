@@ -1,13 +1,9 @@
 package com.dm.user;
 
-import com.dm.user.po.User;
 import com.dm.user.service.UserService;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -27,6 +23,7 @@ public class UserServiceTest
 	@Resource
 	private UserService userService;
 
+	/*
 	@Test
 	public void testFindAll()
 	{
@@ -64,4 +61,5 @@ public class UserServiceTest
 	{
 		userService.deleteById(4);
 	}
+	*/
 }

@@ -6,12 +6,11 @@ import com.dm.user.vo.Result;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 /**
- * <p>标题：</p>
+ * <p>标题：用户Controller</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：
+ * 其他说明：用户注册，用户登录，用户修改
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
@@ -28,42 +27,35 @@ public class UserController
 	@Resource
 	UserService userService;
 
-	@GetMapping("findAll")
-	public List<User> findAll()
+	@PostMapping("login")
+	public Result login(@RequestBody User user)
 	{
-		return userService.findAll();
+		Result result = new Result();
+		User u = userService.login(user);
+		if (u != null)
+		{
+			result.setMsg("登录成功!");
+		} else
+		{
+			result.setStatus(false);
+			result.setMsg("用户名或密码错误！");
+		}
+		return result;
 	}
 
-	@PostMapping("save")
-	public Result save(@RequestBody User user)
+	@PostMapping("regist")
+	public Result regist(@RequestBody User user)
 	{
 		Result result = new Result();
 		try
 		{
-			userService.save(user);
+			userService.regist(user);
 			result.setMsg("保存成功");
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 			result.setStatus(false);
 			result.setMsg("保存失败");
-		}
-		return result;
-	}
-
-	@DeleteMapping("deleteById")
-	public Result deleteById(int id)
-	{
-		Result result = new Result();
-		try
-		{
-			userService.deleteById(id);
-			result.setMsg("删除成功，用户id：" + id);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			result.setStatus(false);
-			result.setMsg("删除失败");
 		}
 		return result;
 	}
@@ -84,4 +76,31 @@ public class UserController
 		}
 		return result;
 	}
+
+	/*
+	@GetMapping("queryList")
+	public List<User> queryList()
+	{
+		return userService.findAll();
+	}
+	*/
+
+	/*
+	@DeleteMapping("deleteById")
+	public Result deleteById(int id)
+	{
+		Result result = new Result();
+		try
+		{
+			userService.deleteById(id);
+			result.setMsg("删除成功，用户id：" + id);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			result.setStatus(false);
+			result.setMsg("删除失败");
+		}
+		return result;
+	}
+	*/
 }

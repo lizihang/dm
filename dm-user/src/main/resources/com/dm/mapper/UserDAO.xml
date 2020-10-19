@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dm.user.dao.UserDAO">
 
-    <select id="findAll" resultType="User">
-        select id,name,birth,gender,addr from users
+    <select id="queryUserByUserName" resultType="User">
+        select id,username,password,createdate,modifydate from users where username = #{username}
     </select>
 
     <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into users values(#{id},#{name},#{birth},#{gender},#{addr})
+        insert into users values(#{id},#{username},#{password},#{createdate},#{modifydate})
     </insert>
 
     <delete id="deleteById" parameterType="int">
@@ -15,7 +15,7 @@
     </delete>
 
     <update id="update" parameterType="User">
-        update users set name=#{name},birth=#{birth},gender=#{gender},addr=#{addr} where id=#{id}
+        update users set username=#{username},password=#{password},createdate=#{createdate},modifydate=#{modifydate} where id=#{id}
     </update>
 
 </mapper>

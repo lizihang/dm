@@ -19,11 +19,12 @@ import java.util.Date;
 public class User
 {
 	private int    id;
-	private String name;
+	private String username;
+	private String password;
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date   birth;
-	private String gender;
-	private String addr;
+	private Date   createdate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date   modifydate;
 
 	public int getId()
 	{
@@ -35,49 +36,49 @@ public class User
 		this.id = id;
 	}
 
-	public String getName()
+	public String getUsername()
 	{
-		return name;
+		return username;
 	}
 
-	public void setName(String name)
+	public void setUsername(String username)
 	{
-		this.name = name;
+		this.username = username;
 	}
 
-	public Date getBirth()
+	public String getPassword()
 	{
-		return birth;
+		return password;
 	}
 
-	public void setBirth(Date birth)
+	public void setPassword(String password)
 	{
-		this.birth = birth;
+		this.password = password;
 	}
 
-	public String getGender()
+	public Date getCreatedate()
 	{
-		return gender;
+		return createdate;
 	}
 
-	public void setGender(String gender)
+	public void setCreatedate(Date createdate)
 	{
-		this.gender = gender;
+		this.createdate = createdate;
 	}
 
-	public String getAddr()
+	public Date getModifydate()
 	{
-		return addr;
+		return modifydate;
 	}
 
-	public void setAddr(String addr)
+	public void setModifydate(Date modifydate)
 	{
-		this.addr = addr;
+		this.modifydate = modifydate;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "User{" + "id=" + id + ", name='" + name + '\'' + ", birth=" + birth + ", gender='" + gender + '\'' + ", addr='" + addr + '\'' + '}';
+		return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", createdate=" + createdate + ", modifydate=" + modifydate + '}';
 	}
 }

@@ -4,11 +4,9 @@ import com.dm.user.dao.UserDAO;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -30,22 +28,23 @@ public class UserServiceImpl implements UserService
 	UserDAO userDAO;
 
 	@Override
-	@Transactional(propagation = Propagation.SUPPORTS)
-	public List<User> findAll()
+	public User login(User user)
 	{
-		return userDAO.findAll();
+		User userDB = userDAO.queryUserByUserName(user.getUsername());
+		if (userDB != null)
+		{
+			if (user.getPassword().equals(userDB.getPassword()))
+			{
+				// TODO 直接返回，密码处理
+				return userDB;
+			}
+		}
+		return null;
 	}
 
 	@Override
-	public void save(User user)
+	public void regist(User user)
 	{
-		userDAO.save(user);
-	}
-
-	@Override
-	public void deleteById(int id)
-	{
-		userDAO.deleteById(id);
 	}
 
 	@Override
@@ -53,4 +52,22 @@ public class UserServiceImpl implements UserService
 	{
 		userDAO.update(user);
 	}
+	// @Override
+	// @Transactional(propagation = Propagation.SUPPORTS)
+	// public List<User> findAll()
+	// {
+	// 	return userDAO.findAll();
+	// }
+
+	// @Override
+	// public void save(User user)
+	// {
+	// 	userDAO.save(user);
+	// }
+
+	// @Override
+	// public void deleteById(int id)
+	// {
+	// 	userDAO.deleteById(id);
+	// }
 }

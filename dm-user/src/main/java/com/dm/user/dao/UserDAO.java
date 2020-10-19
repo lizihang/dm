@@ -2,13 +2,11 @@ package com.dm.user.dao;
 
 import com.dm.user.po.User;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 /**
- * <p>标题：</p>
+ * <p>标题：用户DAO</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：
+ * 其他说明：用户增删改查
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
@@ -20,11 +18,11 @@ import java.util.List;
 @Mapper
 public interface UserDAO
 {
-	List<User> findAll();
+	User queryUserByUserName(String username);
 
 	void save(User user);
 
-	void deleteById(int id);
-
 	void update(User user);
+
+	void deleteById(int id);
 }

@@ -1,13 +1,11 @@
 package com.dm.user.service;
 
 import com.dm.user.po.User;
-
-import java.util.List;
 /**
- * <p>标题：</p>
+ * <p>标题：用户service</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：
+ * 其他说明：处理用户登录，用户注册，用户修改
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
@@ -18,11 +16,25 @@ import java.util.List;
  */
 public interface UserService
 {
-	List<User> findAll();
+	/**
+	 * 用户登录
+	 * @param user
+	 * @return
+	 */
+	User login(User user);
 
-	void save(User user);
+	/**
+	 * 用户注册
+	 * @param user
+	 */
+	void regist(User user);
 
-	void deleteById(int id);
-
+	/**
+	 * 用户修改
+	 * @param user
+	 */
 	void update(User user);
+	// List<User> findAll();
+	// void save(User user);
+	// void deleteById(int id);
 }

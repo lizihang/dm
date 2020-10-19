@@ -1,5 +1,6 @@
 package com.dm.user.vo;
 
+import java.util.Map;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -15,8 +16,14 @@ package com.dm.user.vo;
  */
 public class Result
 {
-	private boolean status = true;
-	private String  msg;
+	private boolean            status;
+	private String             msg;
+	private Map<String,Object> data;
+
+	public Result()
+	{
+		this.status = true;
+	}
 
 	public boolean isStatus()
 	{
@@ -36,5 +43,15 @@ public class Result
 	public void setMsg(String msg)
 	{
 		this.msg = msg;
+	}
+
+	public Map<String,Object> getData()
+	{
+		return data;
+	}
+
+	public void setData(Map<String,Object> data)
+	{
+		this.data = data;
 	}
 }
