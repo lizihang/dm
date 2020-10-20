@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService
 		{
 			if (user.getPassword().equals(userDB.getPassword()))
 			{
-				// TODO 直接返回，密码处理
+				// TODO 返回时密码置空处理
+				userDB.setPassword(null);
 				return userDB;
 			}
 		}

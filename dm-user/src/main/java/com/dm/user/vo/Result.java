@@ -1,5 +1,6 @@
 package com.dm.user.vo;
 
+import java.util.HashMap;
 import java.util.Map;
 /**
  * <p>标题：</p>
@@ -47,7 +48,7 @@ public class Result
 
 	public Map<String,Object> getData()
 	{
-		return data;
+		return data = data == null ? new HashMap<>() : data;
 	}
 
 	public void setData(Map<String,Object> data)

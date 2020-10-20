@@ -34,7 +34,9 @@ public class UserController
 		User u = userService.login(user);
 		if (u != null)
 		{
+			// 登录成功将用户返回
 			result.setMsg("登录成功!");
+			result.getData().put("user", u);
 		} else
 		{
 			result.setStatus(false);

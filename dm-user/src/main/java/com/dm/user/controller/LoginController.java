@@ -37,10 +37,8 @@ public class LoginController
 		ValidateCodeUtil.Validate v = ValidateCodeUtil.getRandomCode();     //直接调用静态方法，返回验证码对象
 		if (v != null)
 		{
-			Map<String,Object> data = new HashMap<>();
-			data.put("validCode", v.getValue().toLowerCase());
-			data.put("validStr", v.getBase64Str());
-			result.setData(data);
+			result.getData().put("validCode", v.getValue().toLowerCase());
+			result.getData().put("validStr", v.getBase64Str());
 			result.setMsg("获取验证码成功");
 		}
 		return result;
