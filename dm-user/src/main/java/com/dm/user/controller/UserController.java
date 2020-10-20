@@ -6,6 +6,7 @@ import com.dm.user.vo.Result;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 /**
  * <p>标题：用户Controller</p>
  * <p>功能：</p>
@@ -45,19 +46,20 @@ public class UserController
 		return result;
 	}
 
-	@PostMapping("regist")
-	public Result regist(@RequestBody User user)
+	@PostMapping("register")
+	public Result register(@RequestBody User user)
 	{
 		Result result = new Result();
 		try
 		{
-			userService.regist(user);
-			result.setMsg("保存成功");
+			User u = userService.register(user);
+			// 注册成功将用户返回
+			result.setMsg("注册成功!");
+			result.getData().put("user", u);
 		} catch (Exception e)
 		{
-			e.printStackTrace();
 			result.setStatus(false);
-			result.setMsg("保存失败");
+			result.setMsg(e.getMessage());
 		}
 		return result;
 	}
@@ -79,13 +81,11 @@ public class UserController
 		return result;
 	}
 
-	/*
 	@GetMapping("queryList")
 	public List<User> queryList()
 	{
-		return userService.findAll();
+		return userService.queryList();
 	}
-	*/
 
 	/*
 	@DeleteMapping("deleteById")
