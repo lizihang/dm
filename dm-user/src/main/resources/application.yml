@@ -15,3 +15,6 @@ spring:
 mybatis:
   mapper-locations: classpath:com/dm/mapper/*.xml
   type-aliases-package: com.dm.user.po
+logging:
+  level:
+    com.dm: trace

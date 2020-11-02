@@ -3,6 +3,8 @@ package com.dm.user.controller;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
 import com.dm.user.vo.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,12 +27,14 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController
 {
+	Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Resource
 	UserService userService;
 
 	@PostMapping("login")
 	public Result login(@RequestBody User user)
 	{
+		logger.info("用户登录方法，用户名:{}", user.getUsername());
 		Result result = new Result();
 		User u = userService.login(user);
 		if (u != null)
@@ -84,6 +88,7 @@ public class UserController
 	@GetMapping("queryList")
 	public List<User> queryList()
 	{
+		logger.info("查询所有用户方法");
 		return userService.queryList();
 	}
 
