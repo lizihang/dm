@@ -9,20 +9,15 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>dm-user</artifactId>
+	<artifactId>dm-log</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dm-user</name>
-	<description>用户组件</description>
+	<name>dm-log</name>
+	<description>日志组件</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.dm</groupId>
 			<artifactId>dm-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dm</groupId>
-			<artifactId>dm-log</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

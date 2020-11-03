@@ -1,5 +1,6 @@
 package com.dm.user.controller;
 
+import com.dm.log.annotation.DmLog;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
 import com.dm.user.vo.Result;
@@ -27,6 +28,7 @@ public class UserController
 	@Resource
 	UserService userService;
 
+	@DmLog
 	@PostMapping("login")
 	public Result login(@RequestBody User user)
 	{
