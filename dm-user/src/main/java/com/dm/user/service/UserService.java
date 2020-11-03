@@ -1,6 +1,8 @@
 package com.dm.user.service;
 
 import com.dm.user.po.User;
+
+import java.util.List;
 /**
  * <p>标题：用户service</p>
  * <p>功能：</p>
@@ -17,6 +19,12 @@ import com.dm.user.po.User;
 public interface UserService
 {
 	/**
+	 * 查询所有
+	 * @return
+	 */
+	List<User> queryList();
+
+	/**
 	 * 用户登录
 	 * @param user
 	 * @return
@@ -27,14 +35,13 @@ public interface UserService
 	 * 用户注册
 	 * @param user
 	 */
-	void regist(User user);
+	User register(User user);
 
 	/**
 	 * 用户修改
 	 * @param user
 	 */
 	void update(User user);
-	// List<User> findAll();
 	// void save(User user);
 	// void deleteById(int id);
 }

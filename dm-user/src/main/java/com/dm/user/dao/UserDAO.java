@@ -2,6 +2,8 @@ package com.dm.user.dao;
 
 import com.dm.user.po.User;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 /**
  * <p>标题：用户DAO</p>
  * <p>功能：</p>
@@ -18,6 +20,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDAO
 {
+	List<User> queryList();
+
 	User queryUserByUserName(String username);
 
 	void save(User user);

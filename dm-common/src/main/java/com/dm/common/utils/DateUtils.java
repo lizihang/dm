@@ -14,13 +14,13 @@ import java.util.Date;
  * <p>类全名：com.dm.common.utils.DateUtils</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class DateUtils
+public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 {
 	/**
 	 * 获取当前日期
 	 * @return
 	 */
-	public static Date getNowDate()
+	public static Date getServerDate()
 	{
 		return new Date();
 	}

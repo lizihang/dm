@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dm.user.dao.UserDAO">
 
+    <select id="queryList" resultType="User">
+        select id,username,nickname,password,createdate,modifydate from users
+    </select>
+
     <select id="queryUserByUserName" resultType="User">
         select id,username,nickname,password,createdate,modifydate from users where username = #{username}
     </select>

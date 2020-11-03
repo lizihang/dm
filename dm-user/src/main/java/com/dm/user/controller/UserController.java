@@ -4,9 +4,12 @@ import com.dm.log.annotation.DmLog;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
 import com.dm.user.vo.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 /**
  * <p>标题：用户Controller</p>
  * <p>功能：</p>
@@ -25,6 +28,7 @@ import javax.annotation.Resource;
 @RequestMapping("user")
 public class UserController
 {
+	Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Resource
 	UserService userService;
 
@@ -32,6 +36,7 @@ public class UserController
 	@PostMapping("login")
 	public Result login(@RequestBody User user)
 	{
+		logger.info("用户登录方法，用户名:{}", user.getUsername());
 		Result result = new Result();
 		User u = userService.login(user);
 		if (u != null)
@@ -47,19 +52,20 @@ public class UserController
 		return result;
 	}
 
-	@PostMapping("regist")
-	public Result regist(@RequestBody User user)
+	@PostMapping("register")
+	public Result register(@RequestBody User user)
 	{
 		Result result = new Result();
 		try
 		{
-			userService.regist(user);
-			result.setMsg("保存成功");
+			User u = userService.register(user);
+			// 注册成功将用户返回
+			result.setMsg("注册成功!");
+			result.getData().put("user", u);
 		} catch (Exception e)
 		{
-			e.printStackTrace();
 			result.setStatus(false);
-			result.setMsg("保存失败");
+			result.setMsg(e.getMessage());
 		}
 		return result;
 	}
@@ -81,13 +87,12 @@ public class UserController
 		return result;
 	}
 
-	/*
 	@GetMapping("queryList")
 	public List<User> queryList()
 	{
-		return userService.findAll();
+		logger.info("查询所有用户方法");
+		return userService.queryList();
 	}
-	*/
 
 	/*
 	@DeleteMapping("deleteById")
