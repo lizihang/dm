@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dm.log.dao.LogDAO">
 
-    <select id="queryList" resultType="DmLog">
-        select * from logs where logtype = #{logtype}
+    <select id="queryList" resultType="DmLog" parameterType="String">
+        select id, username, method, remark, logtype, operatetime from logs where logtype = #{logtype}
     </select>
 
 </mapper>

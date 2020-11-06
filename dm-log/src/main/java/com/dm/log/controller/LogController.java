@@ -38,6 +38,7 @@ public class LogController
 	@GetMapping("queryLogs")
 	public List<DmLog> queryList(String logType)
 	{
-		return logService.queryList(logType);
+		List<DmLog> dmLogs = logService.queryList(logType);
+		return dmLogs;
 	}
 }
