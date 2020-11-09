@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.dm</groupId>
 	<artifactId>dm</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>dm</name>
 	<packaging>pom</packaging>
 	<description>Parent project for dm</description>
@@ -20,6 +20,7 @@
 		<module>dm-common</module>
 		<module>dm-user</module>
 		<module>dm-log</module>
+		<module>dm-system</module>
 	</modules>
 
 	<properties>
@@ -106,9 +107,21 @@
 
 	<build>
 		<plugins>
+			<!--
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			-->
+			<!-- 注意: 因为我们不需要demo-parent是一个可运行的项目，所以修改原来的打包方式为maven打包方式 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

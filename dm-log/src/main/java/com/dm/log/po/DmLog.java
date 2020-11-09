@@ -1,5 +1,6 @@
 package com.dm.log.po;
 
+import com.dm.po.BasePO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -16,15 +17,22 @@ import java.util.Date;
  * <p>类全名：com.dm.log.po.DmLog</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class DmLog
+public class DmLog extends BasePO
 {
-	private int    id;
-	private String username;
-	private String method;
-	private String remark;
-	private String logtype;
+	private static final long   serialVersionUID = 5142476744976867392L;
+	/**id*/
+	private              int    id;
+	/**用户名*/
+	private              String username;
+	/**方法*/
+	private              String method;
+	/**备注*/
+	private              String remark;
+	/**日志类型*/
+	private              String logtype;
+	/**操作时间*/
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date   operatetime;
+	private              Date   operatetime;
 
 	public int getId()
 	{

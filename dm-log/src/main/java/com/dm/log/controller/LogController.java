@@ -1,5 +1,6 @@
 package com.dm.log.controller;
 
+import com.dm.common.util.RedisUtil;
 import com.dm.log.po.DmLog;
 import com.dm.log.service.LogService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +30,8 @@ public class LogController
 {
 	@Resource
 	LogService logService;
+	@Resource
+	RedisUtil  redisUtil;
 
 	/**
 	 * 查询日志信息
@@ -39,6 +42,8 @@ public class LogController
 	public List<DmLog> queryList(String logType)
 	{
 		List<DmLog> dmLogs = logService.queryList(logType);
+		// 测试redisUtil
+		redisUtil.set("dmlogs", dmLogs, 30);
 		return dmLogs;
 	}
 }

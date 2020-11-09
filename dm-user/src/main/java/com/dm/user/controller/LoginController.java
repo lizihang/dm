@@ -1,7 +1,7 @@
 package com.dm.user.controller;
 
+import com.dm.common.vo.Result;
 import com.dm.user.util.ValidateCodeUtil;
-import com.dm.user.vo.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;

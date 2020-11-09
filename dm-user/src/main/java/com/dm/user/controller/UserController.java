@@ -1,9 +1,9 @@
 package com.dm.user.controller;
 
+import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
-import com.dm.user.vo.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;

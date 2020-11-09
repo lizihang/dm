@@ -1,5 +1,6 @@
 package com.dm.user.po;
 
+import com.dm.po.BasePO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -16,16 +17,23 @@ import java.util.Date;
  * <p>类全名：com.dm.user.po.User</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class User
+public class User extends BasePO
 {
-	private int    id;
-	private String username;
-	private String nickname;
-	private String password;
+	private static final long   serialVersionUID = -3231453355270971403L;
+	/**id*/
+	private              int    id;
+	/**用户名*/
+	private              String username;
+	/**昵称*/
+	private              String nickname;
+	/**密码*/
+	private              String password;
+	/**创建时间*/
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date   createdate;
+	private              Date   createdate;
+	/**修改时间*/
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date   modifydate;
+	private              Date   modifydate;
 
 	public int getId()
 	{

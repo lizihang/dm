@@ -11,10 +11,15 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/dm??serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 1
 
 mybatis:
-  mapper-locations: classpath:com/dm/mapper/*.xml
+  #classpath*:能加载多个路径下的资源文件
+  mapper-locations: classpath*:com/dm/mapper/*.xml
   type-aliases-package: com.dm
 logging:
   level:
-    com.dm: trace
+    com.dm: info
