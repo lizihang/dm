@@ -72,7 +72,7 @@ public class DmLogAspect
 	public void doAfter() throws Throwable
 	{
 		// 接口结束后换行，方便分割查看
-		logger.info("=========================================== End ===========================================" + LINE_SEPARATOR);
+		// logger.info("=========================================== End ===========================================" + LINE_SEPARATOR);
 	}
 
 	/**
@@ -90,6 +90,7 @@ public class DmLogAspect
 		logger.info("Response Args  : {}", result.toString());
 		// 执行耗时
 		logger.info("Time-Consuming : {} ms", System.currentTimeMillis() - startTime.get());
+		logger.info("=========================================== End ===========================================" + LINE_SEPARATOR);
 		startTime.remove();
 		return result;
 	}
