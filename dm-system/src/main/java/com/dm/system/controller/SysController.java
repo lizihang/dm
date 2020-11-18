@@ -1,8 +1,10 @@
 package com.dm.system.controller;
 
+import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
 import com.dm.system.service.SysService;
 import com.dm.system.vo.Menus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +26,7 @@ import java.util.List;
  * <p>类全名：com.dm.system.controller.SysController</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
+@CrossOrigin
 @RestController
 @RequestMapping("system")
 public class SysController
@@ -37,8 +40,12 @@ public class SysController
 	 */
 	@DmLog
 	@GetMapping("getMenus")
-	public List<Menus> getMenus()
+	public Result getMenus()
 	{
-		return sysService.getMenus();
+		Result result = new Result();
+		List<Menus> menus = sysService.getMenus();
+		result.setMsg("获取系统菜单成功！");
+		result.getData().put("menus", menus);
+		return result;
 	}
 }
