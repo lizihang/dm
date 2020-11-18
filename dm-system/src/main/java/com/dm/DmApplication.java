@@ -2,6 +2,7 @@ package com.dm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -16,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @SpringBootApplication
+@EnableScheduling
 public class DmApplication
 {
 	public static void main(String[] args)
