@@ -1,14 +1,12 @@
 package com.dm.system.service.impl;
 
 import com.dm.system.dao.SysDAO;
-import com.dm.system.po.Menu;
 import com.dm.system.service.SysService;
+import com.dm.system.vo.Menus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -29,20 +27,8 @@ public class SysServiceImpl implements SysService
 	SysDAO sysDAO;
 
 	@Override
-	public List<Menu> getMenu()
+	public List<Menus> getMenus()
 	{
-		// TODO
-		List<Menu> menuList = sysDAO.getMenu();
-		Map<String,Menu> map = new HashMap<>();
-		for (Menu m : menuList)
-		{
-			String id = m.getId().toString();
-			if (map.get(id) == null && m.getParent_id() == null)
-			{
-				map.put(id, m);
-				continue;
-			}
-		}
-		return sysDAO.getMenu();
+		return sysDAO.getMenus();
 	}
 }

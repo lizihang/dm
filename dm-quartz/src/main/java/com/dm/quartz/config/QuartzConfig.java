@@ -30,8 +30,10 @@ public class QuartzConfig
 	@Bean
 	public Trigger sampleJobTrigger()
 	{
-		// 每隔两秒执行一次
-		SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever();
+		// 每隔30秒执行一次
+		// SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(30).repeatForever();
+		// 每隔15分钟执行一次
+		SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(15).repeatForever();
 		return TriggerBuilder.newTrigger().forJob(sampleJobDetail()).withIdentity("sampleTrigger").withSchedule(scheduleBuilder).build();
 	}
 }

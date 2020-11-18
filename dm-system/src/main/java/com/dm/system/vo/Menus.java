@@ -1,38 +1,43 @@
-package com.dm.system.po;
+package com.dm.system.vo;
 
-import com.dm.po.BasePO;
+import com.dm.system.po.Menu;
+import com.dm.vo.BaseVO;
+
+import java.util.List;
 /**
- * <p>标题：系统菜单</p>
+ * <p>标题：菜单对象</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：
+ * 其他说明：带下级菜单信息
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年11月10日 9:51</p>
- * <p>类全名：com.dm.system.po.Menu</p>
+ * <p>创建日期：2020年11月18日 15:17</p>
+ * <p>类全名：com.dm.system.vo.Menus</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class Menu extends BasePO
+public class Menus extends BaseVO
 {
-	private static final long    serialVersionUID = -2416400997446704646L;
+	private static final long       serialVersionUID = -2017722060757445058L;
 	/**id*/
-	private              Integer id;
+	private              Integer    id;
 	/**菜单名称*/
-	private              String  name;
+	private              String     name;
 	/**菜单路由*/
-	private              String  router;
+	private              String     router;
 	/**菜单图标*/
-	private              String  icon_class;
+	private              String     icon_class;
 	/**菜单分组*/
-	private              String  group;
+	private              String     group;
 	/**排序号*/
-	private              Integer idx;
+	private              Integer    idx;
 	/**菜单级次*/
-	private              Integer level;
+	private              Integer    level;
 	/**父菜单id*/
-	private              Integer parent_id;
+	private              Integer    parent_id;
+	/**子菜单*/
+	private              List<Menu> subMenus;
 
 	public Integer getId()
 	{
@@ -114,9 +119,19 @@ public class Menu extends BasePO
 		this.parent_id = parent_id;
 	}
 
+	public List<Menu> getSubMenus()
+	{
+		return subMenus;
+	}
+
+	public void setSubMenus(List<Menu> subMenus)
+	{
+		this.subMenus = subMenus;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Menu{" + "id=" + id + ", name='" + name + '\'' + ", router='" + router + '\'' + ", icon_class='" + icon_class + '\'' + ", group='" + group + '\'' + ", idx=" + idx + ", level=" + level + ", parent_id=" + parent_id + '}';
+		return "Menus{" + "id=" + id + ", name='" + name + '\'' + ", router='" + router + '\'' + ", icon_class='" + icon_class + '\'' + ", group='" + group + '\'' + ", idx=" + idx + ", level=" + level + ", parent_id=" + parent_id + ", subMenus=" + subMenus + '}';
 	}
 }

@@ -1,6 +1,6 @@
 package com.dm.system.service;
 
-import com.dm.system.po.Menu;
+import com.dm.system.vo.Menus;
 
 import java.util.List;
 /**
@@ -18,5 +18,5 @@ import java.util.List;
  */
 public interface SysService
 {
-	List<Menu> getMenu();
+	List<Menus> getMenus();
 }

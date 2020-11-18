@@ -1,6 +1,6 @@
 package com.dm.system.dao;
 
-import com.dm.system.po.Menu;
+import com.dm.system.vo.Menus;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,5 +20,5 @@ import java.util.List;
 @Mapper
 public interface SysDAO
 {
-	List<Menu> getMenu();
+	List<Menus> getMenus();
 }

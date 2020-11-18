@@ -1,8 +1,8 @@
 package com.dm.system.controller;
 
 import com.dm.log.annotation.DmLog;
-import com.dm.system.po.Menu;
 import com.dm.system.service.SysService;
+import com.dm.system.vo.Menus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,9 +36,9 @@ public class SysController
 	 * @return
 	 */
 	@DmLog
-	@GetMapping("getMenu")
-	public List<Menu> getMenu()
+	@GetMapping("getMenus")
+	public List<Menus> getMenus()
 	{
-		return sysService.getMenu();
+		return sysService.getMenus();
 	}
 }
