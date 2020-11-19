@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 /**
- * <p>标题：系统Controller</p>
+ * <p>标题：系统相关功能Controller</p>
  * <p>功能：</p>
  * <pre>
  * 其他说明：
  * 功能：
- * 1.获取系统菜单
+ * 1.系统菜单的增删改查
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
