@@ -46,7 +46,6 @@ spring:
             threadCount: 10
             # 线程优先级
             threadPriority: 5
-            threadsInheritContextClassLoaderOfInitializingThread: true
 
 
 mybatis:

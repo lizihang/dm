@@ -1,8 +1,5 @@
 package com.dm.quartz.config;
 
-import com.dm.quartz.vo.TestJob;
-import org.quartz.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 /**
  * <p>标题：</p>
@@ -20,20 +17,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class QuartzConfig
 {
-	@Bean
-	public JobDetail sampleJobDetail()
-	{
-		// 链式编程,可以携带多个参数,在Job类中声明属性 + setter方法
-		return JobBuilder.newJob(TestJob.class).withIdentity("sampleJob").storeDurably().build();
-	}
-
-	@Bean
-	public Trigger sampleJobTrigger()
-	{
-		// 每隔30秒执行一次
-		// SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(30).repeatForever();
-		// 每隔15分钟执行一次
-		SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(15).repeatForever();
-		return TriggerBuilder.newTrigger().forJob(sampleJobDetail()).withIdentity("sampleTrigger").withSchedule(scheduleBuilder).build();
-	}
 }

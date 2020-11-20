@@ -15,18 +15,19 @@ import org.quartz.impl.StdSchedulerFactory;
  * <p>类全名：com.dm.quartz.study.QuartzScheduler</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class QuartzScheduler
+public class StudyQuartzScheduler
 {
 	public static void main(String[] args) throws SchedulerException
 	{
 		// 传递数据的map
 		JobDataMap jobDetailDataMap = new JobDataMap();
 		jobDetailDataMap.put("msg", "this is jobDetailDataMap test msg");
-		JobDetail jobDetail = JobBuilder.newJob(QuartzJob.class)
+		JobDetail jobDetail = JobBuilder.newJob(StudyQuartzJob.class)
 				// 指定JobDetail的名称和组名称
 				.withIdentity("study", "study")
 				// 使用JobDataMap存储用户数据
-				.usingJobData(jobDetailDataMap).build();
+				.usingJobData(jobDetailDataMap)
+				.storeDurably().build();
 		// 设置cron运行规则
 		CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/15 * * * * ?");
 		// 传递数据的map

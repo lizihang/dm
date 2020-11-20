@@ -1,4 +1,4 @@
-package com.dm.quartz.vo;
+package com.dm.quartz.job;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -14,15 +14,15 @@ import java.util.Date;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年11月18日 10:56</p>
- * <p>类全名：com.dm.quartz.vo.TestJob</p>
+ * <p>创建日期：2020年11月20日 15:15</p>
+ * <p>类全名：com.dm.quartz.job.TestJob</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public class TestJob extends QuartzJobBean
 {
 	@Override
-	protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException
+	protected void executeInternal(JobExecutionContext context) throws JobExecutionException
 	{
-		System.out.println("测试quartz定时任务" + new Date());
+		System.out.println("TestJob " + new Date());
 	}
 }

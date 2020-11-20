@@ -13,6 +13,31 @@ package com.dm.common.exception;
  * <p>类全名：com.dm.common.exception.DmException</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class DmException
+public class DmException extends RuntimeException
 {
+	private static final long serialVersionUID = 1663117985895236825L;
+
+	public DmException()
+	{
+	}
+
+	public DmException(String message)
+	{
+		super(message);
+	}
+
+	public DmException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
+	public DmException(Throwable cause)
+	{
+		super(cause);
+	}
+
+	public DmException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

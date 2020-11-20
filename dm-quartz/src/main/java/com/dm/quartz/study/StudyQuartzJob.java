@@ -1,9 +1,9 @@
 package com.dm.quartz.study;
 
-import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -17,17 +17,17 @@ import org.quartz.JobExecutionException;
  * <p>类全名：com.dm.quartz.study.QuartzJob</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class QuartzJob implements Job
+public class StudyQuartzJob extends QuartzJobBean
 {
 	@Override
-	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException
+	protected void executeInternal(JobExecutionContext context) throws JobExecutionException
 	{
 		// 获取JobDetail中的JobDataMap
-		JobDataMap jobDetailDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
+		JobDataMap jobDetailDataMap = context.getJobDetail().getJobDataMap();
 		// 获取Trigger中的JobDataMap
-		JobDataMap triggerDataMap = jobExecutionContext.getTrigger().getJobDataMap();
+		JobDataMap triggerDataMap = context.getTrigger().getJobDataMap();
 		// 合并的JobDataMap，要注意两个map的键不能重复，否则覆盖掉
-		JobDataMap mergedJobDataMap = jobExecutionContext.getMergedJobDataMap();
+		JobDataMap mergedJobDataMap = context.getMergedJobDataMap();
 		System.out.println("jobDetailDataMap中的msg：" + jobDetailDataMap.get("msg"));
 		System.out.println("triggerDataMap中的msg：" + triggerDataMap.get("msg"));
 		System.out.println("triggerDataMap中的msg：" + mergedJobDataMap.get("msg"));
