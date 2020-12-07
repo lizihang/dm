@@ -58,6 +58,10 @@ public class SystemServiceImpl implements SystemJobService
 	public int updateSystemJob(SystemJob systemJob) throws SchedulerException
 	{
 		SystemJob oldJob = systemJobDAO.queryJobById(systemJob.getJobId());
+		if (oldJob == null)
+		{
+			return -1;
+		}
 		int rows = systemJobDAO.updateJob(systemJob);
 		if (rows > 0)
 		{
@@ -86,7 +90,7 @@ public class SystemServiceImpl implements SystemJobService
 		SystemJob oldJob = systemJobDAO.queryJobById(systemJob.getJobId());
 		if (oldJob == null)
 		{
-			return 0;
+			return -1;
 		}
 		int rows = systemJobDAO.deleteJobById(systemJob.getJobId());
 		if (rows > 0)

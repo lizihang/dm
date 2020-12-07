@@ -52,6 +52,9 @@ mybatis:
   #classpath*:能加载多个路径下的资源文件
   mapper-locations: classpath*:com/dm/mapper/*.xml
   type-aliases-package: com.dm
+  configuration:
+    # mybatis 打印SQL到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
   level:

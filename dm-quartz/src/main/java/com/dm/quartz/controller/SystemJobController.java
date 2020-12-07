@@ -70,40 +70,11 @@ public class SystemJobController
 	{
 		Result result = new Result();
 		int jobId = systemJobService.updateSystemJob(systemJob);
-		result.setMsg("修改任务成功!");
+		String msg = jobId == -1 ? "修改记录不存在!" : "修改任务成功!";
+		result.setMsg(msg);
 		result.getData().put("JobId", jobId);
 		return result;
 	}
-	// /**
-	//  * 暂停任务
-	//  * @param systemJob
-	//  * @return
-	//  * @throws Exception
-	//  */
-	// @DmLog
-	// @PostMapping("pauseJob")
-	// public Result pauseJob(@RequestBody SystemJob systemJob) throws Exception
-	// {
-	// 	Result result = new Result();
-	// 	systemJobService.pauseJob(systemJob);
-	// 	result.setMsg("暂停任务成功!");
-	// 	return result;
-	// }
-	// /**
-	//  * 恢复任务
-	//  * @param systemJob
-	//  * @return
-	//  * @throws Exception
-	//  */
-	// @DmLog
-	// @PostMapping("resumeJob")
-	// public Result resumeJob(@RequestBody SystemJob systemJob) throws Exception
-	// {
-	// 	Result result = new Result();
-	// 	systemJobService.resumeJob(systemJob);
-	// 	result.setMsg("恢复任务成功!");
-	// 	return result;
-	// }
 
 	/**
 	 * 删除任务
@@ -117,7 +88,7 @@ public class SystemJobController
 	{
 		Result result = new Result();
 		int jobId = systemJobService.deleteJob(systemJob);
-		String msg = jobId > 0 ? "删除任务成功!" : "删除记录不存在!";
+		String msg = jobId == -1 ? "删除记录不存在!" : "删除任务成功!";
 		result.setMsg(msg);
 		result.getData().put("JobId", jobId);
 		return result;
