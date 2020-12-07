@@ -18,7 +18,7 @@ public class SystemJob extends BasePO
 {
 	private static final long   serialVersionUID = 2994114341149006072L;
 	/** 任务ID */
-	private              Long   jobId;
+	private              int    jobId;
 	/** 任务名称 */
 	private              String jobName;
 	/** 任务组名 */
@@ -34,12 +34,12 @@ public class SystemJob extends BasePO
 	/** 任务状态（0正常 1暂停） */
 	private              String status;
 
-	public Long getJobId()
+	public int getJobId()
 	{
 		return jobId;
 	}
 
-	public void setJobId(Long jobId)
+	public void setJobId(int jobId)
 	{
 		this.jobId = jobId;
 	}
@@ -117,7 +117,7 @@ public class SystemJob extends BasePO
 	@Override
 	public String toString()
 	{
-		return "SystemJob{" + "jobId=" + jobId + ", jobName='" + jobName + '\'' + ", jobGroup='" + jobGroup + '\'' + ", jobClass='" + jobClass + '\'' + ", cronExpression='" + cronExpression + '\'' + ", timeZoneId='" + timeZoneId + '\'' + ", concurrent='" + concurrent + '\'' + ", status='" + status + '\'' + '}';
+		return "SystemJob{" + "jobId=" + jobId + ", jobName='" + jobName + '\'' + ", jobGroup='" + jobGroup + '\'' + ", jobClass='" + jobClass + '\'' + ", cronExpression='" + cronExpression + '\'' + ", timeZoneId='" + timeZoneId + '\'' + ", concurrent='" + concurrent + '\'' + ", status='" + status + '\'' + "} " + super.toString();
 	}
 }
 

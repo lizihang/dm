@@ -1,5 +1,6 @@
 package com.dm.log.aspect;
 
+import com.alibaba.fastjson.JSON;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -60,8 +61,7 @@ public class DmLogAspect
 		// 打印请求的 IP
 		logger.info("IP             : {}", request.getRemoteAddr());
 		// 打印请求入参
-		// logger.info("Request Args   : {}", new Gson().toJson(joinPoint.getArgs()));
-		logger.info("Request Args   : {}", joinPoint.getArgs().toString());
+		logger.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()));
 	}
 
 	/**
@@ -87,7 +87,8 @@ public class DmLogAspect
 		startTime.set(System.currentTimeMillis());
 		Object result = proceedingJoinPoint.proceed();
 		// 打印出参
-		logger.info("Response Args  : {}", result.toString());
+		String jsonResult = JSON.toJSONString(result);
+		logger.info("Response Args  : {}", jsonResult);
 		// 执行耗时
 		logger.info("Time-Consuming : {} ms", System.currentTimeMillis() - startTime.get());
 		logger.info("=========================================== End ===========================================" + LINE_SEPARATOR);

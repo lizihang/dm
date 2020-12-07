@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService
 		}
 		// 处理创建时间等字段
 		Date serverDate = DateUtils.getServerDate();
-		user.setCreatedate(serverDate);
-		user.setModifydate(serverDate);
+		user.setCreateDate(serverDate);
+		user.setModifyDate(serverDate);
 		userDAO.save(user);
 		// 返回时密码置空处理
 		user.setPassword(null);

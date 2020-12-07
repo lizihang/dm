@@ -20,7 +20,43 @@ import java.util.List;
 @Mapper
 public interface SystemJobDAO
 {
-	List<SystemJob> getSystemJobs();
+	/**
+	 * 查询所有任务
+	 * @return
+	 */
+	List<SystemJob> queryList();
 
-	int addSystemJob(SystemJob systemJob);
+	/**
+	 * 根据条件查找任务列表
+	 * @param systemJob
+	 * @return
+	 */
+	List<SystemJob> selectJobList(SystemJob systemJob);
+
+	/**
+	 * 根据id查询任务
+	 * @param id
+	 */
+	SystemJob queryJobById(int id);
+
+	/**
+	 * 新增任务
+	 * @param systemJob
+	 * @return
+	 */
+	int save(SystemJob systemJob);
+
+	/**
+	 * 修改任务
+	 * @param systemJob
+	 * @return
+	 */
+	int updateJob(SystemJob systemJob);
+
+	/**
+	 * 删除任务
+	 * @param jobId
+	 * @return
+	 */
+	int deleteJobById(int jobId);
 }

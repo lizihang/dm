@@ -1,9 +1,6 @@
 package com.dm.user.po;
 
 import com.dm.po.BasePO;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -28,12 +25,6 @@ public class User extends BasePO
 	private              String nickname;
 	/**密码*/
 	private              String password;
-	/**创建时间*/
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private              Date   createdate;
-	/**修改时间*/
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private              Date   modifydate;
 
 	public int getId()
 	{
@@ -75,29 +66,9 @@ public class User extends BasePO
 		this.password = password;
 	}
 
-	public Date getCreatedate()
-	{
-		return createdate;
-	}
-
-	public void setCreatedate(Date createdate)
-	{
-		this.createdate = createdate;
-	}
-
-	public Date getModifydate()
-	{
-		return modifydate;
-	}
-
-	public void setModifydate(Date modifydate)
-	{
-		this.modifydate = modifydate;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", createdate=" + createdate + ", modifydate=" + modifydate + '}';
+		return "User{" + "id=" + id + ", username='" + username + '\'' + ", nickname='" + nickname + '\'' + ", password='" + password + '\'' + "} " + super.toString();
 	}
 }

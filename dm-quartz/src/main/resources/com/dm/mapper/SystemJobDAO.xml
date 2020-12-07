@@ -2,6 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dm.quartz.dao.SystemJobDAO">
 
+	<sql id="selectJob">
+        select jobid, jobname, jobgroup, jobclass, cronexpression, timezoneid, concurrent, status, createuser, createdate, modifyuser, modifydate
+		from sys_job
+    </sql>
 
+	<select id="queryList" resultType="SystemJob">
+		<include refid="selectJob"/>
+    </select>
+
+	<select id="queryJobById" resultType="SystemJob">
+		<include refid="selectJob"/>
+		where jobid = #{jobId}
+	</select>
+
+	<select id="selectJobList" parameterType="SystemJob" resultType="SystemJob">
+		<include refid="selectJob"/>
+		<where>
+			<if test="jobName != null and jobName != ''">
+				AND jobname like concat('%', #{jobName}, '%')
+			</if>
+			<if test="jobGroup != null and jobGroup != ''">
+				AND jobgroup = #{jobGroup}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="SystemJob" useGeneratedKeys="true" keyProperty="jobId">
+        insert into sys_job values(#{jobId},#{jobName},#{jobGroup},#{jobClass},#{cronExpression},#{timeZoneId},#{concurrent},#{status},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
+    </insert>
+
+	<update id="updateJob" parameterType="SystemJob">
+		update sys_job
+		<set>
+			<if test="jobName != null and jobName != ''">jobname = #{jobName},</if>
+			<if test="jobGroup != null and jobGroup != ''">jobgroup = #{jobGroup},</if>
+			<if test="jobClass != null and jobClass != ''">jobclass = #{jobClass},</if>
+			<if test="cronExpression != null and cronExpression != ''">cronexpression = #{cronExpression},</if>
+			<if test="status != null">status = #{status},</if>
+			modifyDate = sysdate()
+		</set>
+		where jobid = #{jobId}
+	</update>
+
+	<delete id="deleteJobById" parameterType="int">
+ 		delete from sys_job where jobId = #{jobId}
+ 	</delete>
 
 </mapper>

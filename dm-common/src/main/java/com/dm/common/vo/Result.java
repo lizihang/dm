@@ -51,6 +51,11 @@ public class Result
 		return data = data == null ? new HashMap<>() : data;
 	}
 
+	/**
+	 * 建议使用getData.put方式
+	 * @param data
+	 */
+	@Deprecated
 	public void setData(Map<String,Object> data)
 	{
 		this.data = data;

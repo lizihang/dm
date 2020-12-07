@@ -4,6 +4,7 @@ import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
 import com.dm.quartz.po.SystemJob;
 import com.dm.quartz.service.SystemJobService;
+import org.quartz.SchedulerException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -39,14 +40,86 @@ public class SystemJobController
 		return result;
 	}
 
+	/**
+	 * 新增定时任务
+	 * @param systemJob
+	 * @return
+	 * @throws Exception
+	 */
 	@DmLog
 	@PostMapping("addSystemJob")
 	public Result addSystemJob(@RequestBody SystemJob systemJob) throws Exception
 	{
 		Result result = new Result();
-		systemJobService.addSystemJob(systemJob);
+		int jobId = systemJobService.addSystemJob(systemJob);
 		// 注册成功将用户返回
 		result.setMsg("添加任务成功!");
+		result.getData().put("JobId", jobId);
+		return result;
+	}
+
+	/**
+	 * 修改定时任务
+	 * @param systemJob
+	 * @return
+	 * @throws SchedulerException
+	 */
+	@DmLog
+	@PostMapping("updateSystemJob")
+	public Result updateSystemJob(@RequestBody SystemJob systemJob) throws SchedulerException
+	{
+		Result result = new Result();
+		int jobId = systemJobService.updateSystemJob(systemJob);
+		result.setMsg("修改任务成功!");
+		result.getData().put("JobId", jobId);
+		return result;
+	}
+	// /**
+	//  * 暂停任务
+	//  * @param systemJob
+	//  * @return
+	//  * @throws Exception
+	//  */
+	// @DmLog
+	// @PostMapping("pauseJob")
+	// public Result pauseJob(@RequestBody SystemJob systemJob) throws Exception
+	// {
+	// 	Result result = new Result();
+	// 	systemJobService.pauseJob(systemJob);
+	// 	result.setMsg("暂停任务成功!");
+	// 	return result;
+	// }
+	// /**
+	//  * 恢复任务
+	//  * @param systemJob
+	//  * @return
+	//  * @throws Exception
+	//  */
+	// @DmLog
+	// @PostMapping("resumeJob")
+	// public Result resumeJob(@RequestBody SystemJob systemJob) throws Exception
+	// {
+	// 	Result result = new Result();
+	// 	systemJobService.resumeJob(systemJob);
+	// 	result.setMsg("恢复任务成功!");
+	// 	return result;
+	// }
+
+	/**
+	 * 删除任务
+	 * @param systemJob
+	 * @return
+	 * @throws SchedulerException
+	 */
+	@DmLog
+	@PostMapping("deleteJob")
+	public Result deleteJob(@RequestBody SystemJob systemJob) throws SchedulerException
+	{
+		Result result = new Result();
+		int jobId = systemJobService.deleteJob(systemJob);
+		String msg = jobId > 0 ? "删除任务成功!" : "删除记录不存在!";
+		result.setMsg(msg);
+		result.getData().put("JobId", jobId);
 		return result;
 	}
 }

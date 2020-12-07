@@ -1,6 +1,7 @@
 package com.dm.quartz.service;
 
 import com.dm.quartz.po.SystemJob;
+import org.quartz.SchedulerException;
 
 import java.util.List;
 /**
@@ -24,5 +25,25 @@ public interface SystemJobService
 	 */
 	List<SystemJob> getSystemJobs();
 
+	/**
+	 * 创建定时任务
+	 * @param systemJob
+	 * @return
+	 * @throws Exception
+	 */
 	int addSystemJob(SystemJob systemJob) throws Exception;
+
+	/**
+	 * 修改任务
+	 * @param systemJob
+	 * @return
+	 */
+	int updateSystemJob(SystemJob systemJob) throws SchedulerException;
+
+	/**
+	 * 删除任务
+	 * @param systemJob
+	 * @throws Exception
+	 */
+	int deleteJob(SystemJob systemJob) throws SchedulerException;
 }
