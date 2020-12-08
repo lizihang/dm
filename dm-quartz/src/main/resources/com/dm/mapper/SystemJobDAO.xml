@@ -43,7 +43,10 @@
 			<if test="jobClass != null and jobClass != ''">jobclass = #{jobClass},</if>
 			<if test="cronExpression != null and cronExpression != ''">cronexpression = #{cronExpression},</if>
 			<if test="status != null">status = #{status},</if>
-			modifyDate = sysdate()
+			<if test="createUser != null and createUser != ''">createuser = #{createUser},</if>
+			<if test="createDate != null and createDate != ''">createDate = #{createDate},</if>
+			modifyUser = #{modifyUser},
+			modifyDate = #{modifyDate}
 		</set>
 		where jobid = #{jobId}
 	</update>

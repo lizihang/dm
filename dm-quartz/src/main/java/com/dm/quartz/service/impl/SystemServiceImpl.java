@@ -43,7 +43,6 @@ public class SystemServiceImpl implements SystemJobService
 	@Transactional
 	public int addSystemJob(SystemJob systemJob) throws Exception
 	{
-		// TODO 利用aop add*方法处理创建人，创建时间 update*处理修改人，修改时间
 		// 1.插入数据库
 		int rows = systemJobDAO.save(systemJob);
 		if (rows > 0)
