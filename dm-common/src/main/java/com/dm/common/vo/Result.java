@@ -1,5 +1,7 @@
 package com.dm.common.vo;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -17,32 +19,32 @@ import java.util.Map;
  */
 public class Result
 {
-	private boolean            status;
+	private int            status;
 	private String             msg;
 	private Map<String,Object> data;
 
 	public Result()
 	{
-		this(true);
+		this(HttpStatus.OK.value());
 	}
 
-	public Result(boolean status)
+	public Result(int status)
 	{
 		this(status,null);
 	}
 
-	public Result(boolean status, String msg)
+	public Result(int status, String msg)
 	{
 		this.status = status;
 		this.msg = msg;
 	}
 
-	public boolean isStatus()
+	public int isStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(boolean status)
+	public void setStatus(int status)
 	{
 		this.status = status;
 	}

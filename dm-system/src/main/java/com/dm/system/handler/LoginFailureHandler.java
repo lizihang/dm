@@ -4,6 +4,7 @@ import com.dm.common.vo.Result;
 import com.dm.system.utils.ServletUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -40,37 +41,37 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 		{
 			// 账号过期
 			logger.info("[登录失败] - 用户[{}]账号过期", username);
-			result = new Result(false, "[登录失败] - 用户账号过期");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户账号过期");
 		} else if (exception instanceof BadCredentialsException)
 		{
 			// 密码错误
 			logger.info("[登录失败] - 用户[{}]密码错误", username);
-			result = new Result(false, "[登录失败] - 用户密码错误");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户密码错误");
 		} else if (exception instanceof CredentialsExpiredException)
 		{
 			// 密码过期
 			logger.info("[登录失败] - 用户[{}]密码过期", username);
-			result = new Result(false, "[登录失败] - 用户密码过期");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户密码过期");
 		} else if (exception instanceof DisabledException)
 		{
 			// 用户被禁用
 			logger.info("[登录失败] - 用户[{}]被禁用", username);
-			result = new Result(false, "[登录失败] - 用户被禁用");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户被禁用");
 		} else if (exception instanceof LockedException)
 		{
 			// 用户被锁定
 			logger.info("[登录失败] - 用户[{}]被锁定", username);
-			result = new Result(false, "[登录失败] - 用户被锁定");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户被锁定");
 		} else if (exception instanceof InternalAuthenticationServiceException)
 		{
 			// 内部错误
 			logger.error(String.format("[登录失败] - [%s]内部错误", username), exception);
-			result = new Result(false, "[登录失败] - 内部错误");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 内部错误");
 		} else
 		{
 			// 其他错误
 			logger.error(String.format("[登录失败] - [%s]其他错误", username), exception);
-			result = new Result(false, "[登录失败] - 其他错误");
+			result = new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 其他错误");
 		}
 		// TODO 登录失败 记录日志
 		ServletUtils.render(response, result);

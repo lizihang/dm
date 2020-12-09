@@ -6,6 +6,7 @@ import com.dm.user.po.User;
 import com.dm.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -46,7 +47,7 @@ public class UserController
 			result.getData().put("user", u);
 		} else
 		{
-			result.setStatus(false);
+			result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			result.setMsg("用户名或密码错误！");
 		}
 		return result;
@@ -64,7 +65,7 @@ public class UserController
 			result.getData().put("user", u);
 		} catch (Exception e)
 		{
-			result.setStatus(false);
+			result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			result.setMsg(e.getMessage());
 		}
 		return result;
@@ -81,7 +82,7 @@ public class UserController
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-			result.setStatus(false);
+			result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			result.setMsg("修改失败");
 		}
 		return result;

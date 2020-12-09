@@ -2,6 +2,7 @@ package com.dm.system.handler;
 
 import com.dm.common.vo.Result;
 import com.dm.system.utils.ServletUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,6 @@ public class LogoutSuccessHandler implements org.springframework.security.web.au
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
 	{
 		// TODO 登出成功 记录登出日志
-		ServletUtils.render(response, new Result(true,"退出登录成功！"));
+		ServletUtils.render(response, new Result(HttpStatus.OK.value(),"退出登录成功！"));
 	}
 }
