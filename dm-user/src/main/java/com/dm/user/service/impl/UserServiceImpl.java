@@ -1,14 +1,13 @@
 package com.dm.user.service.impl;
 
-import com.dm.common.utils.DateUtils;
 import com.dm.user.dao.UserDAO;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 /**
  * <p>标题：</p>
@@ -28,12 +27,20 @@ import java.util.List;
 public class UserServiceImpl implements UserService
 {
 	@Resource
-	UserDAO userDAO;
+	UserDAO         userDAO;
+	@Resource
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public List<User> queryList()
 	{
 		return userDAO.queryList();
+	}
+
+	@Override
+	public User queryUserByUserName(String username)
+	{
+		return userDAO.queryUserByUserName(username);
 	}
 
 	@Override
@@ -60,10 +67,11 @@ public class UserServiceImpl implements UserService
 		{
 			throw new RuntimeException("用户已存在！");
 		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		// 处理创建时间等字段
-		Date serverDate = DateUtils.getServerDate();
-		user.setCreateDate(serverDate);
-		user.setModifyDate(serverDate);
+		// Date serverDate = DateUtils.getServerDate();
+		// user.setCreateDate(serverDate);
+		// user.setModifyDate(serverDate);
 		userDAO.save(user);
 		// 返回时密码置空处理
 		user.setPassword(null);

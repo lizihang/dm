@@ -5,6 +5,7 @@ import com.dm.log.annotation.DmLog;
 import com.dm.quartz.po.SystemJob;
 import com.dm.quartz.service.SystemJobService;
 import org.quartz.SchedulerException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -46,6 +47,7 @@ public class SystemJobController
 	 * @return
 	 * @throws Exception
 	 */
+	@PreAuthorize("@ps.permission('system:job:add')")
 	@DmLog
 	@PostMapping("addSystemJob")
 	public Result addSystemJob(@RequestBody SystemJob systemJob) throws Exception

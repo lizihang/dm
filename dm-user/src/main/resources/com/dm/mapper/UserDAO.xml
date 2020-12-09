@@ -3,15 +3,23 @@
 <mapper namespace="com.dm.user.dao.UserDAO">
 
     <select id="queryList" resultType="User">
-        select id,username,nickname,password,createdate,modifydate from users
+        select
+            id, username, nickname, password, createUser, createDate, modifyUser, modifyDate
+        from
+            users
     </select>
 
     <select id="queryUserByUserName" resultType="User">
-        select id,username,nickname,password,createdate,modifydate from users where username = #{username}
+        select
+            id, username, nickname, password, createUser, createDate, modifyUser, modifyDate
+        from
+            users
+        where
+            username = #{username}
     </select>
 
     <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into users values(#{id},#{username},#{nickname},#{password},#{createdate},#{modifydate})
+        insert into users values(#{id},#{username},#{nickname},#{password},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
     </insert>
 
     <delete id="deleteById" parameterType="int">
@@ -19,7 +27,17 @@
     </delete>
 
     <update id="update" parameterType="User">
-        update users set username=#{username},nickname=#{nickname},password=#{password},createdate=#{createdate},modifydate=#{modifydate} where id=#{id}
+        update users
+        set
+            username=#{username},
+            nickname=#{nickname},
+            password=#{password},
+            createUser=#{createUser},
+            createDate=#{createDate},
+            modifyUser=#{modifyUser},
+            modifyDate=#{modifyDate}
+        where
+            id=#{id}
     </update>
 
 </mapper>

@@ -25,6 +25,12 @@ public interface UserService
 	List<User> queryList();
 
 	/**
+	 * 根据用户名查找
+	 * @return
+	 */
+	User queryUserByUserName(String username);
+
+	/**
 	 * 用户登录
 	 * @param user
 	 * @return

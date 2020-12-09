@@ -23,7 +23,18 @@ public class Result
 
 	public Result()
 	{
-		this.status = true;
+		this(true);
+	}
+
+	public Result(boolean status)
+	{
+		this(status,null);
+	}
+
+	public Result(boolean status, String msg)
+	{
+		this.status = status;
+		this.msg = msg;
 	}
 
 	public boolean isStatus()
