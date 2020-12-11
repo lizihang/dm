@@ -1,9 +1,6 @@
 package com.dm.common.vo;
 
 import org.springframework.http.HttpStatus;
-
-import java.util.HashMap;
-import java.util.Map;
 /**
  * <p>标题：通用结果类</p>
  * <p>功能：</p>
@@ -19,58 +16,38 @@ import java.util.Map;
  */
 public class Result
 {
-	private int            status;
-	private String             msg;
-	private Map<String,Object> data;
+	private int    status;
+	private String msg;
+	private Object data;
 
-	public Result()
+	private Result()
 	{
-		this(HttpStatus.OK.value());
 	}
 
-	public Result(int status)
-	{
-		this(status,null);
-	}
-
-	public Result(int status, String msg)
+	private Result(int status, String msg, Object data)
 	{
 		this.status = status;
 		this.msg = msg;
-	}
-
-	public int isStatus()
-	{
-		return status;
-	}
-
-	public void setStatus(int status)
-	{
-		this.status = status;
-	}
-
-	public String getMsg()
-	{
-		return msg;
-	}
-
-	public void setMsg(String msg)
-	{
-		this.msg = msg;
-	}
-
-	public Map<String,Object> getData()
-	{
-		return data = data == null ? new HashMap<>() : data;
-	}
-
-	/**
-	 * 建议使用getData.put方式
-	 * @param data
-	 */
-	@Deprecated
-	public void setData(Map<String,Object> data)
-	{
 		this.data = data;
+	}
+
+	public static Result success(String msg)
+	{
+		return success(msg, null);
+	}
+
+	public static Result success(String msg, Object data)
+	{
+		return new Result(HttpStatus.OK.value(), msg, data);
+	}
+
+	public static Result error(int errorCode, String msg)
+	{
+		return error(errorCode, msg, null);
+	}
+
+	public static Result error(int errorCode, String msg, Object data)
+	{
+		return new Result(errorCode, msg, data);
 	}
 }

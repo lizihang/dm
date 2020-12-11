@@ -4,12 +4,15 @@ import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
+import java.lang.reflect.Field;
 import java.util.List;
 /**
  * <p>标题：用户Controller</p>
@@ -33,61 +36,59 @@ public class UserController
 	@Resource
 	UserService userService;
 
+	/**
+	 * 用户登录
+	 * @param user
+	 * @return
+	 */
 	@DmLog
 	@PostMapping("login")
 	public Result login(@RequestBody User user)
 	{
-		logger.info("用户登录方法，用户名:{}", user.getUsername());
-		Result result = new Result();
 		User u = userService.login(user);
 		if (u != null)
 		{
 			// 登录成功将用户返回
-			result.setMsg("登录成功!");
-			result.getData().put("user", u);
+			return Result.success("登录成功!", u);
 		} else
 		{
-			result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			result.setMsg("用户名或密码错误！");
+			return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "用户名或密码错误！");
 		}
-		return result;
 	}
 
+	/**
+	 * 用户注册
+	 * @param user
+	 * @return
+	 */
+	@DmLog
 	@PostMapping("register")
 	public Result register(@RequestBody User user)
 	{
-		Result result = new Result();
-		try
-		{
-			User u = userService.register(user);
-			// 注册成功将用户返回
-			result.setMsg("注册成功!");
-			result.getData().put("user", u);
-		} catch (Exception e)
-		{
-			result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			result.setMsg(e.getMessage());
-		}
-		return result;
+		// TODO 验证参数不为空
+		User u = userService.register(user);
+		// 注册成功将用户返回
+		return Result.success("注册成功!", u);
 	}
 
+	/**
+	 * 用户更新
+	 * @param user
+	 * @return
+	 */
+	@DmLog
 	@PostMapping("update")
 	public Result update(@RequestBody User user)
 	{
-		Result result = new Result();
-		try
-		{
-			userService.update(user);
-			result.setMsg("修改成功");
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			result.setMsg("修改失败");
-		}
-		return result;
+		userService.update(user);
+		return Result.success("修改成功");
 	}
 
+	/**
+	 * 查询所有用户列表
+	 * @return
+	 */
+	@DmLog
 	@GetMapping("queryList")
 	public List<User> queryList()
 	{
@@ -95,22 +96,33 @@ public class UserController
 		return userService.queryList();
 	}
 
-	/*
+	/**
+	 * 根据ID删除用户
+	 * @param id
+	 * @return
+	 */
+	@DmLog
 	@DeleteMapping("deleteById")
 	public Result deleteById(int id)
 	{
-		Result result = new Result();
-		try
-		{
-			userService.deleteById(id);
-			result.setMsg("删除成功，用户id：" + id);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			result.setStatus(false);
-			result.setMsg("删除失败");
-		}
-		return result;
+		userService.deleteById(id);
+		return Result.success("删除成功，用户id：" + id);
 	}
-	*/
+
+	private void validUser(User user) throws IllegalAccessException
+	{
+		//TODO 是否有统一处理方法
+		Field[] fields = User.class.getDeclaredFields();
+		for (Field f : fields)
+		{
+			String fieldName = f.getName();
+			f.setAccessible(true);
+			Object fieldValue = f.get(user);
+			boolean isNotNull = f.isAnnotationPresent(NotNull.class);
+			if (isNotNull && ObjectUtils.isEmpty(fieldValue))
+			{
+				System.out.println("字段：" + fieldName + "不能为空！");
+			}
+		}
+	}
 }

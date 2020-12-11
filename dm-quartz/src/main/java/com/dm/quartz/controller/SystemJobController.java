@@ -34,11 +34,8 @@ public class SystemJobController
 	@GetMapping("getSystemJobs")
 	public Result getSystemJobs()
 	{
-		Result result = new Result();
 		List<SystemJob> data = systemJobService.getSystemJobs();
-		result.setMsg("查询系统定时任务成功！");
-		result.getData().put("systemjobs", data);
-		return result;
+		return Result.success("查询系统定时任务成功！", data);
 	}
 
 	/**
@@ -52,12 +49,9 @@ public class SystemJobController
 	@PostMapping("addSystemJob")
 	public Result addSystemJob(@RequestBody SystemJob systemJob) throws Exception
 	{
-		Result result = new Result();
 		int jobId = systemJobService.addSystemJob(systemJob);
 		// 注册成功将用户返回
-		result.setMsg("添加任务成功!");
-		result.getData().put("JobId", jobId);
-		return result;
+		return Result.success("添加任务成功!", jobId);
 	}
 
 	/**
@@ -70,12 +64,9 @@ public class SystemJobController
 	@PostMapping("updateSystemJob")
 	public Result updateSystemJob(@RequestBody SystemJob systemJob) throws SchedulerException
 	{
-		Result result = new Result();
 		int jobId = systemJobService.updateSystemJob(systemJob);
 		String msg = jobId == -1 ? "修改记录不存在!" : "修改任务成功!";
-		result.setMsg(msg);
-		result.getData().put("JobId", jobId);
-		return result;
+		return Result.success(msg, jobId);
 	}
 
 	/**
@@ -88,11 +79,8 @@ public class SystemJobController
 	@PostMapping("deleteJob")
 	public Result deleteJob(@RequestBody SystemJob systemJob) throws SchedulerException
 	{
-		Result result = new Result();
 		int jobId = systemJobService.deleteJob(systemJob);
 		String msg = jobId == -1 ? "删除记录不存在!" : "删除任务成功!";
-		result.setMsg(msg);
-		result.getData().put("JobId", jobId);
-		return result;
+		return Result.success(msg, jobId);
 	}
 }

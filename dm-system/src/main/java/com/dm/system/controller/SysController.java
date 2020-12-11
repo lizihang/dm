@@ -42,10 +42,7 @@ public class SysController
 	@GetMapping("getMenus")
 	public Result getMenus()
 	{
-		Result result = new Result();
 		List<Menus> menus = sysService.getMenus();
-		result.setMsg("获取系统菜单成功！");
-		result.getData().put("menus", menus);
-		return result;
+		return Result.success("获取系统菜单成功！", menus);
 	}
 }

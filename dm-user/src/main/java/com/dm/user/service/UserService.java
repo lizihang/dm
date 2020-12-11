@@ -48,6 +48,7 @@ public interface UserService
 	 * @param user
 	 */
 	void update(User user);
+
+	void deleteById(int id);
 	// void save(User user);
-	// void deleteById(int id);
 }

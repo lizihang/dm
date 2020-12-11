@@ -94,9 +94,9 @@ public class UserServiceImpl implements UserService
 	// {
 	// 	userDAO.save(user);
 	// }
-	// @Override
-	// public void deleteById(int id)
-	// {
-	// 	userDAO.deleteById(id);
-	// }
+	@Override
+	public void deleteById(int id)
+	{
+		userDAO.deleteById(id);
+	}
 }

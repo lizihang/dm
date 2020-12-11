@@ -30,8 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
 	{
 		// TODO 登录成功 记录日志
-		Result result = new Result();
-		result.setMsg("测试登录成功handler");
+		Result result = Result.success("测试登录成功handler");
 		ServletUtils.render(response, result);
 	}
 }

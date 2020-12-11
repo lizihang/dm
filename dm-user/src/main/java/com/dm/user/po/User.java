@@ -1,6 +1,8 @@
 package com.dm.user.po;
 
 import com.dm.po.BasePO;
+
+import javax.validation.constraints.NotNull;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -20,6 +22,7 @@ public class User extends BasePO
 	/**id*/
 	private              int    id;
 	/**用户名*/
+	@NotNull
 	private              String username;
 	/**昵称*/
 	private              String nickname;

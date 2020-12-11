@@ -33,7 +33,6 @@ public class SysUserOnlineController
 	@GetMapping("list")
 	public Result onlineList(String username)
 	{
-		Result result = new Result();
 		// 1.获取缓存中所有登录用户的key
 		Collection<String> keys = redisCache.keys(SystemConstants.LOGIN_TOKEN_KEY + "*");
 		//
@@ -53,9 +52,7 @@ public class SysUserOnlineController
 			// 	userOnlineList.add(userOnlineService.loginUserToUserOnline(user));
 			// }
 		}
-		result.setMsg("查询在线用户成功！");
-		result.getData().put("onlineList",onlineList);
-		return result;
+		return Result.success("查询在线用户成功！", onlineList);
 	}
 
 	/**
@@ -64,8 +61,7 @@ public class SysUserOnlineController
 	@DeleteMapping("/{tokenId}")
 	public Result forceLogout(@PathVariable String tokenId)
 	{
-		Result result = new Result();
-		//
-		return result;
+		//TODO
+		return Result.success("成功！");
 	}
 }
