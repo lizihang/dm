@@ -27,13 +27,13 @@ import javax.annotation.Resource;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2020年12月09日 10:09</p>
- * <p>类全名：com.dm.system.config.securityConfig</p>
+ * <p>类全名：com.dm.system.config.SecurityConfig</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class securityConfig extends WebSecurityConfigurerAdapter
+public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
 	@Resource(name = UserDetailsServiceImpl.BeanName)
 	UserDetailsService userDetailsService;

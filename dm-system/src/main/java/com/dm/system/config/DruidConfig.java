@@ -8,7 +8,6 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -21,15 +20,15 @@ import java.util.Map;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2020年12月14日 10:58</p>
- * <p>类全名：com.dm.system.config.druidConfig</p>
+ * <p>类全名：com.dm.system.config.DruidConfig</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Configuration
-public class druidConfig
+public class DruidConfig
 {
-	@Value("${spring.datasource.druid.loginUsername}")
+	@Value("${spring.datasource.druid.username}")
 	private String loginUsername;
-	@Value("${spring.datasource.druid.loginPassword}")
+	@Value("${spring.datasource.druid.password}")
 	private String loginPassword;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -37,13 +36,13 @@ public class druidConfig
 	public ServletRegistrationBean statViewServlet()
 	{
 		ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");//处理drueuid下的所有请求
-		Map<String,String> initParams = new HashMap<>();
-		initParams.put("loginUsername", loginUsername);//用户名
-		initParams.put("loginPassword", loginPassword);//密码
-		initParams.put("allow", "127.0.0.1");//白名单，允许ip访问
-		initParams.put("deny", "192.168.0.1");//黑名单，拒绝ip访问，黑名单优先于白名单
-		initParams.put("resetEnable", "false");//是否能够重置数据 禁用HTML页面上的“Reset All”功能
-		bean.setInitParameters(initParams);
+		Map<String,String> initParameters = new HashMap<>();
+		initParameters.put("loginUsername", loginUsername);//用户名
+		initParameters.put("loginPassword", loginPassword);//密码
+		initParameters.put("allow", "127.0.0.1");//白名单，允许ip访问
+		initParameters.put("deny", "192.168.0.1");//黑名单，拒绝ip访问，黑名单优先于白名单
+		initParameters.put("resetEnable", "false");//是否能够重置数据 禁用HTML页面上的“Reset All”功能
+		bean.setInitParameters(initParameters);
 		return bean;
 	}
 
@@ -56,7 +55,7 @@ public class druidConfig
 		Map<String,String> initParams = new HashMap<>();
 		initParams.put("exclusions", "*.js,*.css,/druid/*");//静态资源放行
 		bean.setInitParameters(initParams);
-		bean.setUrlPatterns(Collections.singletonList("/*"));
+		bean.addUrlPatterns("/*");
 		return bean;
 	}
 }
