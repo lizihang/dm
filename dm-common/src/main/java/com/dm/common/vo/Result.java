@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
  * <p>功能：</p>
  * <pre>
  * 其他说明：
+ * 属性的get,set方法仍旧需要，否则 JSON.toJSONString(object) 中无数据
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
@@ -49,5 +50,35 @@ public class Result
 	public static Result error(int errorCode, String msg, Object data)
 	{
 		return new Result(errorCode, msg, data);
+	}
+
+	public int getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(int status)
+	{
+		this.status = status;
+	}
+
+	public String getMsg()
+	{
+		return msg;
+	}
+
+	public void setMsg(String msg)
+	{
+		this.msg = msg;
+	}
+
+	public Object getData()
+	{
+		return data;
+	}
+
+	public void setData(Object data)
+	{
+		this.data = data;
 	}
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -32,7 +31,7 @@ public class LoginController
 	 */
 	@DmLog
 	@GetMapping("/getCodeImg")
-	public Result getCodeImg(HttpServletResponse response)
+	public Result getCodeImg()
 	{
 		//直接调用静态方法，返回验证码对象
 		ValidateCodeUtil.Validate v = ValidateCodeUtil.getRandomCode();

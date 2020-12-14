@@ -27,7 +27,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<mysql.version>5.1.47</mysql.version>
-		<druid.version>1.2.1</druid.version>
+		<druid.version>1.2.4</druid.version>
 		<fastjson.version>1.2.75</fastjson.version>
 	</properties>
 
@@ -72,9 +72,19 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+		<!--
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		-->
+
+		<!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+		<!-- 使用这个替代druid 可以简化druid配置，application中可以用spring.datasource.druid.xxx直接配置 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>${druid.version}</version>
 		</dependency>
 

@@ -177,6 +177,13 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{
 		return authorities;
+		/*
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for (Role role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
+		return authorities;
+		*/
 	}
 
 	@Override
