@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -37,16 +38,16 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 	{
 		Result result;
 		String username = request.getRemoteUser();
-		if (exception instanceof AccountExpiredException)
+		if (exception instanceof UsernameNotFoundException || exception instanceof BadCredentialsException)
+		{
+			// 用户名或密码错误
+			logger.info("[登录失败] - 用户名或密码错误！");
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户名或密码错误！");
+		} else if (exception instanceof AccountExpiredException)
 		{
 			// 账号过期
 			logger.info("[登录失败] - 用户[{}]账号过期", username);
 			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户账号过期");
-		} else if (exception instanceof BadCredentialsException)
-		{
-			// 密码错误
-			logger.info("[登录失败] - 用户[{}]密码错误", username);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户密码错误");
 		} else if (exception instanceof CredentialsExpiredException)
 		{
 			// 密码过期

@@ -31,6 +31,8 @@ public class SystemJobController
 	@Resource()
 	SystemJobService systemJobService;
 
+	@DmLog
+	@PreAuthorize("@ps.permission('system:job:query')")
 	@GetMapping("getSystemJobs")
 	public Result getSystemJobs()
 	{
@@ -44,8 +46,8 @@ public class SystemJobController
 	 * @return
 	 * @throws Exception
 	 */
-	@PreAuthorize("@ps.permission('system:job:add')")
 	@DmLog
+	@PreAuthorize("@ps.permission('system:job:add')")
 	@PostMapping("addSystemJob")
 	public Result addSystemJob(@RequestBody SystemJob systemJob) throws Exception
 	{

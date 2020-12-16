@@ -2,9 +2,14 @@ package com.dm.system.service;
 
 import com.dm.common.utils.StringUtils;
 import com.dm.system.vo.LoginUser;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -36,13 +41,19 @@ public class PermissionService
 		// TODO
 		// LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
 		LoginUser loginUser = new LoginUser();
-		if (ObjectUtils.isEmpty(loginUser) || CollectionUtils.isEmpty(loginUser.getPermissions()))
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+		GrantedAuthority grantedAuthority1 = new SimpleGrantedAuthority("system:job:query");
+		GrantedAuthority grantedAuthority2 = new SimpleGrantedAuthority("system:job:add");
+		grantedAuthorities.add(grantedAuthority1);
+		grantedAuthorities.add(grantedAuthority2);
+		loginUser.setAuthorities(grantedAuthorities);
+		if (ObjectUtils.isEmpty(loginUser) || CollectionUtils.isEmpty(loginUser.getAuthorities()))
 		{
 			return false;
 		}
-		for (String userPermission : loginUser.getPermissions())
+		for (GrantedAuthority auth : loginUser.getAuthorities())
 		{
-			if (permission.matches(userPermission))
+			if (permission.matches(auth.getAuthority()))
 			{
 				return true;
 			}

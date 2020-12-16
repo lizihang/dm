@@ -40,20 +40,23 @@ public class UserDetailsServiceImpl implements UserDetailsService
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 		User user = userService.queryUserByUserName(username);
 		if (user == null)
 		{
 			logger.info("登录用户：{} 不存在.", username);
 			throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
 		}
-		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
 		return createLoginUser(user);
 	}
 
 	public UserDetails createLoginUser(User user)
 	{
 		//TODO 做个util转换对象？
-		return new LoginUser(user, DateUtils.getServerDate(), "127.0.0.1");
+		LoginUser loginUser = new LoginUser(user, DateUtils.getServerDate(), "127.0.0.1");
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("system:job:query");
+		grantedAuthorities.add(grantedAuthority);
+		loginUser.setAuthorities(grantedAuthorities);
+		return loginUser;
 	}
 }

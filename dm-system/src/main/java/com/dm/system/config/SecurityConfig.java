@@ -1,9 +1,7 @@
 package com.dm.system.config;
 
 import com.dm.system.constants.SystemConstants;
-import com.dm.system.handler.LoginFailureHandler;
-import com.dm.system.handler.LoginSuccessHandler;
-import com.dm.system.handler.LogoutSuccessHandler;
+import com.dm.system.handler.*;
 import com.dm.system.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,20 +36,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	@Resource(name = UserDetailsServiceImpl.BeanName)
 	UserDetailsService userDetailsService;
 	/**
+	 * 自定义登录验证类
+	 */
+	// @Resource
+	// private UserAuthenticationProvider          userAuthenticationProvider;
+	/**
 	 * 登录成功的处理
 	 */
 	@Resource
-	private LoginSuccessHandler  loginSuccessHandler;
+	private LoginSuccessHandler                 loginSuccessHandler;
 	/**
 	 * 登录失败的处理
 	 */
 	@Resource
-	private LoginFailureHandler  loginFailureHandler;
+	private LoginFailureHandler                 loginFailureHandler;
+	/**
+	 * 用户未登录处理
+	 */
+	@Resource
+	private UserAuthenticationEntryPointHandler userAuthenticationEntryPointHandler;
+	/**
+	 * 用户没有权限时处理
+	 */
+	@Resource
+	private UserAuthAccessDeniedHandler         userAuthAccessDeniedHandler;
 	/**
 	 * 登出成功的处理
 	 */
 	@Resource
-	private LogoutSuccessHandler logoutSuccessHandler;
+	private LogoutSuccessHandler                logoutSuccessHandler;
 
 	@Bean
 	public PasswordEncoder passwordEncoder()
@@ -64,31 +77,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		// 暂时不用自定义的，以后扩展复杂验证时再使用
+		// auth.authenticationProvider(userAuthenticationProvider);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.cors().and().csrf().disable();//禁用了 csrf 功能
-		// http.authorizeRequests()//限定签名成功的请求
-		// 		.antMatchers("/decision/**", "/govern/**", "/employee/*")//
-		// 		.hasAnyRole("EMPLOYEE", "ADMIN")//对decision和govern 下的接口 需要 USER 或者 ADMIN 权限
-		// 		.antMatchers("/employee/login").permitAll()///employee/login 不限定
-		// 		.antMatchers("/admin/**").hasRole("ADMIN")//对admin下的接口 需要ADMIN权限
-		// 		.antMatchers("/oauth/**").permitAll()//不拦截 oauth 开放的资源
-		// 		.anyRequest().permitAll()//其他没有限定的请求，允许访问
-		// 		.and().anonymous()//对于没有配置权限的其他请求允许匿名访问
-		// 		.and().formLogin()//使用 spring security 默认登录页面
-		// 		.and().httpBasic();//启用http 基础验证
 		http.authorizeRequests()
 				// 放行接口
 				.antMatchers(SystemConstants.AUTH_WHITELIST).permitAll()
-				// 除上面外的所有请求全部需要鉴权认证
+				// 除上面外的所有请求全部需要鉴权认证，使用注解方式
 				.anyRequest().authenticated()
-				// 异常处理(权限拒绝、登录失效等)
+				// 异常处理(权限拒绝、登录失效等) 配置没有权限自定义处理类
 				.and().exceptionHandling()
-				// .authenticationEntryPoint(anonymousAuthenticationEntryPoint)//匿名用户访问无权限资源时的异常处理
-				// .accessDeniedHandler(accessDeniedHandler)//登录用户没有权限访问资源
+				// 登录用户没有权限访问资源
+				.accessDeniedHandler(userAuthAccessDeniedHandler)
+				// 用户未登录时处理
+				.authenticationEntryPoint(userAuthenticationEntryPointHandler)
 				// 登入
 				.and().formLogin().permitAll()//允许所有用户
 				.loginProcessingUrl("/user/login")//登录请求路径
