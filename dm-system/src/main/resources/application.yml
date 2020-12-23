@@ -83,7 +83,12 @@ spring:
             threadCount: 10
             # 线程优先级
             threadPriority: 5
-
+  servlet:
+    multipart:
+      # 单文件上传大小
+      max-file-size: 5MB
+      # 总文件上传大小
+      max-request-size: 10MB
 
 mybatis:
   # classpath*:能加载多个路径下的资源文件
@@ -96,4 +101,7 @@ mybatis:
 logging:
   level:
     com.dm:
+
+
+
 
