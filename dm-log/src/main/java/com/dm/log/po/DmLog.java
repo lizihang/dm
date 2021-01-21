@@ -31,7 +31,7 @@ public class DmLog extends BasePO
 	/**日志类型*/
 	private              String logtype;
 	/**操作时间*/
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private              Date   operatetime;
 
 	public int getId()
