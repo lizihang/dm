@@ -1,9 +1,11 @@
 package com.dm.poi;
 
+import com.dm.common.util.DateConverter;
 import com.dm.fund.po.Bill;
 import com.dm.fund.po.ZFBBill;
 import com.dm.fund.service.BillService;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -15,10 +17,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -41,7 +40,8 @@ public class CsvTest
 	@Test
 	void testCsv() throws IOException, InvocationTargetException, IllegalAccessException
 	{
-		InputStreamReader isr = new InputStreamReader(new FileInputStream("D:\\JetBrains\\IntelliJ IDEA Project\\dm\\dm-system\\src\\main\\resources\\file\\bill.csv"), "GBK");
+		ConvertUtils.register(new DateConverter(), Date.class);
+		InputStreamReader isr = new InputStreamReader(new FileInputStream("F:\\被诈骗资料\\支付宝明细\\alipay_record_2018年01月01日到2021年01月14日所有账单\\bill.csv"), "GBK");
 		CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(isr);
 		Map<String,Integer> headerMap = csvParser.getHeaderMap();
 		int count = 0;
@@ -62,21 +62,24 @@ public class CsvTest
 				{
 					value = csvRecord.get(key).trim();
 				}
-				//TODO
-				dataMap.put("", value);
+				dataMap.put(key, value);
 				System.out.println(key + ":" + value);
 			}
 			BeanUtils.populate(bill, dataMap);
+			// 10:支付宝
+			bill.setBillType("10");
 			// 对象放入list
 			data.add(bill);
 			count++;
 			// 每500条存入数据库
 			if (count % 500 == 0)
 			{
-				//TODO billService.insert(data);
+				billService.insertList(data);
 				data.clear();
 			}
 		}
+		// 最后不够500的再执行insert
+		billService.insertList(data);
 		System.out.println("数据导入成功，总共导入" + count + "条数据");
 	}
 }

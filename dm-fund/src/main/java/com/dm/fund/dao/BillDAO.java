@@ -22,4 +22,6 @@ import java.util.List;
 public interface BillDAO
 {
 	List<Bill> queryList(BillQueryParams params);
+
+	int insertList(List<Bill> data);
 }

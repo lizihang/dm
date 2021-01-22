@@ -32,4 +32,10 @@ public class BillServiceImpl implements BillService
 	{
 		return billDAO.queryList(params);
 	}
+
+	@Override
+	public int insertList(List<Bill> data)
+	{
+		return billDAO.insertList(data);
+	}
 }

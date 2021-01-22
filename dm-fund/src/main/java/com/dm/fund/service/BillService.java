@@ -20,4 +20,6 @@ import java.util.List;
 public interface BillService
 {
 	List<Bill> queryList(BillQueryParams params);
+
+	int insertList(List<Bill> data);
 }

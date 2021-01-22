@@ -29,7 +29,7 @@ public class ZFBBill extends Bill
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private              Date       tradeModifyTime;
 	/** 交易来源地 */
-	private              String     tradeSourc;
+	private              String     tradeSource;
 	/** 类型(即时到账交易,支付宝担保交易) */
 	private              String     type;
 	/** 服务费（元） */
@@ -69,14 +69,14 @@ public class ZFBBill extends Bill
 		this.tradeModifyTime = tradeModifyTime;
 	}
 
-	public String getTradeSourc()
+	public String getTradeSource()
 	{
-		return tradeSourc;
+		return tradeSource;
 	}
 
-	public void setTradeSourc(String tradeSourc)
+	public void setTradeSource(String tradeSource)
 	{
-		this.tradeSourc = tradeSourc;
+		this.tradeSource = tradeSource;
 	}
 
 	public String getType()
