@@ -97,6 +97,6 @@ public class DmLog extends BasePO
 	@Override
 	public String toString()
 	{
-		return "DmLog{" + "id=" + id + ", username='" + username + '\'' + ", method='" + method + '\'' + ", remark='" + remark + '\'' + ", logtype='" + logtype + '\'' + ", operatetime=" + operatetime + '}';
+		return "DmLog{" + "id=" + id + ", username='" + username + '\'' + ", method='" + method + '\'' + ", remark='" + remark + '\'' + ", logtype='" + logtype + '\'' + ", operatetime=" + operatetime + "} " + super.toString();
 	}
 }

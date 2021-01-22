@@ -35,7 +35,9 @@
 		<swagger2.version>2.9.2</swagger2.version>
 		<commons-lang3.version>3.10</commons-lang3.version>
 		<commons-io.version>2.7</commons-io.version>
+		<commons-beanutils.version>1.9.4</commons-beanutils.version>
 		<hibernate-validator.version>6.1.6.Final</hibernate-validator.version>
+		<poi.version>5.0.0</poi.version>
 	</properties>
 
 	<dependencies>
@@ -142,11 +144,25 @@
 			<version>${commons-io.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
 		</dependency>
 
 		<!-- 测试 -->

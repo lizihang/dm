@@ -3,6 +3,7 @@ package com.dm;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -17,7 +18,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @SpringBootApplication
-@EnableScheduling
+@EnableScheduling	//定时任务
+@EnableTransactionManagement	//开启事务
 public class DmApplication
 {
 	public static void main(String[] args)
