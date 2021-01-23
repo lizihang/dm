@@ -40,17 +40,25 @@ public class CsvTest
 	@Test
 	void testCsv() throws IOException, InvocationTargetException, IllegalAccessException
 	{
+		String filePath = "E:\\个人文件夹\\账单\\张\\bill.csv";
+		String userCode = "zhw";
+		String billType = "10";
+		testImportCsv(filePath, userCode, billType);
+	}
+
+	private void testImportCsv(String filePath, String userCode, String billType) throws IOException, InvocationTargetException, IllegalAccessException
+	{
 		ConvertUtils.register(new DateConverter(), Date.class);
-		InputStreamReader isr = new InputStreamReader(new FileInputStream("F:\\被诈骗资料\\支付宝明细\\alipay_record_2018年01月01日到2021年01月14日所有账单\\bill.csv"), "GBK");
+		InputStreamReader isr = new InputStreamReader(new FileInputStream(filePath), "GBK");
 		CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(isr);
 		Map<String,Integer> headerMap = csvParser.getHeaderMap();
 		int count = 0;
 		List<Bill> data = new ArrayList<>();
 		for (CSVRecord csvRecord : csvParser)
 		{
-			// 新建对象
+			// 1.新建对象
 			ZFBBill bill = new ZFBBill();
-			// 将数据转换成对象，放入list
+			// 2.将数据转换成对象
 			Map<String,Object> dataMap = new HashMap<>();
 			for (String key : headerMap.keySet())
 			{
@@ -67,18 +75,19 @@ public class CsvTest
 			}
 			BeanUtils.populate(bill, dataMap);
 			// 10:支付宝
-			bill.setBillType("10");
-			// 对象放入list
+			bill.setUserCode(userCode);
+			bill.setBillType(billType);
+			// 3.对象放入list
 			data.add(bill);
 			count++;
-			// 每500条存入数据库
+			// 4.每500条存入数据库
 			if (count % 500 == 0)
 			{
 				billService.insertList(data);
 				data.clear();
 			}
 		}
-		// 最后不够500的再执行insert
+		// 5.最后不够500的再执行insert
 		billService.insertList(data);
 		System.out.println("数据导入成功，总共导入" + count + "条数据");
 	}

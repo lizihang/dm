@@ -10,7 +10,7 @@ import java.util.Date;
  * <p>功能：</p>
  * <pre>
  * 其他说明：
- * apache commons beanUtils时间类型转换报错
+ * 解决apache commons beanUtils时间类型转换报错
  * org.apache.commons.beanutils.ConversionException: DateConverter does not support default String to 'Date' conversion
  * </pre>
  * <p>作者：lizh</p>

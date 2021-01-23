@@ -3,6 +3,8 @@ package com.dm.fund.service;
 import com.dm.fund.po.Bill;
 import com.dm.fund.vo.BillQueryParams;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 /**
  * <p>标题：</p>
@@ -22,4 +24,6 @@ public interface BillService
 	List<Bill> queryList(BillQueryParams params);
 
 	int insertList(List<Bill> data);
+
+	void importCsv(String filePath, String userCode, String billType) throws IOException, InvocationTargetException, IllegalAccessException;
 }
