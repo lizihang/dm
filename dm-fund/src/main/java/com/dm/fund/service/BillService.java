@@ -21,7 +21,7 @@ import java.util.List;
  */
 public interface BillService
 {
-	List<Bill> queryList(BillQueryParams params);
+	<T extends Bill> List<T> queryList(BillQueryParams params, Class<T> clazz) throws IllegalAccessException, InstantiationException, InvocationTargetException;
 
 	int insertList(List<Bill> data);
 

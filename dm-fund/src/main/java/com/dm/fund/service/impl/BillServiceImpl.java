@@ -9,6 +9,7 @@ import com.dm.fund.po.WXBill;
 import com.dm.fund.po.ZFBBill;
 import com.dm.fund.service.BillService;
 import com.dm.fund.vo.BillQueryParams;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.csv.CSVFormat;
@@ -40,9 +41,18 @@ public class BillServiceImpl implements BillService
 	BillDAO billDAO;
 
 	@Override
-	public List<Bill> queryList(BillQueryParams params)
+	public <T extends Bill> List<T> queryList(BillQueryParams params, Class<T> clazz) throws IllegalAccessException, InstantiationException, InvocationTargetException
 	{
-		return billDAO.queryList(params);
+		PageHelper.startPage(params.getPageNum(), params.getPageSize());
+		List<Map<String,Object>> dataList = billDAO.queryList(params);
+		List<T> result = new ArrayList<>();
+		for (Map<String,Object> data : dataList)
+		{
+			T obj = clazz.newInstance();
+			BeanUtils.populate(obj, data);
+			result.add(obj);
+		}
+		return result;
 	}
 
 	@Override

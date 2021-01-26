@@ -1,6 +1,6 @@
 package com.dm.fund.po;
 
-import com.dm.po.BasePO;
+import com.dm.common.po.BasePO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;

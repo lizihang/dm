@@ -1,6 +1,6 @@
 package com.dm.system.po;
 
-import com.dm.po.BasePO;
+import com.dm.common.po.BasePO;
 /**
  * <p>标题：系统菜单</p>
  * <p>功能：</p>
@@ -117,6 +117,6 @@ public class Menu extends BasePO
 	@Override
 	public String toString()
 	{
-		return "Menu{" + "id=" + id + ", name='" + name + '\'' + ", router='" + router + '\'' + ", icon_class='" + icon_class + '\'' + ", group='" + group + '\'' + ", idx=" + idx + ", level=" + level + ", parent_id=" + parent_id + '}';
+		return "Menu{" + "id=" + id + ", name='" + name + '\'' + ", router='" + router + '\'' + ", icon_class='" + icon_class + '\'' + ", group='" + group + '\'' + ", idx=" + idx + ", level=" + level + ", parent_id=" + parent_id + "} " + super.toString();
 	}
 }

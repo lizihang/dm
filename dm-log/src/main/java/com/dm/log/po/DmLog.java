@@ -1,6 +1,6 @@
 package com.dm.log.po;
 
-import com.dm.po.BasePO;
+import com.dm.common.po.BasePO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -31,7 +31,7 @@ public class DmLog extends BasePO
 	/**日志类型*/
 	private              String logtype;
 	/**操作时间*/
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private              Date   operatetime;
 
 	public int getId()

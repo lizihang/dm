@@ -5,6 +5,7 @@ import com.dm.fund.vo.BillQueryParams;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -21,7 +22,7 @@ import java.util.List;
 @Mapper
 public interface BillDAO
 {
-	List<Bill> queryList(BillQueryParams params);
+	List<Map<String,Object>> queryList(BillQueryParams params);
 
 	int insertList(List<Bill> data);
 }

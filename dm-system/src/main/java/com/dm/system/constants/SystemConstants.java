@@ -16,31 +16,20 @@ package com.dm.system.constants;
 public class SystemConstants
 {
 	/**==================== Redis常用key ====================*/
-	public static final String REDIS_KEY_LOGIN_USER = "user";
-
+	public static final String   REDIS_KEY_LOGIN_USER = "user";
 	/**
 	 * 登录用户 redis key
 	 */
-	public static final String LOGIN_TOKEN_KEY = "login_tokens:";
-
+	public static final String   LOGIN_TOKEN_KEY      = "login_tokens:";
 	/**==================== 错误吗 ====================*/
-	public static final String ERR_CODE_00 = "当前登录用户不存在！请检查";
-
+	public static final String   ERR_CODE_00          = "当前登录用户不存在！请检查";
 	/**==================== 不需要权限的 ====================*/
-	public static final String[] AUTH_WHITELIST = {
+	public static final String[] AUTH_WHITELIST       = {
 			//登录相关
-			"/getCodeImg",
-			"/user/login",
-			"/user/register",
+			"/getCodeImg", "/user/login", "/user/register",
 			//swagger3相关
-			"/swagger-ui/**",
-			"/v3/**",
-			"/swagger-resources/**"
+			"/swagger-ui/**", "/v3/**", "/swagger-resources/**"
 			//swagger2相关
-			// "/swagger-ui.html",
-			// "/webjars/**",
-			// "/v2/**",
-			// "/swagger-resources/**"
-			};
-
+			// "/swagger-ui.html", "/webjars/**", "/v2/**", "/swagger-resources/**"
+	};
 }
