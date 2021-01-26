@@ -1,4 +1,4 @@
-package com.dm.po;
+package com.dm.common.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -13,22 +13,23 @@ import java.util.Date;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年11月09日 16:21</p>
- * <p>类全名：com.dm.po.BasePO</p>
+ * <p>创建日期：2021年01月26日 10:49</p>
+ * <p>类全名：com.dm.common.po.BasePO</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public class BasePO implements Serializable
 {
+	private static final long   serialVersionUID = -9053633431591965726L;
 	/** 创建人 */
-	private String createUser;
+	private              String createUser;
 	/** 创建时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date   createDate;
+	private              Date   createDate;
 	/** 修改人 */
-	private String modifyUser;
+	private              String modifyUser;
 	/** 修改时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date   modifyDate;
+	private              Date   modifyDate;
 
 	public String getCreateUser()
 	{
