@@ -1,6 +1,7 @@
 package com.dm.system.service.impl;
 
 import com.dm.common.utils.DateUtils;
+import com.dm.system.utils.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
 import com.dm.user.po.User;
 import com.dm.user.service.UserService;
@@ -37,6 +38,9 @@ public class UserDetailsServiceImpl implements UserDetailsService
 	@Resource
 	UserService userService;
 
+	@Resource
+	JwtTokenUtil jwtTokenUtil;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
@@ -57,6 +61,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
 		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("system:job:query");
 		grantedAuthorities.add(grantedAuthority);
 		loginUser.setAuthorities(grantedAuthorities);
+		loginUser.setToken(jwtTokenUtil.generateToken(loginUser));
 		return loginUser;
 	}
 }

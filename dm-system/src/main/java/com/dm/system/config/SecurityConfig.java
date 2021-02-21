@@ -10,9 +10,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
 /**
@@ -65,6 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	 */
 	@Resource
 	private LogoutSuccessHandler                logoutSuccessHandler;
+	/**
+	 * token认证过滤器
+	 */
+	@Resource
+	private JwtAuthenticationTokenFilter        authenticationTokenFilter;
 
 	@Bean
 	public PasswordEncoder passwordEncoder()
@@ -105,10 +112,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.and().logout().permitAll()//允许所有用户
 				.logoutSuccessHandler(logoutSuccessHandler)//登出成功处理逻辑
 		// .deleteCookies(RestHttpSessionIdResolver.AUTH_TOKEN)
-		// 会话管理
-		// .and().sessionManagement().invalidSessionStrategy(invalidSessionHandler) // 超时处理
+				// 会话管理
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //基于token，所以不需要session
 		// .maximumSessions(1)//同一账号同时登录最大用户数
 		// .expiredSessionStrategy(sessionInformationExpiredHandler) // 顶号处理
 		;
+		// 添加JWT filter
+		http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }

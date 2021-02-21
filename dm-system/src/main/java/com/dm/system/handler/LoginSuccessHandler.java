@@ -1,11 +1,14 @@
 package com.dm.system.handler;
 
+import com.dm.common.util.RedisCache;
 import com.dm.common.vo.Result;
 import com.dm.system.utils.ServletUtils;
+import com.dm.system.vo.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +29,16 @@ import java.io.IOException;
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler
 {
+	@Resource
+	RedisCache redisCache;
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
 	{
 		// TODO 登录成功 记录日志
-		Result result = Result.success("测试登录成功handler");
+		LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+		redisCache.setCacheObject(loginUser.getUsername(), loginUser);
+		Result result = Result.success("测试登录成功handler", loginUser);
 		ServletUtils.render(response, result);
 	}
 }
