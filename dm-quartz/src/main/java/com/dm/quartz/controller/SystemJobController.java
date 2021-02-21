@@ -4,6 +4,7 @@ import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
 import com.dm.quartz.po.SystemJob;
 import com.dm.quartz.service.SystemJobService;
+import io.swagger.annotations.*;
 import org.quartz.SchedulerException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,18 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("system")
+@Api(tags = "定时任务controller")
 public class SystemJobController
 {
 	@Resource()
 	SystemJobService systemJobService;
 
+	/**
+	 *
+	 * @return
+	 */
 	@DmLog
+	@ApiOperation("新增定时任务")
 	@PreAuthorize("@ps.permission('system:job:query')")
 	@GetMapping("getSystemJobs")
 	public Result getSystemJobs()
@@ -47,6 +54,7 @@ public class SystemJobController
 	 * @throws Exception
 	 */
 	@DmLog
+	@ApiOperation("新增定时任务")
 	@PreAuthorize("@ps.permission('system:job:add')")
 	@PostMapping("addSystemJob")
 	public Result addSystemJob(@RequestBody SystemJob systemJob) throws Exception

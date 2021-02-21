@@ -1,7 +1,7 @@
 package com.dm.system.vo;
 
+import com.dm.common.vo.BaseVO;
 import com.dm.system.po.Menu;
-import com.dm.vo.BaseVO;
 
 import java.util.List;
 /**
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class Menus extends BaseVO
 {
-	private static final long       serialVersionUID = -2017722060757445058L;
+	private static final long       serialVersionUID = 318476173070133666L;
 	/**id*/
 	private              Integer    id;
 	/**菜单名称*/
@@ -132,6 +132,6 @@ public class Menus extends BaseVO
 	@Override
 	public String toString()
 	{
-		return "Menus{" + "id=" + id + ", name='" + name + '\'' + ", router='" + router + '\'' + ", icon_class='" + icon_class + '\'' + ", group='" + group + '\'' + ", idx=" + idx + ", level=" + level + ", parent_id=" + parent_id + ", subMenus=" + subMenus + '}';
+		return "Menus{" + "id=" + id + ", name='" + name + '\'' + ", router='" + router + '\'' + ", icon_class='" + icon_class + '\'' + ", group='" + group + '\'' + ", idx=" + idx + ", level=" + level + ", parent_id=" + parent_id + ", subMenus=" + subMenus + "} " + super.toString();
 	}
 }

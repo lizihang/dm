@@ -118,4 +118,10 @@ public class ZFBBill extends Bill
 	{
 		this.fundStatus = fundStatus;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "ZFBBill{" + "orderCode='" + orderCode + '\'' + ", tradeCreateTime=" + tradeCreateTime + ", tradeModifyTime=" + tradeModifyTime + ", tradeSource='" + tradeSource + '\'' + ", type='" + type + '\'' + ", serviceFund=" + serviceFund + ", refund=" + refund + ", fundStatus='" + fundStatus + '\'' + "} " + super.toString();
+	}
 }

@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dm.fund.dao.BillDAO">
 
-	<select id="queryList" resultType="Bill" parameterType="BillQueryParams">
-		select id, usercode, tradeCode, tradedirection, goods, amount, paymenttime, tousercode, status, billtype, remark, ordercode, tradecreatetime, trademodifytime, tradesource, type, servicefund, refund, fundstatus from dm_bills
+	<select id="queryList" resultType="map" parameterType="BillQueryParams">
+		select id, userCode, tradeCode, tradeDirection, goods, amount, paymentTime, toUserCode, status, billType, remark, orderCode, tradeCreateTime, tradeModifyTime, tradeSource, type, serviceFund, refund, fundStatus from dm_bills
 		<where>
 			1=1
 			<if test="userCode != null">
-				and user.usercode = #{userCode}
+				and usercode = #{userCode}
 			</if>
 			<if test="tradeDirection != null">
-				and user.tradedirection = #{tradeDirection}
+				and tradedirection = #{tradeDirection}
+			</if>
+			<if test="billType != null">
+				and billType = #{billType}
 			</if>
 		</where>
 	</select>

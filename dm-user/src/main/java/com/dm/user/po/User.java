@@ -1,6 +1,6 @@
 package com.dm.user.po;
 
-import com.dm.po.BasePO;
+import com.dm.common.po.BasePO;
 
 import javax.validation.constraints.NotNull;
 /**

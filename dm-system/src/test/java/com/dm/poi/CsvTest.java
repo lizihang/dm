@@ -43,7 +43,8 @@ public class CsvTest
 		String filePath = "E:\\个人文件夹\\账单\\张\\bill.csv";
 		String userCode = "zhw";
 		String billType = "10";
-		testImportCsv(filePath, userCode, billType);
+		billService.importCsv(filePath,userCode,billType);
+		//testImportCsv(filePath, userCode, billType);
 	}
 
 	private void testImportCsv(String filePath, String userCode, String billType) throws IOException, InvocationTargetException, IllegalAccessException

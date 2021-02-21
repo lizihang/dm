@@ -1,6 +1,6 @@
 package com.dm.quartz.po;
 
-import com.dm.po.BasePO;
+import com.dm.common.po.BasePO;
 /**
  * <p>标题：系统任务PO</p>
  * <p>功能：</p>

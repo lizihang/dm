@@ -1,6 +1,6 @@
 package com.dm.fund.vo;
 
-import com.dm.vo.QueryParams;
+import com.dm.common.vo.QueryParams;
 
 import java.util.Date;
 /**
@@ -18,11 +18,17 @@ import java.util.Date;
  */
 public class BillQueryParams extends QueryParams
 {
-	private static final long   serialVersionUID = 6599504691729647164L;
+	private static final long   serialVersionUID = -4859617658671953031L;
+	/** 账号 */
 	private              String userCode;
+	/** 交易方向(收/支) */
 	private              String tradeDirection;
+	/** 付款时间 */
 	private              Date   paymentTime;
+	/** 状态 */
 	private              String status;
+	/** 账单类型 */
+	private              String billType;
 
 	public String getUserCode()
 	{
@@ -62,5 +68,15 @@ public class BillQueryParams extends QueryParams
 	public void setStatus(String status)
 	{
 		this.status = status;
+	}
+
+	public String getBillType()
+	{
+		return billType;
+	}
+
+	public void setBillType(String billType)
+	{
+		this.billType = billType;
 	}
 }

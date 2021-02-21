@@ -1,7 +1,9 @@
 package com.dm.fund.controller;
 
 import com.dm.common.vo.Result;
+import com.dm.fund.constants.BillConstants;
 import com.dm.fund.po.Bill;
+import com.dm.fund.po.ZFBBill;
 import com.dm.fund.service.BillService;
 import com.dm.fund.vo.BillQueryParams;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 /**
  * <p>标题：账单controller</p>
@@ -37,9 +40,16 @@ public class BillController
 	 * @return
 	 */
 	@GetMapping("queryList")
-	public Result queryList(BillQueryParams params)
+	public Result queryList(BillQueryParams params) throws IllegalAccessException, InvocationTargetException, InstantiationException
 	{
-		List<Bill> bills = billService.queryList(params);
+		List<? extends Bill> bills;
+		if (params.getBillType().equals(BillConstants.BILL_TYPE_ZFB))
+		{
+			bills = billService.queryList(params, ZFBBill.class);
+		} else
+		{
+			bills = billService.queryList(params, Bill.class);
+		}
 		return Result.success("查询账单成功！", bills);
 	}
 }
