@@ -19,17 +19,16 @@ import java.util.Date;
  */
 public class BasePO implements Serializable
 {
-	private static final long   serialVersionUID = -9053633431591965726L;
 	/** 创建人 */
-	private              String createUser;
+	private String createUser;
 	/** 创建时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private              Date   createDate;
+	private Date   createDate;
 	/** 修改人 */
-	private              String modifyUser;
+	private String modifyUser;
 	/** 修改时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private              Date   modifyDate;
+	private Date   modifyDate;
 
 	public String getCreateUser()
 	{

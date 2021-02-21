@@ -23,6 +23,16 @@ public class SystemConstants
 	 */
 	public static final String LOGIN_TOKEN_KEY = "login_tokens:";
 
+	/**
+	 * 请求中TOKEN名
+	 */
+	public static final String TOKEN_HEADER = "Authorization";
+
+	/**
+	 * 令牌前缀
+	 */
+	public static final String TOKEN_PREFIX = "Bearer";
+
 	/**==================== 错误吗 ====================*/
 	public static final String ERR_CODE_00 = "当前登录用户不存在！请检查";
 
