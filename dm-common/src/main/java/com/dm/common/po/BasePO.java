@@ -19,6 +19,7 @@ import java.util.Date;
  */
 public class BasePO implements Serializable
 {
+	private static final long serialVersionUID = -9053633431591965726L;
 	/** 创建人 */
 	private String createUser;
 	/** 创建时间 */

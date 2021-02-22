@@ -35,7 +35,7 @@ public class BasePODefaultValueAspect
 	RedisUtil redisUtil;
 
 	@Before("execution(* com.dm.*.dao.*.save*(..))")
-	public void beforeSave(JoinPoint joinPoint) throws IllegalAccessException
+	public void beforeSave(JoinPoint joinPoint)
 	{
 		Object[] args = joinPoint.getArgs();
 		for (Object o : args)
@@ -48,7 +48,7 @@ public class BasePODefaultValueAspect
 	}
 
 	@Before("execution(* com.dm.*.dao.*.update*(..))")
-	public void beforeUpdate(JoinPoint joinPoint) throws IllegalAccessException
+	public void beforeUpdate(JoinPoint joinPoint)
 	{
 		Object[] args = joinPoint.getArgs();
 		for (Object o : args)
@@ -62,7 +62,7 @@ public class BasePODefaultValueAspect
 
 	/**
 	 * 设置创建人，创建时间
-	 * @param o
+	 * @param o BasePO对象
 	 */
 	private void setCreateValue(Object o)
 	{
@@ -73,7 +73,7 @@ public class BasePODefaultValueAspect
 
 	/**
 	 * 设置修改人，修改时间
-	 * @param o
+	 * @param o BasePO对象
 	 */
 	private void setModifyValue(Object o)
 	{

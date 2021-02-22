@@ -52,6 +52,17 @@ public class JwtTokenUtil
 	}
 
 	/**
+	 * 从数据声明生成令牌
+	 * @param claims 数据声明
+	 * @return 令牌
+	 */
+	private String generateToken(Map<String,Object> claims)
+	{
+		Date expirationDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
+		return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
+	}
+
+	/**
 	 * 从令牌中获取用户名
 	 * @param token 令牌
 	 * @return 用户名
@@ -139,29 +150,14 @@ public class JwtTokenUtil
 
 	/**
 	 * 验证令牌
-	 * @param loginUser 用户
-	 * @return 是否有效
-	 * @throws Exception
+	 * @param token 客户端传入的token
+	 * @param loginUser 从数据库中查询出来的用户信息
+	 * @return
 	 */
-	public Boolean validateToken(LoginUser loginUser)
+	public Boolean validateToken(String token, LoginUser loginUser)
 	{
-		return true;
-		/* TODO
-		LoginUser user = (LoginUser) userDetails;
 		String username = getUsernameFromToken(token);
-		return (username.equals(user.getUsername()) && !isTokenExpired(token));
-		*/
-	}
-
-	/**
-	 * 从数据声明生成令牌
-	 * @param claims 数据声明
-	 * @return 令牌
-	 */
-	private String generateToken(Map<String,Object> claims)
-	{
-		Date expirationDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
-		return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
+		return username.equals(loginUser.getUsername()) && !isTokenExpired(token);
 	}
 
 	/**

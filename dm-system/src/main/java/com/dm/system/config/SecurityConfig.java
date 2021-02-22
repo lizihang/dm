@@ -111,12 +111,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				// 登出
 				.and().logout().permitAll()//允许所有用户
 				.logoutSuccessHandler(logoutSuccessHandler)//登出成功处理逻辑
-		// .deleteCookies(RestHttpSessionIdResolver.AUTH_TOKEN)
+				// .deleteCookies(RestHttpSessionIdResolver.AUTH_TOKEN)
 				// 会话管理
-				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //基于token，所以不需要session
-		// .maximumSessions(1)//同一账号同时登录最大用户数
-		// .expiredSessionStrategy(sessionInformationExpiredHandler) // 顶号处理
-		;
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //基于token，所以不需要session
 		// 添加JWT filter
 		http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
