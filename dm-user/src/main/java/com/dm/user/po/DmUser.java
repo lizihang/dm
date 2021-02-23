@@ -1,8 +1,7 @@
 package com.dm.user.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.dm.common.po.BasePO;
-
-import javax.validation.constraints.NotNull;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -12,22 +11,26 @@ import javax.validation.constraints.NotNull;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年10月13日 17:03</p>
- * <p>类全名：com.dm.user.po.User</p>
+ * <p>创建日期：2021年02月23日 11:16</p>
+ * <p>类全名：com.dm.user.po.DmUser</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class User extends BasePO
+public class DmUser extends BasePO
 {
-	private static final long   serialVersionUID = -3231453355270971403L;
-	/**id*/
+	private static final long   serialVersionUID = 5591750859687447212L;
+	/** id */
 	private              int    id;
-	/**用户名*/
-	@NotNull
+	/** 用户名 */
 	private              String username;
-	/**昵称*/
-	private              String nickname;
-	/**密码*/
+	/** 密码 */
+	@JSONField(serialize = false)
 	private              String password;
+	/** 昵称 */
+	private              String nickname;
+	/** 邮箱 */
+	private              String email;
+	/** 状态 */
+	private              int    status;
 
 	public int getId()
 	{
@@ -49,16 +52,6 @@ public class User extends BasePO
 		this.username = username;
 	}
 
-	public String getNickname()
-	{
-		return nickname;
-	}
-
-	public void setNickname(String nickname)
-	{
-		this.nickname = nickname;
-	}
-
 	public String getPassword()
 	{
 		return password;
@@ -69,9 +62,39 @@ public class User extends BasePO
 		this.password = password;
 	}
 
+	public String getNickname()
+	{
+		return nickname;
+	}
+
+	public void setNickname(String nickname)
+	{
+		this.nickname = nickname;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	public int getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(int status)
+	{
+		this.status = status;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "User{" + "id=" + id + ", username='" + username + '\'' + ", nickname='" + nickname + '\'' + ", password='" + password + '\'' + "} " + super.toString();
+		return "DmUser{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", nickname='" + nickname + '\'' + ", email='" + email + '\'' + ", status=" + status + "} " + super.toString();
 	}
 }
