@@ -1,6 +1,7 @@
 package com.dm.user.dao;
 
-import com.dm.user.po.User;
+import com.dm.user.po.DmUser;
+import com.dm.user.vo.DmUserQueryParams;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,13 +21,13 @@ import java.util.List;
 @Mapper
 public interface UserDAO
 {
-	List<User> queryList();
+	List<DmUser> queryList(DmUserQueryParams params);
 
-	User queryUserByUserName(String username);
+	DmUser queryUserByUserName(String username);
 
-	void save(User user);
+	void save(DmUser user);
 
-	void update(User user);
+	void update(DmUser user);
 
 	void deleteById(int id);
 }

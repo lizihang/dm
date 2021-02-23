@@ -1,6 +1,7 @@
 package com.dm.user.service;
 
-import com.dm.user.po.User;
+import com.dm.user.po.DmUser;
+import com.dm.user.vo.DmUserQueryParams;
 
 import java.util.List;
 /**
@@ -19,36 +20,38 @@ import java.util.List;
 public interface UserService
 {
 	/**
-	 * 查询所有
-	 * @return
+	 * 查询所有用户
+	 * @return 用户列表
 	 */
-	List<User> queryList();
+	List<DmUser> queryList(DmUserQueryParams params);
 
 	/**
 	 * 根据用户名查找
-	 * @return
+	 * @return 用户对象
 	 */
-	User queryUserByUserName(String username);
-
-	/**
-	 * 用户登录
-	 * @param user
-	 * @return
-	 */
-	User login(User user);
+	DmUser queryUserByUserName(String username);
 
 	/**
 	 * 用户注册
-	 * @param user
+	 * @param user 用户
 	 */
-	User register(User user);
+	void register(DmUser user);
 
 	/**
 	 * 用户修改
-	 * @param user
+	 * @param user 用户
 	 */
-	void update(User user);
+	void update(DmUser user);
 
+	/**
+	 * 逻辑删除
+	 * @param id
+	 */
+	void deleteLogic(int id);
+
+	/**
+	 * 根据用户id删除用户
+	 * @param id id
+	 */
 	void deleteById(int id);
-	// void save(User user);
 }

@@ -1,14 +1,20 @@
 package com.dm.user.service.impl;
 
+import com.dm.common.constants.Constants;
+import com.dm.common.util.RedisCache;
+import com.dm.common.utils.DateUtils;
 import com.dm.user.dao.UserDAO;
-import com.dm.user.po.User;
+import com.dm.user.po.DmUser;
 import com.dm.user.service.UserService;
+import com.dm.user.vo.DmUserQueryParams;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -30,70 +36,78 @@ public class UserServiceImpl implements UserService
 	UserDAO         userDAO;
 	@Resource
 	PasswordEncoder passwordEncoder;
+	@Resource
+	RedisCache      redisCache;
 
 	@Override
-	public List<User> queryList()
+	public List<DmUser> queryList(DmUserQueryParams params)
 	{
-		return userDAO.queryList();
+		return userDAO.queryList(params);
 	}
 
 	@Override
-	public User queryUserByUserName(String username)
+	public DmUser queryUserByUserName(String username)
 	{
-		return userDAO.queryUserByUserName(username);
-	}
-
-	@Override
-	public User login(User user)
-	{
-		User userDB = userDAO.queryUserByUserName(user.getUsername());
-		if (userDB != null)
+		String key = "user_" + username;
+		// 1.从缓存中查询数据
+		if (redisCache.hasKey(key))
 		{
-			if (user.getPassword().equals(userDB.getPassword()))
-			{
-				// 返回时密码置空处理
-				userDB.setPassword(null);
-				return userDB;
-			}
+			System.out.println("redis");
+			return redisCache.getCacheObject(key);
 		}
-		return null;
-	}
-
-	@Override
-	public User register(User user)
-	{
-		User userDB = userDAO.queryUserByUserName(user.getUsername());
-		if (userDB != null)
+		// 2.缓存中不存在，则查询数据库
+		DmUser user = userDAO.queryUserByUserName(username);
+		if (user != null)
 		{
-			throw new RuntimeException("用户已存在！");
+			// 3.将对象存入缓存
+			// TODO 查询数据库中不存在的数据，会有缓存穿透问题，布隆过滤器
+			redisCache.setCacheObject(key, user);
+		} else
+		{
+			// 临时用这种方法解决
+			redisCache.setCacheObject(key, user, 600, TimeUnit.SECONDS);
 		}
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		// 处理创建时间等字段
-		// Date serverDate = DateUtils.getServerDate();
-		// user.setCreateDate(serverDate);
-		// user.setModifyDate(serverDate);
-		userDAO.save(user);
-		// 返回时密码置空处理
-		user.setPassword(null);
+		System.out.println("mybatis");
 		return user;
 	}
 
 	@Override
-	public void update(User user)
+	public void register(DmUser user)
 	{
+		DmUser userDB = userDAO.queryUserByUserName(user.getUsername());
+		if (userDB != null)
+		{
+			throw new RuntimeException("用户已存在！");
+		}
+		//TODO 密码应该前端也加密
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		// 处理创建人，创建时间字段
+		Date serverDate = DateUtils.getServerDate();
+		user.setCreateDate(serverDate);
+		user.setCreateUser(user.getUsername());
+		userDAO.save(user);
+	}
+
+	@Override
+	public void update(DmUser user)
+	{
+		// TODO 修改为更新有值字段
+		if (user.getPassword() != null)
+		{
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+		}
 		userDAO.update(user);
 	}
-	// @Override
-	// @Transactional(propagation = Propagation.SUPPORTS)
-	// public List<User> findAll()
-	// {
-	// 	return userDAO.findAll();
-	// }
-	// @Override
-	// public void save(User user)
-	// {
-	// 	userDAO.save(user);
-	// }
+
+	@Override
+	public void deleteLogic(int id)
+	{
+		DmUser user = new DmUser();
+		user.setId(id);
+		user.setStatus(Constants.STATUS_DELETE);
+		userDAO.update(user);
+	}
+
 	@Override
 	public void deleteById(int id)
 	{

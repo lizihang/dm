@@ -37,6 +37,8 @@ public class BasePODefaultValueAspect
 	@Before("execution(* com.dm.*.dao.*.save*(..))")
 	public void beforeSave(JoinPoint joinPoint)
 	{
+		// TODO 应该在前端做
+		/*
 		Object[] args = joinPoint.getArgs();
 		for (Object o : args)
 		{
@@ -45,11 +47,14 @@ public class BasePODefaultValueAspect
 				setCreateValue(o);
 			}
 		}
+		*/
 	}
 
 	@Before("execution(* com.dm.*.dao.*.update*(..))")
 	public void beforeUpdate(JoinPoint joinPoint)
 	{
+		// TODO 应该在前端做
+		/*
 		Object[] args = joinPoint.getArgs();
 		for (Object o : args)
 		{
@@ -58,6 +63,7 @@ public class BasePODefaultValueAspect
 				setModifyValue(o);
 			}
 		}
+		*/
 	}
 
 	/**

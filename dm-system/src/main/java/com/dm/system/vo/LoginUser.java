@@ -1,6 +1,6 @@
 package com.dm.system.vo;
 
-import com.dm.user.po.User;
+import com.dm.user.po.DmUser;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +28,7 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	/**
 	 * 用户信息
 	 */
-	private              User                   user;
+	private              DmUser                 user;
 	/**
 	 * 用户唯一标识
 	 */
@@ -71,19 +71,17 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	}
 
 	//TODO 其他参数的构造器
-	public LoginUser(User user, Date loginTime, String ip)
+	public LoginUser(DmUser user)
 	{
 		this.user = user;
-		this.loginTime = loginTime;
-		this.ip = ip;
 	}
 
-	public User getUser()
+	public DmUser getUser()
 	{
 		return user;
 	}
 
-	public void setUser(User user)
+	public void setUser(DmUser user)
 	{
 		this.user = user;
 	}
@@ -177,13 +175,6 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{
 		return authorities;
-		/*
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		for (Role role : roles) {
-			authorities.add(new SimpleGrantedAuthority(role.getName()));
-		}
-		return authorities;
-		*/
 	}
 
 	@Override
@@ -201,13 +192,13 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	@Override
 	public boolean isAccountNonExpired()
 	{
-		return true;
+		return user.getStatus() != 2;
 	}
 
 	@Override
 	public boolean isAccountNonLocked()
 	{
-		return true;
+		return user.getStatus() != 2;
 	}
 
 	@Override
@@ -219,7 +210,7 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	@Override
 	public boolean isEnabled()
 	{
-		return true;
+		return user.getStatus() != 3;
 	}
 
 	/**

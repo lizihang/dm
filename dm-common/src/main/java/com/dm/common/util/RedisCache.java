@@ -218,6 +218,16 @@ public class RedisCache
 	}
 
 	/**
+	 * 判断key是否存在
+	 * @param key 键
+	 * @return true 存在 false不存在
+	 */
+	public boolean hasKey(String key)
+	{
+		return redisTemplate.hasKey(key);
+	}
+
+	/**
 	 * 获得缓存的基本对象列表
 	 * @param pattern 字符串前缀
 	 * @return key的集合

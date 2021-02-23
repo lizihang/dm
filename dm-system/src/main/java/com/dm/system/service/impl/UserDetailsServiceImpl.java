@@ -1,9 +1,8 @@
 package com.dm.system.service.impl;
 
-import com.dm.common.utils.DateUtils;
 import com.dm.system.utils.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
-import com.dm.user.po.User;
+import com.dm.user.po.DmUser;
 import com.dm.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,32 +35,34 @@ public class UserDetailsServiceImpl implements UserDetailsService
 	public static final  String BeanName = "UserDetailsService";
 	private static final Logger logger   = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 	@Resource
-	UserService userService;
-
+	UserService  userService;
 	@Resource
 	JwtTokenUtil jwtTokenUtil;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
-		User user = userService.queryUserByUserName(username);
+		DmUser user = userService.queryUserByUserName(username);
 		if (user == null)
 		{
-			logger.info("登录用户：{} 不存在.", username);
 			throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
 		}
 		return createLoginUser(user);
 	}
 
-	public UserDetails createLoginUser(User user)
+	public UserDetails createLoginUser(DmUser user)
 	{
-		//TODO 做个util转换对象？
-		LoginUser loginUser = new LoginUser(user, DateUtils.getServerDate(), "127.0.0.1");
+		//TODO 转换对象
+		logger.info("[用户登录]-将DmUser转换成LoginUser");
+		LoginUser loginUser = new LoginUser(user);
+		// 1.生成token
+		loginUser.setToken(jwtTokenUtil.generateToken(loginUser));
+		// 12.处理权限
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("system:job:query");
 		grantedAuthorities.add(grantedAuthority);
 		loginUser.setAuthorities(grantedAuthorities);
-		loginUser.setToken(jwtTokenUtil.generateToken(loginUser));
+		// 3.处理其他信息
 		return loginUser;
 	}
 }

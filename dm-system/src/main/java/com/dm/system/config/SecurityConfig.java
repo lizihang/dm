@@ -105,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.authenticationEntryPoint(userAuthenticationEntryPointHandler)
 				// 登入
 				.and().formLogin().permitAll()//允许所有用户
-				.loginProcessingUrl("/user/login")//登录请求路径
+				.loginProcessingUrl("/login")//登录请求路径
 				.successHandler(loginSuccessHandler)//登录成功处理逻辑
 				.failureHandler(loginFailureHandler)//登录失败处理逻辑
 				// 登出

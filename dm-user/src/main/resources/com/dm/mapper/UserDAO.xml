@@ -2,42 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dm.user.dao.UserDAO">
 
-    <select id="queryList" resultType="User">
+	<select id="queryList" resultType="DmUser" parameterType="DmUserQueryParams">
         select
-            id, username, nickname, password, createUser, createDate, modifyUser, modifyDate
+            id, username, password, nickname, email, status, create_user, create_date, modify_user, modify_date
         from
-            users
+            dm_user
+        <where>
+            <if test="username != null">
+                and username like CONCAT('%',#{username,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="nickname != null">
+                and nickname like CONCAT('%',#{nickname,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="email != null">
+                and email like CONCAT('%',#{email,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
     </select>
 
-    <select id="queryUserByUserName" resultType="User">
+	<select id="queryUserByUserName" resultType="DmUser">
         select
-            id, username, nickname, password, createUser, createDate, modifyUser, modifyDate
+            id, username, password, nickname, email, status, create_user, create_date, modify_user, modify_date
         from
-            users
+            dm_user
         where
             username = #{username}
     </select>
 
-    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into users values(#{id},#{username},#{nickname},#{password},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
+	<insert id="save" parameterType="DmUser" useGeneratedKeys="true" keyProperty="id">
+        insert into dm_user
+        values(#{id},#{username},#{password},#{nickname},#{email},#{status},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
     </insert>
 
-    <delete id="deleteById" parameterType="int">
-        delete from users where id = #{id}
-    </delete>
-
-    <update id="update" parameterType="User">
-        update users
-        set
-            username=#{username},
-            nickname=#{nickname},
-            password=#{password},
-            createUser=#{createUser},
-            createDate=#{createDate},
-            modifyUser=#{modifyUser},
-            modifyDate=#{modifyDate}
-        where
+	<update id="update" parameterType="DmUser">
+        update dm_user
+        <set>
+            <if test="password != null">password=#{password},</if>
+            <if test="nickname != null">nickname=#{nickname},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="status != null">status=#{status},</if>
+            <if test="modifyUser != null">modify_user=#{modifyUser},</if>
+            <if test="modifyDate != null">modify_date=#{modifyDate}</if>
+        </set>
+        <where>
             id=#{id}
+        </where>
     </update>
+
+	<delete id="deleteById" parameterType="int">
+        delete from dm_user where id = #{id}
+    </delete>
 
 </mapper>

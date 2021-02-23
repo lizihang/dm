@@ -37,7 +37,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException
 	{
 		Result result;
-		String username = request.getRemoteUser();
+		String username = request.getParameter("username");
+		// AbstractUserDetailsAuthenticationProvider中，将UsernameNotFoundException改成了BadCredentialsException抛出
 		if (exception instanceof UsernameNotFoundException || exception instanceof BadCredentialsException)
 		{
 			// 用户名或密码错误
@@ -46,35 +47,40 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 		} else if (exception instanceof AccountExpiredException)
 		{
 			// 账号过期
-			logger.info("[登录失败] - 用户[{}]账号过期", username);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户账号过期");
+			String msg = String.format("[登录失败] - 用户[%s]账号过期", username);
+			logger.info(msg);
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		} else if (exception instanceof CredentialsExpiredException)
 		{
 			// 密码过期
-			logger.info("[登录失败] - 用户[{}]密码过期", username);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户密码过期");
+			String msg = String.format("[登录失败] - 用户[%s]密码过期", username);
+			logger.info(msg);
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		} else if (exception instanceof DisabledException)
 		{
 			// 用户被禁用
-			logger.info("[登录失败] - 用户[{}]被禁用", username);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户被禁用");
+			String msg = String.format("[登录失败] - 用户[%s]被禁用", username);
+			logger.info(msg);
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		} else if (exception instanceof LockedException)
 		{
 			// 用户被锁定
-			logger.info("[登录失败] - 用户[{}]被锁定", username);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户被锁定");
+			String msg = String.format("[登录失败] - 用户[%s]被锁定", username);
+			logger.info(msg);
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		} else if (exception instanceof InternalAuthenticationServiceException)
 		{
 			// 内部错误
-			logger.error(String.format("[登录失败] - [%s]内部错误", username), exception);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 内部错误");
+			String msg = String.format("[登录失败] - [%s]内部错误", username);
+			logger.error(msg, exception);
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		} else
 		{
 			// 其他错误
-			logger.error(String.format("[登录失败] - [%s]其他错误", username), exception);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 其他错误");
+			String msg = String.format("[登录失败] - [%s]其他错误", username);
+			logger.error(msg, exception);
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		}
-		// TODO 登录失败 记录日志
 		ServletUtils.render(response, result);
 	}
 }
