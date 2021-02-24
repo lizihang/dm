@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public void update(DmUser user)
+	public void updateUser(DmUser user)
 	{
 		// TODO 修改为更新有值字段
 		if (user.getPassword() != null)
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public void deleteLogic(int id)
+	public void deleteUserByLogic(int id)
 	{
 		DmUser user = new DmUser();
 		user.setId(id);
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public void deleteById(int id)
+	public void deleteUserById(int id)
 	{
 		userDAO.deleteById(id);
 	}

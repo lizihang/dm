@@ -5,6 +5,7 @@ import com.dm.log.annotation.DmLog;
 import com.dm.user.po.DmUser;
 import com.dm.user.service.UserService;
 import com.dm.user.vo.DmUserQueryParams;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,19 +32,20 @@ public class UserController
 
 	/**
 	 * 查询所有用户列表
-	 * @return
+	 * @return result
 	 */
 	@DmLog
 	@GetMapping("queryList")
+	@PreAuthorize("@ps.permission('user:query')")
 	public Result queryList(DmUserQueryParams params)
 	{
 		return Result.success("查询用户列表成功", userService.queryList(params));
 	}
 
 	/**
-	 * 用户注册
-	 * @param user
-	 * @return
+	 * 注册用户
+	 * @param user 用户
+	 * @return result
 	 */
 	@DmLog
 	@PostMapping("register")
@@ -55,27 +57,29 @@ public class UserController
 
 	/**
 	 * 用户更新
-	 * @param user
-	 * @return
+	 * @param user 用户
+	 * @return result
 	 */
 	@DmLog
-	@PostMapping("update")
-	public Result update(@RequestBody DmUser user)
+	@PostMapping("updateUser")
+	@PreAuthorize("@ps.permission('user:update')")
+	public Result updateUser(@RequestBody DmUser user)
 	{
-		userService.update(user);
+		userService.updateUser(user);
 		return Result.success("用户修改成功");
 	}
 
 	/**
 	 * 逻辑删除
-	 * @param id
-	 * @return
+	 * @param id id
+	 * @return result
 	 */
 	@DmLog
-	@DeleteMapping("deleteById")
-	public Result deleteById(int id)
+	@DeleteMapping("deleteUserByLogic")
+	@PreAuthorize("@ps.permission('user:delete')")
+	public Result deleteUserByLogic(int id)
 	{
-		userService.deleteLogic(id);
+		userService.deleteUserByLogic(id);
 		return Result.success("删除成功，用户id：" + id);
 	}
 
@@ -86,9 +90,10 @@ public class UserController
 	 */
 	@DmLog
 	@DeleteMapping("deleteCompletely")
+	@PreAuthorize("@ps.permission('user:delete')")
 	public Result deleteCompletely(int id)
 	{
-		userService.deleteById(id);
+		userService.deleteUserById(id);
 		return Result.success("删除成功，用户id：" + id);
 	}
 }

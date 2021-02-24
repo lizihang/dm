@@ -41,17 +41,17 @@ public interface UserService
 	 * 用户修改
 	 * @param user 用户
 	 */
-	void update(DmUser user);
+	void updateUser(DmUser user);
 
 	/**
 	 * 逻辑删除
 	 * @param id
 	 */
-	void deleteLogic(int id);
+	void deleteUserByLogic(int id);
 
 	/**
 	 * 根据用户id删除用户
 	 * @param id id
 	 */
-	void deleteById(int id);
+	void deleteUserById(int id);
 }

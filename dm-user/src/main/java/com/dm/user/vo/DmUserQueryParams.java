@@ -23,6 +23,8 @@ public class DmUserQueryParams extends QueryParams
 	private              String nickname;
 	/** 邮箱 */
 	private              String email;
+	/** 状态 */
+	private              int    status;
 
 	public String getUsername()
 	{
@@ -52,5 +54,15 @@ public class DmUserQueryParams extends QueryParams
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+
+	public int getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(int status)
+	{
+		this.status = status;
 	}
 }

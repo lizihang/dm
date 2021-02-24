@@ -57,9 +57,9 @@ public class UserDetailsServiceImpl implements UserDetailsService
 		LoginUser loginUser = new LoginUser(user);
 		// 1.生成token
 		loginUser.setToken(jwtTokenUtil.generateToken(loginUser));
-		// 12.处理权限
+		// 2.处理权限
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("system:job:query");
+		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("/user/queryList");
 		grantedAuthorities.add(grantedAuthority);
 		loginUser.setAuthorities(grantedAuthorities);
 		// 3.处理其他信息

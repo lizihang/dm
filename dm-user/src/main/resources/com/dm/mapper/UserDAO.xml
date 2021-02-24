@@ -17,6 +17,9 @@
             <if test="email != null">
                 and email like CONCAT('%',#{email,jdbcType=VARCHAR},'%')
             </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
         </where>
     </select>
 

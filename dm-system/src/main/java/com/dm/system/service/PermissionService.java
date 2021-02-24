@@ -1,15 +1,16 @@
 package com.dm.system.service;
 
 import com.dm.common.utils.StringUtils;
+import com.dm.system.utils.JwtTokenUtil;
+import com.dm.system.utils.ServletUtils;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -26,6 +27,9 @@ import java.util.List;
 @Service("ps")
 public class PermissionService
 {
+	@Resource
+	JwtTokenUtil tokenUtil;
+
 	/**
 	 * 验证用户是否具备某权限
 	 *
@@ -38,22 +42,20 @@ public class PermissionService
 		{
 			return false;
 		}
-		// TODO
-		// LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-		LoginUser loginUser = new LoginUser();
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-		GrantedAuthority grantedAuthority1 = new SimpleGrantedAuthority("system:job:query");
-		GrantedAuthority grantedAuthority2 = new SimpleGrantedAuthority("system:job:add");
-		grantedAuthorities.add(grantedAuthority1);
-		grantedAuthorities.add(grantedAuthority2);
-		loginUser.setAuthorities(grantedAuthorities);
+		HttpServletRequest request = ServletUtils.getRequest();
+		String requestURI = request.getRequestURI();
+		LoginUser loginUser = tokenUtil.getLoginUser(request);
 		if (ObjectUtils.isEmpty(loginUser) || CollectionUtils.isEmpty(loginUser.getAuthorities()))
 		{
 			return false;
 		}
 		for (GrantedAuthority auth : loginUser.getAuthorities())
 		{
-			if (permission.matches(auth.getAuthority()))
+			// if (permission.matches(auth.getAuthority()))
+			// {
+			// 	return true;
+			// }
+			if (requestURI.matches(auth.getAuthority()))
 			{
 				return true;
 			}
