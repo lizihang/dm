@@ -2,6 +2,7 @@ package com.dm.system.handler;
 
 import com.dm.common.util.RedisCache;
 import com.dm.common.vo.Result;
+import com.dm.system.constants.SystemConstants;
 import com.dm.system.utils.ServletUtils;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.core.Authentication;
@@ -37,8 +38,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler
 	{
 		// TODO 登录成功 记录日志
 		LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-		redisCache.setCacheObject(loginUser.getUsername(), loginUser);
-		Result result = Result.success("测试登录成功handler", loginUser);
+		redisCache.setCacheObject(SystemConstants.LOGIN_USER_KEY + loginUser.getUsername(), loginUser);
+		Result result = Result.success("登录成功", loginUser);
 		ServletUtils.render(response, result);
 	}
 }

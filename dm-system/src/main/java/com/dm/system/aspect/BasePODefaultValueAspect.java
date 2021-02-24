@@ -1,10 +1,8 @@
 package com.dm.system.aspect;
 
-import com.dm.common.exception.DmException;
 import com.dm.common.po.BasePO;
-import com.dm.common.util.RedisUtil;
+import com.dm.common.util.RedisCache;
 import com.dm.common.utils.DateUtils;
-import com.dm.system.constants.SystemConstants;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -32,7 +30,7 @@ import java.util.Date;
 public class BasePODefaultValueAspect
 {
 	@Resource
-	RedisUtil redisUtil;
+	RedisCache redisCache;
 
 	@Before("execution(* com.dm.*.dao.*.save*(..))")
 	public void beforeSave(JoinPoint joinPoint)
@@ -94,11 +92,6 @@ public class BasePODefaultValueAspect
 	 */
 	private String getLoginUser()
 	{
-		Object value = redisUtil.get(SystemConstants.REDIS_KEY_LOGIN_USER);
-		if (value == null)
-		{
-			throw new DmException(SystemConstants.ERR_CODE_00);
-		}
-		return value.toString();
+		return null;
 	}
 }

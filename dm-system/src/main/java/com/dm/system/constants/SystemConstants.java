@@ -15,42 +15,26 @@ package com.dm.system.constants;
  */
 public class SystemConstants
 {
-	/**==================== Redis常用key ====================*/
-	public static final String REDIS_KEY_LOGIN_USER = "user";
-
-	/**
-	 * 登录用户 redis key
-	 */
-	public static final String LOGIN_TOKEN_KEY = "login_tokens:";
-
-	/**
-	 * 请求中TOKEN名
-	 */
-	public static final String TOKEN_HEADER = "Authorization";
-
-	/**
-	 * 令牌前缀
-	 */
-	public static final String TOKEN_PREFIX = "Bearer";
-
-	/**==================== 错误吗 ====================*/
-	public static final String ERR_CODE_00 = "当前登录用户不存在！请检查";
-
+	/** 登录用户 redis key */
+	public static final String   LOGIN_USER_KEY        = "login_user:";
+	/** 请求中TOKEN名 */
+	public static final String   TOKEN_HEADER          = "Authorization";
+	/** 令牌前缀 */
+	public static final String   TOKEN_PREFIX          = "Bearer ";
+	/** 私钥 */
+	public static final String   TOKEN_SECRET_KEY      = "dm_security";
+	/** 过期时间 毫秒,设置默认1周的时间过期 */
+	public static final long     TOKEN_EXPIRATION_TIME = 3600000L * 24 * 7;
+	/**==================== 错误码 ====================*/
+	public static final String   ERR_CODE_00           = "当前登录用户不存在！请检查";
 	/**==================== 不需要权限的 ====================*/
-	public static final String[] AUTH_WHITELIST = {
-			//登录相关
-			"/getCodeImg",
-			"/user/login",
-			"/user/register",
-			//swagger3相关
-			"/swagger-ui/**",
-			"/v3/**",
-			"/swagger-resources/**"
-			//swagger2相关
-			// "/swagger-ui.html",
-			// "/webjars/**",
-			// "/v2/**",
-			// "/swagger-resources/**"
-			};
-
+	public static final String[] AUTH_WHITELIST        = {
+			// 登录相关
+			"/getCodeImg", "/user/register",
+			// swagger3相关
+			"/swagger-ui/**", "/v3/**", "/swagger-resources/**"
+			// swagger2相关
+			// "/swagger-ui.html", "/webjars/**", "/v2/**", "/swagger-resources/**"
+			// 结束符
+	};
 }

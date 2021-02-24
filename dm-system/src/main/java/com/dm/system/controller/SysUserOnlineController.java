@@ -34,7 +34,7 @@ public class SysUserOnlineController
 	public Result onlineList(String username)
 	{
 		// 1.获取缓存中所有登录用户的key
-		Collection<String> keys = redisCache.keys(SystemConstants.LOGIN_TOKEN_KEY + "*");
+		Collection<String> keys = redisCache.keys(SystemConstants.LOGIN_USER_KEY + "*");
 		//
 		List<Object> onlineList = new ArrayList<>();
 		// 2.根据key获取登录用户对象

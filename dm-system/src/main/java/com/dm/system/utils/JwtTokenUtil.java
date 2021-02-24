@@ -31,12 +31,8 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil
 {
-	//私钥
-	private static final String     SECRET_KEY      = "dm_security";
-	// 过期时间 毫秒,设置默认1周的时间过期
-	private static final long       EXPIRATION_TIME = 3600000L * 24 * 7;
 	@Resource
-	private              RedisCache redisCache;
+	private RedisCache redisCache;
 
 	/**
 	 * 生成令牌
@@ -58,8 +54,8 @@ public class JwtTokenUtil
 	 */
 	private String generateToken(Map<String,Object> claims)
 	{
-		Date expirationDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
-		return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
+		Date expirationDate = new Date(System.currentTimeMillis() + SystemConstants.TOKEN_EXPIRATION_TIME);
+		return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SystemConstants.TOKEN_SECRET_KEY).compact();
 	}
 
 	/**
@@ -84,8 +80,8 @@ public class JwtTokenUtil
 
 	/**
 	 * 获取用户身份信息
-	 *
-	 * @return 用户信息
+	 * @param request 请求
+	 * @return 登录用户
 	 */
 	public LoginUser getLoginUser(HttpServletRequest request)
 	{
@@ -96,7 +92,7 @@ public class JwtTokenUtil
 			Claims claims = getClaimsFromToken(token);
 			String username = claims.getSubject();
 			// 解析对应的权限以及用户信息
-			return redisCache.getCacheObject(username);
+			return redisCache.getCacheObject(SystemConstants.LOGIN_USER_KEY + username);
 		}
 		return null;
 	}
@@ -156,8 +152,14 @@ public class JwtTokenUtil
 	public Boolean validateToken(LoginUser loginUser)
 	{
 		return true;
-		// String username = getUsernameFromToken(token);
-		// return username.equals(loginUser.getUsername()) && !isTokenExpired(token);
+		/*
+		long expireTime = loginUser.getExpireTime();
+		long currentTime = System.currentTimeMillis();
+		if (expireTime - currentTime <= MILLIS_MINUTE_TEN)
+		{
+			refreshToken(loginUser);
+		}
+		*/
 	}
 
 	/**
@@ -167,6 +169,6 @@ public class JwtTokenUtil
 	 */
 	private Claims getClaimsFromToken(String token)
 	{
-		return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+		return Jwts.parser().setSigningKey(SystemConstants.TOKEN_SECRET_KEY).parseClaimsJws(token).getBody();
 	}
 }

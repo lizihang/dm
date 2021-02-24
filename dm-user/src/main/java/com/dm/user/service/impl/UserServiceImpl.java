@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	public DmUser queryUserByUserName(String username)
 	{
-		String key = "user_" + username;
+		String key = Constants.USER_KEY + username;
 		// 1.从缓存中查询数据
 		if (redisCache.hasKey(key))
 		{
