@@ -23,8 +23,8 @@ public class SystemConstants
 	public static final String   TOKEN_PREFIX          = "Bearer ";
 	/** 私钥 */
 	public static final String   TOKEN_SECRET_KEY      = "dm_security";
-	/** 过期时间 毫秒,设置默认1周的时间过期 */
-	public static final long     TOKEN_EXPIRATION_TIME = 3600000L * 24 * 7;
+	/** 过期时间 毫秒,设置默认1天的时间过期 */
+	public static final long     TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 	/**==================== 错误码 ====================*/
 	public static final String   ERR_CODE_00           = "当前登录用户不存在！请检查";
 	/**==================== 不需要权限的 ====================*/

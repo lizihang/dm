@@ -34,10 +34,6 @@ public class ValidateCodeUtil
 	private static int      width      = 80;
 	//图片高度
 	private static int      height     = 34;
-	//字符的数量
-	private static int      StringNum  = 4;
-	//干扰线数量
-	private static int      lineSize   = 40;
 
 	/**
 	 * 将构造函数私有化 禁止new创建
@@ -61,7 +57,7 @@ public class ValidateCodeUtil
 		Graphics g = image.getGraphics();
 		g.fillRect(0, 0, width, height);//填充矩形
 		// 设置字体
-		g.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		g.setFont(new Font("Fixedsys", Font.BOLD, 25));
 		// 设置颜色
 		g.setColor(getRandColor(110, 133));
 		// 绘制干扰线
@@ -111,6 +107,8 @@ public class ValidateCodeUtil
 	 */
 	private static void drawLine(Graphics g)
 	{
+		//干扰线数量
+		int lineSize = 40;
 		for (int i = 0; i <= lineSize; i++)
 		{
 			//起点(x,y)  偏移量x1、y1
@@ -132,15 +130,15 @@ public class ValidateCodeUtil
 	{
 		StringBuilder randomString = new StringBuilder();
 		Graphics2D g2d = (Graphics2D) g;
-		// TODO 字体设置重复
-		g2d.setFont(getFont());   //设置字体
-		for (int i = 1; i <= StringNum; i++)
+		//字符的数量
+		int stringNum = 4;
+		for (int i = 1; i <= stringNum; i++)
 		{
 			// 随机生成一个字符
 			String randChar = getRandomChar(random.nextInt(randString.length()));
 			// 画出验证码
 			g2d.setColor(new Color(random.nextFloat(), random.nextFloat(), random.nextFloat()));//设置颜色
-			int rot = getRandomNum(5, 10);
+			int rot = RandomUtils.nextInt(5, 10);
 			g2d.translate(random.nextInt(3), random.nextInt(3));
 			g2d.rotate(rot * Math.PI / 180);
 			g2d.drawString(randChar, 13 * i, 20);
@@ -160,26 +158,6 @@ public class ValidateCodeUtil
 	{
 		//获取指定位置index的字符，并转换成字符串表示形式
 		return String.valueOf(randString.charAt(index));
-	}
-
-	/**
-	 * 获取随机指定区间的随机数
-	 * @param min (指定最小数)
-	 * @param max (指定最大数)
-	 * @return
-	 */
-	private static int getRandomNum(int min, int max)
-	{
-		return RandomUtils.nextInt(min, max);
-	}
-
-	/**
-	 * 获得字体
-	 * @return
-	 */
-	private static Font getFont()
-	{
-		return new Font("Fixedsys", Font.BOLD, 25);  //名称、样式、磅值
 	}
 
 	/**
