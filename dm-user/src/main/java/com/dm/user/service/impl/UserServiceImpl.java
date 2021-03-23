@@ -1,8 +1,8 @@
 package com.dm.user.service.impl;
 
 import com.dm.common.constants.Constants;
+import com.dm.common.util.DateUtil;
 import com.dm.common.util.RedisCache;
-import com.dm.common.utils.DateUtils;
 import com.dm.user.dao.UserDAO;
 import com.dm.user.po.DmUser;
 import com.dm.user.service.UserService;
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService
 		//TODO 密码应该前端也加密
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		// 处理创建人，创建时间字段
-		Date serverDate = DateUtils.getServerDate();
+		Date serverDate = DateUtil.getServerDate();
 		user.setCreateDate(serverDate);
 		user.setCreateUser(user.getUsername());
 		userDAO.save(user);

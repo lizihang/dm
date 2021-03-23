@@ -13,10 +13,10 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2020年11月20日 15:38</p>
- * <p>类全名：com.dm.quartz.util.JobUtils</p>
+ * <p>类全名：com.dm.quartz.util.JobUtil</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class JobUtils
+public class JobUtil
 {
 	/**
 	 *

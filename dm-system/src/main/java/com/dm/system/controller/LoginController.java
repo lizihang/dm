@@ -2,7 +2,7 @@ package com.dm.system.controller;
 
 import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
-import com.dm.system.utils.ValidateCodeUtil;
+import com.dm.system.util.ValidateCodeUtil;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package com.dm.system.utils;
+package com.dm.system.util;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.web.context.request.RequestAttributes;
@@ -18,10 +18,10 @@ import java.io.IOException;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2020年12月09日 15:41</p>
- * <p>类全名：com.dm.system.utils.ServletUtils</p>
+ * <p>类全名：com.dm.system.util.ServletUtil</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
-public class ServletUtils
+public class ServletUtil
 {
 	/**
 	 * 渲染到客户端

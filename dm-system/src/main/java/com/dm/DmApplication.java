@@ -1,5 +1,6 @@
 package com.dm;
 
+import com.dm.common.util.SystemUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -24,6 +25,7 @@ public class DmApplication
 {
 	public static void main(String[] args)
 	{
+		SystemUtil.getSystemInfo();
 		SpringApplication.run(DmApplication.class, args);
 	}
 }

@@ -1,7 +1,7 @@
 package com.dm.system.handler;
 
 import com.dm.common.vo.Result;
-import com.dm.system.utils.ServletUtils;
+import com.dm.system.util.ServletUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -81,6 +81,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 			logger.error(msg, exception);
 			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		}
-		ServletUtils.render(response, result);
+		ServletUtil.render(response, result);
 	}
 }

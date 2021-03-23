@@ -4,8 +4,8 @@ import com.dm.common.constants.Constants;
 import com.dm.common.util.RedisCache;
 import com.dm.common.vo.Result;
 import com.dm.system.constants.SystemConstants;
-import com.dm.system.utils.JwtTokenUtil;
-import com.dm.system.utils.ServletUtils;
+import com.dm.system.util.JwtTokenUtil;
+import com.dm.system.util.ServletUtil;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -44,6 +44,6 @@ public class LogoutSuccessHandler implements org.springframework.security.web.au
 		LoginUser loginUser = jwtTokenUtil.getLoginUser(request);
 		redisCache.deleteObject(SystemConstants.LOGIN_USER_KEY + loginUser.getUsername());
 		redisCache.deleteObject(Constants.USER_KEY + loginUser.getUsername());
-		ServletUtils.render(response, Result.success("退出登录成功！"));
+		ServletUtil.render(response, Result.success("退出登录成功！"));
 	}
 }

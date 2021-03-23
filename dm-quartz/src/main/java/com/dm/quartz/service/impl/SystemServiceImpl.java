@@ -4,7 +4,7 @@ import com.dm.quartz.constants.JobConstants;
 import com.dm.quartz.dao.SystemJobDAO;
 import com.dm.quartz.po.SystemJob;
 import com.dm.quartz.service.SystemJobService;
-import com.dm.quartz.util.JobUtils;
+import com.dm.quartz.util.JobUtil;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class SystemServiceImpl implements SystemJobService
 		if (rows > 0)
 		{
 			// 2.JobUtil开启定时任务
-			JobUtils.createJob(scheduler, systemJob, null);
+			JobUtil.createJob(scheduler, systemJob, null);
 		}
 		return systemJob.getJobId();
 	}
@@ -67,17 +67,17 @@ public class SystemServiceImpl implements SystemJobService
 			// 修改了cron执行表达式
 			if (!oldJob.getCronExpression().equals(systemJob.getCronExpression()))
 			{
-				JobUtils.rescheduleJob(scheduler, systemJob);
+				JobUtil.rescheduleJob(scheduler, systemJob);
 			}
 			//暂停状态->运行状态
 			if (oldJob.getStatus().equals(JobConstants.JOB_STATUS_PAUSE) && systemJob.getStatus().equals(JobConstants.JOB_STATUS_START))
 			{
-				JobUtils.resumeJob(scheduler, systemJob);
+				JobUtil.resumeJob(scheduler, systemJob);
 			}
 			//运行状态->暂停状态
 			if (oldJob.getStatus().equals(JobConstants.JOB_STATUS_START) && systemJob.getStatus().equals(JobConstants.JOB_STATUS_PAUSE))
 			{
-				JobUtils.pauseJob(scheduler, systemJob);
+				JobUtil.pauseJob(scheduler, systemJob);
 			}
 		}
 		return systemJob.getJobId();
@@ -94,7 +94,7 @@ public class SystemServiceImpl implements SystemJobService
 		int rows = systemJobDAO.deleteJobById(systemJob.getJobId());
 		if (rows > 0)
 		{
-			JobUtils.deleteJob(scheduler, oldJob);
+			JobUtil.deleteJob(scheduler, oldJob);
 		}
 		return systemJob.getJobId();
 	}

@@ -1,7 +1,7 @@
 package com.dm.system.handler;
 
 import com.dm.common.vo.Result;
-import com.dm.system.utils.ServletUtils;
+import com.dm.system.util.ServletUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -31,6 +31,6 @@ public class UserAuthenticationEntryPointHandler implements AuthenticationEntryP
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException
 	{
 		Result result = Result.error(HttpStatus.UNAUTHORIZED.value(), "用户未登录！");
-		ServletUtils.render(response, result);
+		ServletUtil.render(response, result);
 	}
 }

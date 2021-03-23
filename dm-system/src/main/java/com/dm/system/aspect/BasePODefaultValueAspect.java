@@ -1,8 +1,8 @@
 package com.dm.system.aspect;
 
 import com.dm.common.po.BasePO;
+import com.dm.common.util.DateUtil;
 import com.dm.common.util.RedisCache;
-import com.dm.common.utils.DateUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -70,7 +70,7 @@ public class BasePODefaultValueAspect
 	 */
 	private void setCreateValue(Object o)
 	{
-		Date date = DateUtils.getServerDate();
+		Date date = DateUtil.getServerDate();
 		((BasePO) o).setCreateUser(getLoginUser());
 		((BasePO) o).setCreateDate(date);
 	}
@@ -81,7 +81,7 @@ public class BasePODefaultValueAspect
 	 */
 	private void setModifyValue(Object o)
 	{
-		Date date = DateUtils.getServerDate();
+		Date date = DateUtil.getServerDate();
 		((BasePO) o).setModifyUser(getLoginUser());
 		((BasePO) o).setModifyDate(date);
 	}

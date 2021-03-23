@@ -1,7 +1,7 @@
 package com.dm.system.handler;
 
 import com.dm.common.vo.Result;
-import com.dm.system.utils.ServletUtils;
+import com.dm.system.util.ServletUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -31,6 +31,6 @@ public class UserAuthAccessDeniedHandler implements AccessDeniedHandler
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException
 	{
 		Result result = Result.error(HttpStatus.FORBIDDEN.value(),"用户没有权限！");
-		ServletUtils.render(response, result);
+		ServletUtil.render(response, result);
 	}
 }

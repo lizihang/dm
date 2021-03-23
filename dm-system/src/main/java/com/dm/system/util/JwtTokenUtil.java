@@ -1,7 +1,7 @@
-package com.dm.system.utils;
+package com.dm.system.util;
 
 import com.dm.common.util.RedisCache;
-import com.dm.common.utils.StringUtils;
+import com.dm.common.util.StrUtil;
 import com.dm.system.constants.SystemConstants;
 import com.dm.system.vo.LoginUser;
 import io.jsonwebtoken.Claims;
@@ -25,7 +25,7 @@ import java.util.Map;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2021年02月21日 15:20</p>
- * <p>类全名：com.dm.system.utils.JwtTokenUtil</p>
+ * <p>类全名：com.dm.system.util.JwtTokenUtil</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Component
@@ -87,7 +87,7 @@ public class JwtTokenUtil
 	{
 		// 获取请求携带的令牌
 		String token = getToken(request);
-		if (StringUtils.isNotEmpty(token))
+		if (StrUtil.isNotEmpty(token))
 		{
 			Claims claims = getClaimsFromToken(token);
 			String username = claims.getSubject();
@@ -105,7 +105,7 @@ public class JwtTokenUtil
 	private String getToken(HttpServletRequest request)
 	{
 		String token = request.getHeader(SystemConstants.TOKEN_HEADER);
-		if (StringUtils.isNotEmpty(token) && token.startsWith(SystemConstants.TOKEN_PREFIX))
+		if (StrUtil.isNotEmpty(token) && token.startsWith(SystemConstants.TOKEN_PREFIX))
 		{
 			token = token.replace(SystemConstants.TOKEN_PREFIX, "");
 		}

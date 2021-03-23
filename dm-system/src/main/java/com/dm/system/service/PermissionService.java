@@ -1,8 +1,8 @@
 package com.dm.system.service;
 
-import com.dm.common.utils.StringUtils;
-import com.dm.system.utils.JwtTokenUtil;
-import com.dm.system.utils.ServletUtils;
+import com.dm.common.util.StrUtil;
+import com.dm.system.util.JwtTokenUtil;
+import com.dm.system.util.ServletUtil;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -38,11 +38,11 @@ public class PermissionService
 	 */
 	public boolean permission(String permission)
 	{
-		if (StringUtils.isEmpty(permission))
+		if (StrUtil.isEmpty(permission))
 		{
 			return false;
 		}
-		HttpServletRequest request = ServletUtils.getRequest();
+		HttpServletRequest request = ServletUtil.getRequest();
 		String requestURI = request.getRequestURI();
 		LoginUser loginUser = tokenUtil.getLoginUser(request);
 		if (ObjectUtils.isEmpty(loginUser) || CollectionUtils.isEmpty(loginUser.getAuthorities()))

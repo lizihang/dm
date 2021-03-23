@@ -1,4 +1,4 @@
-package com.dm.system.utils;
+package com.dm.system.util;
 
 import com.alibaba.druid.util.Base64;
 import org.apache.commons.lang3.RandomUtils;
@@ -19,7 +19,7 @@ import java.util.Random;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2021年02月24日 17:00</p>
- * <p>类全名：com.dm.system.utils.ValidateCodeUtil</p>
+ * <p>类全名：com.dm.system.util.ValidateCodeUtil</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public class ValidateCodeUtil

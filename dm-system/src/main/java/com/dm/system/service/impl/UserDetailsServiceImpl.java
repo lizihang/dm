@@ -1,6 +1,6 @@
 package com.dm.system.service.impl;
 
-import com.dm.system.utils.JwtTokenUtil;
+import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
 import com.dm.user.po.DmUser;
 import com.dm.user.service.UserService;

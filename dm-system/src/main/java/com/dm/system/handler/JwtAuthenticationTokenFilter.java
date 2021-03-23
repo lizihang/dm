@@ -1,7 +1,7 @@
 package com.dm.system.handler;
 
-import com.dm.common.utils.ObjectUtils;
-import com.dm.system.utils.JwtTokenUtil;
+import com.dm.common.util.ObjectUtil;
+import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,7 +38,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException
 	{
 		LoginUser loginUser = jwtTokenUtil.getLoginUser(request);
-		if (ObjectUtils.isNotEmpty(loginUser) && ObjectUtils.isEmpty(SecurityContextHolder.getContext().getAuthentication()))
+		if (ObjectUtil.isNotEmpty(loginUser) && ObjectUtil.isEmpty(SecurityContextHolder.getContext().getAuthentication()))
 		{
 			jwtTokenUtil.validateToken(loginUser);
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
