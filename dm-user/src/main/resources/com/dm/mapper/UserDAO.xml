@@ -4,7 +4,7 @@
 
 	<select id="queryList" resultType="DmUser" parameterType="DmUserQueryParams">
         select
-            id, username, password, nickname, email, status, create_user, create_date, modify_user, modify_date
+            id, username, password, nickname, email, status, create_user, create_time, modify_user, modify_time
         from
             dm_user
         <where>
@@ -25,7 +25,7 @@
 
 	<select id="queryUserByUserName" resultType="DmUser">
         select
-            id, username, password, nickname, email, status, create_user, create_date, modify_user, modify_date
+            id, username, password, nickname, email, status, create_user, create_time, modify_user, modify_time
         from
             dm_user
         where
@@ -34,7 +34,7 @@
 
 	<insert id="save" parameterType="DmUser" useGeneratedKeys="true" keyProperty="id">
         insert into dm_user
-        values(#{id},#{username},#{password},#{nickname},#{email},#{status},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
+        values(#{id},#{username},#{password},#{nickname},#{email},#{status},#{createUser},#{createTime},#{modifyUser},#{modifyTime})
     </insert>
 
 	<update id="update" parameterType="DmUser">
@@ -45,7 +45,7 @@
             <if test="email != null">email=#{email},</if>
             <if test="status != null">status=#{status},</if>
             <if test="modifyUser != null">modify_user=#{modifyUser},</if>
-            <if test="modifyDate != null">modify_date=#{modifyDate}</if>
+            <if test="modifyTime != null">modify_time=#{modifyTime}</if>
         </set>
         <where>
             id=#{id}

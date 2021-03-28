@@ -19,17 +19,17 @@ import java.util.Date;
  */
 public class BasePO implements Serializable
 {
-	private static final long serialVersionUID = -9053633431591965726L;
+	private static final long   serialVersionUID = -9053633431591965726L;
 	/** 创建人 */
-	private String createUser;
+	private              String createUser;
 	/** 创建时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date   createDate;
+	private              Date   createTime;
 	/** 修改人 */
-	private String modifyUser;
+	private              String modifyUser;
 	/** 修改时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date   modifyDate;
+	private              Date   modifyTime;
 
 	public String getCreateUser()
 	{
@@ -41,14 +41,14 @@ public class BasePO implements Serializable
 		this.createUser = createUser;
 	}
 
-	public Date getCreateDate()
+	public Date getCreateTime()
 	{
-		return createDate;
+		return createTime;
 	}
 
-	public void setCreateDate(Date createDate)
+	public void setCreateTime(Date createTime)
 	{
-		this.createDate = createDate;
+		this.createTime = createTime;
 	}
 
 	public String getModifyUser()
@@ -61,19 +61,19 @@ public class BasePO implements Serializable
 		this.modifyUser = modifyUser;
 	}
 
-	public Date getModifyDate()
+	public Date getModifyTime()
 	{
-		return modifyDate;
+		return modifyTime;
 	}
 
-	public void setModifyDate(Date modifyDate)
+	public void setModifyTime(Date modifyTime)
 	{
-		this.modifyDate = modifyDate;
+		this.modifyTime = modifyTime;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "BasePO{" + "createUser='" + createUser + '\'' + ", createDate=" + createDate + ", modifyUser='" + modifyUser + '\'' + ", modifyDate=" + modifyDate + '}';
+		return "BasePO{" + "createUser='" + createUser + '\'' + ", createTime=" + createTime + ", modifyUser='" + modifyUser + '\'' + ", modifyTime=" + modifyTime + '}';
 	}
 }

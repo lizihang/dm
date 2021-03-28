@@ -72,7 +72,7 @@ public class BasePODefaultValueAspect
 	{
 		Date date = DateUtil.getServerDate();
 		((BasePO) o).setCreateUser(getLoginUser());
-		((BasePO) o).setCreateDate(date);
+		((BasePO) o).setCreateTime(date);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class BasePODefaultValueAspect
 	{
 		Date date = DateUtil.getServerDate();
 		((BasePO) o).setModifyUser(getLoginUser());
-		((BasePO) o).setModifyDate(date);
+		((BasePO) o).setModifyTime(date);
 	}
 
 	/**

@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		// 处理创建人，创建时间字段
 		Date serverDate = DateUtil.getServerDate();
-		user.setCreateDate(serverDate);
+		user.setCreateTime(serverDate);
 		user.setCreateUser(user.getUsername());
 		userDAO.save(user);
 	}
