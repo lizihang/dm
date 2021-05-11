@@ -1,25 +1,26 @@
-# Springboot+Dubbo+Zookeeper的分布式示例
+# SpringBoot+Dubbo+Zookeeper的分布式示例
 
 ## 一、环境搭建
 
-jdk:1.8.0_231   
-maven:3.6.3   
-zookeeper:3.4.10   
-IDE:IntelliJ IDEA 2019.3
+IDE: IntelliJ IDEA 2019.3 (2020.3.3)   
+jdk: 1.8.0_231 (1.8.0_271)   
+maven: 3.6.3 (3.8.1)   
+SpringBoot: 2.3.4.RELEASE   
+zookeeper: 3.4.10   
 
 ## 二、创建工程
 
 ### 1.创建接口工程 dm-dubbo-api
-![avatar](images/dm-dubbo-api目录结构.png)   
+![avatar](../images/dm-dubbo/dm-dubbo-api目录结构.png)   
 ```text
 接口工程的作用：提供给消费者，用来调用方法
 ```
 
 ### 2.创建提供者工程 dm-dubbo-provider
 **(0)工程目录**   
-![avatar](images/dm-dubbo-provider目录结构.png)    
+![avatar](../images/dm-dubbo/dm-dubbo-provider目录结构.png)    
 **(1)创建springboot工程**   
-![avatar](images/创建springboot工程.png)    
+![avatar](../images/dm-dubbo/创建springboot工程.png)    
 **(2)引入dubbo和zookeeper依赖**   
 ```xml
 <!-- 分布式 -->
@@ -129,7 +130,7 @@ public class TestServiceImpl implements TestService
 
 ### 3.创建消费者工程 dm-dubbo-consumer
 **(0)工程目录**   
-![avatar](images/dm-dubbo-consumer目录结构.png)    
+![avatar](../images/dm-dubbo/dm-dubbo-consumer目录结构.png)    
 **(1)创建springboot工程**  
 ```text
 与dm-dubbo-provider相同

@@ -42,7 +42,7 @@
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
 		<hibernate-validator.version>6.1.6.Final</hibernate-validator.version>
 		<poi.version>5.0.0</poi.version>
-		<!-- elasticsearch版本号 -->
+		<!-- 本地安装的elasticsearch版本号 -->
 		<elasticsearch.version>7.12.1</elasticsearch.version>
 	</properties>
 

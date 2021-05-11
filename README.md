@@ -160,3 +160,6 @@ http://localhost:8081/swagger-ui.html
 ## 七、SpringBoot整合Redis
 
 ## 八、SpringBoot整合Slf4j
+
+## 九、SpringBoot整合ElasticSearch 
+[SpringBoot整合ElasticSearch](/readme/SpringBoot整合ElasticSearch.md)
