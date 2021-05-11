@@ -1,4 +1,4 @@
-#一个前后端分离的学习项目
+# 一个前后端分离的学习项目
 
 ## 开发环境
 
@@ -12,7 +12,7 @@
 
 ## 运行方式
 
-1. git clone git@github.com:lizihang/dm.git
+1. git clone https://github.com/lizihang/dm.git
 2. 初始化数据库
    1. 在dm-system/src/main/resources/sql目录下找到dm_init.sql
    2. 在navicat中运行此文件
