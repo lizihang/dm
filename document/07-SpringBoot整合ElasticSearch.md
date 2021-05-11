@@ -2,11 +2,7 @@
 
 ## 一、环境搭建
 
-IDE: IntelliJ IDEA 2019.3 (2020.3.3)   
-jdk: 1.8.0_231 (1.8.0_271)   
-maven: 3.6.3 (3.8.1)   
-SpringBoot: 2.3.4.RELEASE   
-ElasticSearch: 7.12.1
+- ElasticSearch 7.12.1
 
 ## 二、引入依赖
 springboot 2.3.4版本依赖的elasticsearch版本为7.6.2，修改为本地版本7.12.1
@@ -24,9 +20,9 @@ springboot 2.3.4版本依赖的elasticsearch版本为7.6.2，修改为本地版�
 ```
 
 ## 三、创建配置类
-**(0)配置类目录**   
-![avatar](../images/dm-elasticsearch/ElasticSearch配置类.png)   
-**(1)配置类代码**
+**(1)配置类目录**   
+![avatar](images/dm-elasticsearch/ElasticSearch配置类.png)   
+**(2)配置类代码**
 ```java
 @Configuration
 public class ElasticSearchClientConfig
@@ -42,7 +38,7 @@ public class ElasticSearchClientConfig
 ```
 
 ## 四、创建测试类
-**(0)测试类目录**   
-![avatar](../images/dm-elasticsearch/ElasticSearch测试类.png)   
-**(1)测试类代码**   
+**(1)测试类目录**   
+![avatar](images/dm-elasticsearch/ElasticSearch测试类.png)   
+**(2)测试类代码**   
 略，参照代码
