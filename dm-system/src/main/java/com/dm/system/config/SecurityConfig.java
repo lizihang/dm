@@ -15,6 +15,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
 /**
@@ -80,6 +84,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * 跨域配置
+	 */
+	@Bean
+	public CorsFilter corsFilter()
+	{
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		// 设置访问源地址
+		config.addAllowedOrigin("*");
+		// 设置访问源请求头
+		config.addAllowedHeader("*");
+		// 设置访问源请求方法
+		config.addAllowedMethod("*");
+		// 对接口配置跨域设置
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
+	}
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
@@ -116,5 +140,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //基于token，所以不需要session
 		// 添加JWT filter
 		http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+		// 退出登录配置跨域
+		http.addFilterBefore(corsFilter(), LogoutFilter.class);
 	}
 }

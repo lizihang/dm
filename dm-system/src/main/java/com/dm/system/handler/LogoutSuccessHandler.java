@@ -44,6 +44,7 @@ public class LogoutSuccessHandler implements org.springframework.security.web.au
 		LoginUser loginUser = jwtTokenUtil.getLoginUser(request);
 		redisCache.deleteObject(SystemConstants.LOGIN_USER_KEY + loginUser.getUsername());
 		redisCache.deleteObject(Constants.USER_KEY + loginUser.getUsername());
+		// TODO 用户<%s>退出登录
 		ServletUtil.render(response, Result.success("退出登录成功！"));
 	}
 }

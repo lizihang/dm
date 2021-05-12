@@ -1,5 +1,7 @@
 package com.dm.system.handler;
 
+import com.dm.common.constants.Constants;
+import com.dm.common.util.RedisCache;
 import com.dm.common.vo.Result;
 import com.dm.system.util.ServletUtil;
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +35,8 @@ import java.io.IOException;
 public class LoginFailureHandler implements AuthenticationFailureHandler
 {
 	Logger logger = LoggerFactory.getLogger(LoginFailureHandler.class);
+	@Resource
+	RedisCache redisCache;
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException
@@ -81,6 +86,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 			logger.error(msg, exception);
 			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		}
+		//登录失败，清空redis缓存
+		String key = Constants.USER_KEY + username;
+		redisCache.deleteObject(key);
 		ServletUtil.render(response, result);
 	}
 }
