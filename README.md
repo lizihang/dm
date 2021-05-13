@@ -20,7 +20,7 @@
 4. 主启动类：dm-system/src/main/java/com/dm/DmApplication.java
 
 ## 各Module介绍
-|Modulem名称          |Modulem介绍|备注|  
+|Module名称           |Module介绍|备注|  
 |:-------------------|:--------- |---| 
 |dm-common           |utils类，项目公用vo，基础配置类等    | |
 |dm-fund             |财务系统                          | |

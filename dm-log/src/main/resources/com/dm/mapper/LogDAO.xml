@@ -3,7 +3,7 @@
 <mapper namespace="com.dm.log.dao.LogDAO">
 
     <select id="queryList" resultType="DmLog" parameterType="String">
-        select id, username, method, remark, logtype, operatetime from logs where logtype = #{logtype}
+        select id, username, method, remark, logtype, operatetime from dm_log where logtype = #{logtype}
     </select>
 
 </mapper>

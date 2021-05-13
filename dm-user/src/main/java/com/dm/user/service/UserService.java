@@ -26,6 +26,12 @@ public interface UserService
 	List<DmUser> queryList(DmUserQueryParams params);
 
 	/**
+	 * 查询总数量
+	 * @return
+	 */
+	int queryTotal(DmUserQueryParams params);
+
+	/**
 	 * 根据用户名查找
 	 * @return 用户对象
 	 */

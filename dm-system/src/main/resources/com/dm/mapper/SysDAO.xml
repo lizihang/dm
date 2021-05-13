@@ -7,9 +7,9 @@
 			m.id m_id, m.name m_name, m.router m_router,m.icon_class m_icon_class, m.group m_group, m.idx m_idx, m.level m_level, m.parent_id m_parent_id,
 			g.*
 		from
-			sys_menu m
+			dm_sys_menu m
 		left join
-			sys_menu g
+			dm_sys_menu g
 		on
 			m.id = g.parent_id
 		having

@@ -1,5 +1,6 @@
 package com.dm.system.service;
 
+import com.dm.common.constants.Constants;
 import com.dm.common.util.StrUtil;
 import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.util.ServletUtil;
@@ -38,6 +39,11 @@ public class PermissionService
 	 */
 	public boolean permission(String permission)
 	{
+		// 系统选项，是否检查权限，不检查返回true
+		if (!Constants.IS_CHECK_PERMISSION)
+		{
+			return true;
+		}
 		if (StrUtil.isEmpty(permission))
 		{
 			return false;

@@ -7,6 +7,7 @@ import com.dm.user.dao.UserDAO;
 import com.dm.user.po.DmUser;
 import com.dm.user.service.UserService;
 import com.dm.user.vo.DmUserQueryParams;
+import com.github.pagehelper.PageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,16 @@ public class UserServiceImpl implements UserService
 	@Override
 	public List<DmUser> queryList(DmUserQueryParams params)
 	{
-		return userDAO.queryList(params);
+		// PageHelper 分页查询，放在查询前面
+		PageHelper.startPage(params.getPageNum(), params.getPageSize());
+		List<DmUser> data = userDAO.queryList(params);
+		data.forEach(user->user.setPassword(null));
+		return data;
+	}
+
+	@Override
+	public int queryTotal(DmUserQueryParams params){
+		return userDAO.queryTotal(params);
 	}
 
 	@Override

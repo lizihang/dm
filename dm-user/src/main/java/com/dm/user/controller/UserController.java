@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * <p>标题：用户Controller</p>
  * <p>功能：</p>
@@ -39,7 +41,10 @@ public class UserController
 	@PreAuthorize("@ps.permission('user:query')")
 	public Result queryList(DmUserQueryParams params)
 	{
-		return Result.success("查询用户列表成功", userService.queryList(params));
+		Map<String,Object> data = new HashMap<>();
+		data.put("users",userService.queryList(params));
+		data.put("total",userService.queryTotal(params));
+		return Result.success("查询用户列表成功", data);
 	}
 
 	/**
@@ -75,7 +80,7 @@ public class UserController
 	 * @return result
 	 */
 	@DmLog
-	@DeleteMapping("deleteUserByLogic")
+	@DeleteMapping("deleteUserById")
 	@PreAuthorize("@ps.permission('user:delete')")
 	public Result deleteUserByLogic(int id)
 	{

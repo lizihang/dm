@@ -23,6 +23,8 @@ public interface UserDAO
 {
 	List<DmUser> queryList(DmUserQueryParams params);
 
+	int queryTotal(DmUserQueryParams params);
+
 	DmUser queryUserByUserName(String username);
 
 	void save(DmUser user);

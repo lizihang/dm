@@ -4,7 +4,7 @@
 
 	<sql id="selectJob">
         select jobid, jobname, jobgroup, jobclass, cronexpression, timezoneid, concurrent, status, createuser, createdate, modifyuser, modifydate
-		from sys_job
+		from dm_sys_job
     </sql>
 
 	<select id="queryList" resultType="SystemJob">
@@ -32,11 +32,11 @@
 	</select>
 
 	<insert id="save" parameterType="SystemJob" useGeneratedKeys="true" keyProperty="jobId">
-        insert into sys_job values(#{jobId},#{jobName},#{jobGroup},#{jobClass},#{cronExpression},#{timeZoneId},#{concurrent},#{status},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
+        insert into dm_sys_job values(#{jobId},#{jobName},#{jobGroup},#{jobClass},#{cronExpression},#{timeZoneId},#{concurrent},#{status},#{createUser},#{createDate},#{modifyUser},#{modifyDate})
     </insert>
 
 	<update id="updateJob" parameterType="SystemJob">
-		update sys_job
+		update dm_sys_job
 		<set>
 			<if test="jobName != null and jobName != ''">jobname = #{jobName},</if>
 			<if test="jobGroup != null and jobGroup != ''">jobgroup = #{jobGroup},</if>
@@ -52,7 +52,7 @@
 	</update>
 
 	<delete id="deleteJobById" parameterType="int">
- 		delete from sys_job where jobId = #{jobId}
+ 		delete from dm_sys_job where jobId = #{jobId}
  	</delete>
 
 </mapper>

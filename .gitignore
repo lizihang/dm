@@ -30,3 +30,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### 本地日志路径 ###
+log/
