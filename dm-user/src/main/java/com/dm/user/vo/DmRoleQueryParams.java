@@ -16,13 +16,13 @@ import com.dm.common.vo.QueryParams;
  */
 public class DmRoleQueryParams extends QueryParams
 {
-	private static final long   serialVersionUID = 2651784472236127127L;
+	private static final long    serialVersionUID = 2651784472236127127L;
 	/** 角色名称 */
-	private              String roleName;
+	private              String  roleName;
 	/** 用户名 */
-	private              String username;
+	private              String  username;
 	/** 状态 */
-	private              int    status;
+	private              Integer status;
 
 	public String getRoleName()
 	{
@@ -44,12 +44,12 @@ public class DmRoleQueryParams extends QueryParams
 		this.username = username;
 	}
 
-	public int getStatus()
+	public Integer getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(int status)
+	public void setStatus(Integer status)
 	{
 		this.status = status;
 	}

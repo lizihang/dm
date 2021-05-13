@@ -26,6 +26,13 @@ public interface RoleService
 	List<DmRole> queryList(DmRoleQueryParams params);
 
 	/**
+	 * 查询总数量
+	 * @param params
+	 * @return
+	 */
+	int queryTotal(DmRoleQueryParams params);
+
+	/**
 	 * 新增角色
 	 * @param role 角色
 	 */
@@ -48,4 +55,6 @@ public interface RoleService
 	 * @param id id
 	 */
 	void deleteRoleById(int id);
+
+
 }

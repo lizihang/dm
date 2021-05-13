@@ -37,12 +37,12 @@ public class UserController
 	 * @return result
 	 */
 	@DmLog
-	@GetMapping("queryList")
+	@GetMapping("queryUserList")
 	@PreAuthorize("@ps.permission('user:query')")
 	public Result queryList(DmUserQueryParams params)
 	{
 		Map<String,Object> data = new HashMap<>();
-		data.put("users",userService.queryList(params));
+		data.put("list",userService.queryList(params));
 		data.put("total",userService.queryTotal(params));
 		return Result.success("查询用户列表成功", data);
 	}

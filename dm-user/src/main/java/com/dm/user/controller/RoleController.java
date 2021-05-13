@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -36,11 +38,14 @@ public class RoleController
 	 * @return result
 	 */
 	@DmLog
-	@GetMapping("queryList")
+	@GetMapping("queryRoleList")
 	@PreAuthorize("@ps.permission('role:query')")
 	public Result queryList(DmRoleQueryParams params)
 	{
-		return Result.success("查询角色列表成功", roleService.queryList(params));
+		Map<String,Object> data = new HashMap<>();
+		data.put("list",roleService.queryList(params));
+		data.put("total",roleService.queryTotal(params));
+		return Result.success("查询角色列表成功", data);
 	}
 
 	/**

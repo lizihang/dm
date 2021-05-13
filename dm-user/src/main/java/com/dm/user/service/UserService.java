@@ -27,6 +27,7 @@ public interface UserService
 
 	/**
 	 * 查询总数量
+	 * @param params
 	 * @return
 	 */
 	int queryTotal(DmUserQueryParams params);

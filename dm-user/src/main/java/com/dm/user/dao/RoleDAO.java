@@ -23,6 +23,8 @@ public interface RoleDAO
 {
 	List<DmRole> queryList(DmRoleQueryParams params);
 
+	int queryTotal(DmRoleQueryParams params);
+
 	void save(DmRole role);
 
 	void update(DmRole role);

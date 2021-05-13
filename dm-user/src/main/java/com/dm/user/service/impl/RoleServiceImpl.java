@@ -5,6 +5,7 @@ import com.dm.user.dao.RoleDAO;
 import com.dm.user.po.DmRole;
 import com.dm.user.service.RoleService;
 import com.dm.user.vo.DmRoleQueryParams;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,15 @@ public class RoleServiceImpl implements RoleService
 	@Override
 	public List<DmRole> queryList(DmRoleQueryParams params)
 	{
+		// PageHelper 分页查询，放在查询前面
+		PageHelper.startPage(params.getPageNum(), params.getPageSize());
 		return roleDAO.queryList(params);
+	}
+
+	@Override
+	public int queryTotal(DmRoleQueryParams params)
+	{
+		return roleDAO.queryTotal(params);
 	}
 
 	@Override
