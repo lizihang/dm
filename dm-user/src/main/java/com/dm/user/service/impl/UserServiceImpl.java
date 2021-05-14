@@ -46,12 +46,13 @@ public class UserServiceImpl implements UserService
 		// PageHelper 分页查询，放在查询前面
 		PageHelper.startPage(params.getPageNum(), params.getPageSize());
 		List<DmUser> data = userDAO.queryList(params);
-		data.forEach(user->user.setPassword(null));
+		data.forEach(user -> user.setPassword(null));
 		return data;
 	}
 
 	@Override
-	public int queryTotal(DmUserQueryParams params){
+	public int queryTotal(DmUserQueryParams params)
+	{
 		return userDAO.queryTotal(params);
 	}
 
@@ -62,22 +63,26 @@ public class UserServiceImpl implements UserService
 		// 1.从缓存中查询数据
 		if (redisCache.hasKey(key))
 		{
-			System.out.println("redis");
 			return redisCache.getCacheObject(key);
 		}
 		// 2.缓存中不存在，则查询数据库
 		DmUser user = userDAO.queryUserByUserName(username);
+		/*
+		查询数据库中不存在的数据，会有缓存穿透问题，
+		解决办法：
+		1.将空对象也放入缓存，设置过期时间。
+		之后再查询此username不存在的数据时，从缓存返回，减少数据库访问
+		2.布隆过滤器
+		*/
 		if (user != null)
 		{
 			// 3.将对象存入缓存
-			// TODO 查询数据库中不存在的数据，会有缓存穿透问题，布隆过滤器
 			redisCache.setCacheObject(key, user);
 		} else
 		{
-			// 临时用这种方法解决
-			redisCache.setCacheObject(key, user, 600, TimeUnit.SECONDS);
+			// 将空对象存入缓存
+			redisCache.setCacheObject(key, null, 600, TimeUnit.SECONDS);
 		}
-		System.out.println("mybatis");
 		return user;
 	}
 

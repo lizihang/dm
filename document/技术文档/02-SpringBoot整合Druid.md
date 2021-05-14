@@ -1,6 +1,6 @@
 # SpringBoot整合Druid
 
-## 返回 [README.md](../README.md)
+## 返回 [README.md](../../README.md)
 
 ## 1.引入依赖
 ```xml

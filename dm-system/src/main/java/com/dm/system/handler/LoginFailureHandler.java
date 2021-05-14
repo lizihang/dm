@@ -42,9 +42,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException
 	{
 		Result result;
+		// 为了解决缓存穿透问题，UsernameNotFoundException的时候不清redis缓存
+		boolean flag = true;
 		String username = request.getParameter("username");
 		// AbstractUserDetailsAuthenticationProvider中，将UsernameNotFoundException改成了BadCredentialsException抛出
-		if (exception instanceof UsernameNotFoundException || exception instanceof BadCredentialsException)
+		if (exception instanceof UsernameNotFoundException)
+		{
+			// 用户名或密码错误
+			logger.info("[登录失败] - 用户名或密码错误！");
+			flag = false;
+			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户名或密码错误！");
+		} else if (exception instanceof BadCredentialsException)
 		{
 			// 用户名或密码错误
 			logger.info("[登录失败] - 用户名或密码错误！");
@@ -87,8 +95,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
 		}
 		//登录失败，清空redis缓存
-		String key = Constants.USER_KEY + username;
-		redisCache.deleteObject(key);
+		if (flag)
+		{
+			redisCache.deleteObject(Constants.USER_KEY + username);
+		}
 		ServletUtil.render(response, result);
 	}
 }

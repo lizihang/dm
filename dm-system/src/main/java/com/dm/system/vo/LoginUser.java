@@ -192,25 +192,32 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	@Override
 	public boolean isAccountNonExpired()
 	{
-		return user.getStatus() != 2;
+		// 只判断是否禁用，其他判断为true
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked()
 	{
-		return user.getStatus() != 2;
+		// 只判断是否禁用，其他判断为true
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired()
 	{
+		// 只判断是否禁用，其他判断为true
 		return true;
 	}
 
+	/**
+	 * 判断用户是否禁用
+	 * @return
+	 */
 	@Override
 	public boolean isEnabled()
 	{
-		return user.getStatus() != 3;
+		return user.getStatus() != 2;
 	}
 
 	/**

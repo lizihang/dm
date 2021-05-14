@@ -1,6 +1,6 @@
 # SpringBoot整合swagger
 
-## 返回 [README.md](../README.md)
+## 返回 [README.md](../../README.md)
 
 ## 一、SpringBoot整合swagger3
 

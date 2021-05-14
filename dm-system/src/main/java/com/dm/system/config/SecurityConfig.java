@@ -5,6 +5,7 @@ import com.dm.system.handler.*;
 import com.dm.system.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -104,10 +105,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		return new CorsFilter(source);
 	}
 
+	/**
+	 * 为了能抛出UsernameNotFoundException，自定义DaoAuthenticationProvider，将hideUserNotFoundExceptions属性设置为false
+	 * @return
+	 */
+	@Bean
+	public DaoAuthenticationProvider daoAuthenticationProvider()
+	{
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setPasswordEncoder(passwordEncoder());
+		provider.setUserDetailsService(userDetailsService);
+		provider.setHideUserNotFoundExceptions(false);
+		return provider;
+	}
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		// 为了能抛出UsernameNotFoundException，自定义DaoAuthenticationProvider，将hideUserNotFoundExceptions属性设置为false
+		// 所以这个配置不需要了，在daoAuthenticationProvider已经配置
+		// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		// daoAuthenticationProvider()相当于自定义provider
+		auth.authenticationProvider(daoAuthenticationProvider());
 		// 暂时不用自定义的，以后扩展复杂验证时再使用
 		// auth.authenticationProvider(userAuthenticationProvider);
 	}

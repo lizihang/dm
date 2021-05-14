@@ -1,6 +1,6 @@
 # SpringBoot+Dubbo+Zookeeper的分布式示例
 
-## 返回 [README.md](../README.md)
+## 返回 [README.md](../../README.md)
 
 ## 一、环境搭建
 

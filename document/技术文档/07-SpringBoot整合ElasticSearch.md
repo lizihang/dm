@@ -1,6 +1,6 @@
 # SpringBoot整合ElasticSearch
 
-## 返回 [README.md](../README.md)
+## 返回 [README.md](../../README.md)
 
 ## 一、环境搭建
 

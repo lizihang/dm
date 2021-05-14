@@ -35,18 +35,18 @@
 
 ## SpringBoot整合文档
 
-### [01-SpringBoot整合MyBatis](/document/01-SpringBoot整合MyBatis.md)
+### [01-SpringBoot整合MyBatis](/document/技术文档/01-SpringBoot整合MyBatis.md)
 
-### [02-SpringBoot整合Druid](/document/02-SpringBoot整合Druid.md)
+### [02-SpringBoot整合Druid](/document/技术文档/02-SpringBoot整合Druid.md)
 
-### [03-SpringBoot整合Redis](/document/03-SpringBoot整合Redis.md)
+### [03-SpringBoot整合Redis](/document/技术文档/03-SpringBoot整合Redis.md)
 
-### [04-SpringBoot整合SpringSecurity](/document/04-SpringBoot整合SpringSecurity.md)
+### [04-SpringBoot整合SpringSecurity](/document/技术文档/04-SpringBoot整合SpringSecurity.md)
 
-### [05-SpringBoot整合swagger](/document/05-SpringBoot整合swagger.md)
+### [05-SpringBoot整合swagger](/document/技术文档/05-SpringBoot整合swagger.md)
 
-### [06-SpringBoot整合Quartz](/document/06-SpringBoot整合Quartz.md)
+### [06-SpringBoot整合Quartz](/document/技术文档/06-SpringBoot整合Quartz.md)
 
-### [07-SpringBoot整合ElasticSearch](/document/07-SpringBoot整合ElasticSearch.md)   
+### [07-SpringBoot整合ElasticSearch](/document/技术文档/07-SpringBoot整合ElasticSearch.md)   
 
-### [分布式Demo](/document/分布式Demo.md)
+### [分布式Demo](/document/技术文档/分布式Demo.md)
