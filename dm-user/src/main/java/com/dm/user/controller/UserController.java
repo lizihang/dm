@@ -42,9 +42,22 @@ public class UserController
 	public Result queryList(DmUserQueryParams params)
 	{
 		Map<String,Object> data = new HashMap<>();
-		data.put("list",userService.queryList(params));
-		data.put("total",userService.queryTotal(params));
+		data.put("list", userService.queryList(params));
+		data.put("total", userService.queryTotal(params));
 		return Result.success("查询用户列表成功", data);
+	}
+
+	/**
+	 * 根据用户名查询用户信息
+	 * @return
+	 */
+	@DmLog
+	@GetMapping("queryUser")
+	@PreAuthorize("@ps.permission('user:query')")
+	public Result queryUser(String username)
+	{
+		DmUser user = userService.queryUserByUserName(username);
+		return Result.success("查询用户成功", user);
 	}
 
 	/**

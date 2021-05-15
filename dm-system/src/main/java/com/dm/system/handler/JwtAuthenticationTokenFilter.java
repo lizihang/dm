@@ -1,6 +1,9 @@
 package com.dm.system.handler;
 
+import com.dm.common.constants.Constants;
 import com.dm.common.util.ObjectUtil;
+import com.dm.common.util.RedisCache;
+import com.dm.system.constants.SystemConstants;
 import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +36,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 {
 	@Resource
 	JwtTokenUtil jwtTokenUtil;
+	@Resource
+	RedisCache   redisCache;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException
@@ -40,10 +45,17 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 		LoginUser loginUser = jwtTokenUtil.getLoginUser(request);
 		if (ObjectUtil.isNotEmpty(loginUser) && ObjectUtil.isEmpty(SecurityContextHolder.getContext().getAuthentication()))
 		{
-			jwtTokenUtil.validateToken(loginUser);
-			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
-			authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-			SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+			// 如果token过期，清空redis中user缓存
+			if (jwtTokenUtil.isTokenExpired(request))
+			{
+				redisCache.deleteObject(SystemConstants.LOGIN_USER_KEY + loginUser.getUsername());
+				redisCache.deleteObject(Constants.USER_KEY + loginUser.getUsername());
+			} else
+			{
+				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+				authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+			}
 		}
 		filterChain.doFilter(request, response);
 	}

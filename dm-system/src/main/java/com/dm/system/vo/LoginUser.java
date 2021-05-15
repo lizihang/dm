@@ -40,7 +40,7 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	/**
 	 * 过期时间
 	 */
-	private              Date                   expireTime;
+	private              Long                   expireTime;
 	/**
 	 * 登录IP地址
 	 */
@@ -106,12 +106,12 @@ public class LoginUser implements UserDetails, CredentialsContainer
 		this.loginTime = loginTime;
 	}
 
-	public Date getExpireTime()
+	public Long getExpireTime()
 	{
 		return expireTime;
 	}
 
-	public void setExpireTime(Date expireTime)
+	public void setExpireTime(Long expireTime)
 	{
 		this.expireTime = expireTime;
 	}

@@ -5,6 +5,7 @@ import com.dm.common.util.StrUtil;
 import com.dm.system.constants.SystemConstants;
 import com.dm.system.vo.LoginUser;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -59,6 +60,74 @@ public class JwtTokenUtil
 	}
 
 	/**
+	 * 获取用户身份信息
+	 * @param request 请求
+	 * @return 登录用户
+	 */
+	public LoginUser getLoginUser(HttpServletRequest request)
+	{
+		// 获取请求携带的令牌
+		String token = getToken(request);
+		if (StrUtil.isNotEmpty(token))
+		{
+			Claims claims = getClaimsFromToken(token);
+			String username = claims.getSubject();
+			// 解析对应的权限以及用户信息
+			return redisCache.getCacheObject(SystemConstants.LOGIN_USER_KEY + username);
+		}
+		return null;
+	}
+
+	/**
+	 * 判断令牌是否过期
+	 * @param request 请求
+	 * @return 过期返回true
+	 */
+	public Boolean isTokenExpired(HttpServletRequest request)
+	{
+		String token = getToken(request);
+		Claims claims = getClaimsFromToken(token);
+		Date expiration = claims.getExpiration();
+		return expiration.before(new Date());
+	}
+
+	/**
+	 * 获取请求token
+	 * @param request 请求
+	 * @return token
+	 */
+	private String getToken(HttpServletRequest request)
+	{
+		String token = request.getHeader(SystemConstants.TOKEN_HEADER);
+		if (StrUtil.isNotEmpty(token) && token.startsWith(SystemConstants.TOKEN_PREFIX))
+		{
+			token = token.replace(SystemConstants.TOKEN_PREFIX, "");
+		}
+		return token;
+	}
+
+	/**
+	 * 从令牌中获取数据声明
+	 * @param token 令牌
+	 * @return 数据声明
+	 */
+	private Claims getClaimsFromToken(String token)
+	{
+		// DefaultJwtParser在转换claims的时候就已经抛出ExpiredJwtException，所以特殊处理一下
+		// return Jwts.parser().setSigningKey(SystemConstants.TOKEN_SECRET_KEY).parseClaimsJws(token).getBody();
+		Claims claims;
+		try {
+			claims = Jwts.parser()
+					.setSigningKey(SystemConstants.TOKEN_SECRET_KEY) // 设置标识名
+					.parseClaimsJws(token)  //解析token
+					.getBody();
+		} catch (ExpiredJwtException e) {
+			claims = e.getClaims();
+		}
+		return claims;
+	}
+
+	/**
 	 * 从令牌中获取用户名
 	 * @param token 令牌
 	 * @return 用户名
@@ -79,52 +148,6 @@ public class JwtTokenUtil
 	}
 
 	/**
-	 * 获取用户身份信息
-	 * @param request 请求
-	 * @return 登录用户
-	 */
-	public LoginUser getLoginUser(HttpServletRequest request)
-	{
-		// 获取请求携带的令牌
-		String token = getToken(request);
-		if (StrUtil.isNotEmpty(token))
-		{
-			Claims claims = getClaimsFromToken(token);
-			String username = claims.getSubject();
-			// 解析对应的权限以及用户信息
-			return redisCache.getCacheObject(SystemConstants.LOGIN_USER_KEY + username);
-		}
-		return null;
-	}
-
-	/**
-	 * 获取请求token
-	 * @param request 请求
-	 * @return token
-	 */
-	private String getToken(HttpServletRequest request)
-	{
-		String token = request.getHeader(SystemConstants.TOKEN_HEADER);
-		if (StrUtil.isNotEmpty(token) && token.startsWith(SystemConstants.TOKEN_PREFIX))
-		{
-			token = token.replace(SystemConstants.TOKEN_PREFIX, "");
-		}
-		return token;
-	}
-
-	/**
-	 * 判断令牌是否过期
-	 * @param token 令牌
-	 * @return 是否过期
-	 */
-	public Boolean isTokenExpired(String token)
-	{
-		Claims claims = getClaimsFromToken(token);
-		Date expiration = claims.getExpiration();
-		return expiration.before(new Date());
-	}
-
-	/**
 	 * 刷新令牌
 	 * @param token 原令牌
 	 * @return 新令牌
@@ -142,33 +165,5 @@ public class JwtTokenUtil
 			refreshedToken = null;
 		}
 		return refreshedToken;
-	}
-
-	/**
-	 * 验证令牌
-	 * @param loginUser 从数据库中查询出来的用户信息
-	 * @return
-	 */
-	public Boolean validateToken(LoginUser loginUser)
-	{
-		return true;
-		/*
-		long expireTime = loginUser.getExpireTime();
-		long currentTime = System.currentTimeMillis();
-		if (expireTime - currentTime <= MILLIS_MINUTE_TEN)
-		{
-			refreshToken(loginUser);
-		}
-		*/
-	}
-
-	/**
-	 * 从令牌中获取数据声明
-	 * @param token 令牌
-	 * @return 数据声明
-	 */
-	private Claims getClaimsFromToken(String token)
-	{
-		return Jwts.parser().setSigningKey(SystemConstants.TOKEN_SECRET_KEY).parseClaimsJws(token).getBody();
 	}
 }
