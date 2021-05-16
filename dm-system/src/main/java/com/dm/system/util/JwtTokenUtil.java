@@ -116,12 +116,13 @@ public class JwtTokenUtil
 		// DefaultJwtParser在转换claims的时候就已经抛出ExpiredJwtException，所以特殊处理一下
 		// return Jwts.parser().setSigningKey(SystemConstants.TOKEN_SECRET_KEY).parseClaimsJws(token).getBody();
 		Claims claims;
-		try {
-			claims = Jwts.parser()
-					.setSigningKey(SystemConstants.TOKEN_SECRET_KEY) // 设置标识名
+		try
+		{
+			claims = Jwts.parser().setSigningKey(SystemConstants.TOKEN_SECRET_KEY) // 设置标识名
 					.parseClaimsJws(token)  //解析token
 					.getBody();
-		} catch (ExpiredJwtException e) {
+		} catch (ExpiredJwtException e)
+		{
 			claims = e.getClaims();
 		}
 		return claims;
@@ -129,11 +130,12 @@ public class JwtTokenUtil
 
 	/**
 	 * 从令牌中获取用户名
-	 * @param token 令牌
-	 * @return 用户名
+	 * @param request
+	 * @return
 	 */
-	public String getUsernameFromToken(String token)
+	public String getUsernameFromToken(HttpServletRequest request)
 	{
+		String token = getToken(request);
 		String username = null;
 		try
 		{

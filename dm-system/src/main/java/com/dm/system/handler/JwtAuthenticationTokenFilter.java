@@ -6,6 +6,8 @@ import com.dm.common.util.RedisCache;
 import com.dm.system.constants.SystemConstants;
 import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -34,6 +36,7 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 {
+	private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
 	@Resource
 	JwtTokenUtil jwtTokenUtil;
 	@Resource
@@ -55,6 +58,22 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
 				authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+			}
+		}
+		if (ObjectUtil.isEmpty(loginUser))
+		{
+			// 当redis缓存中loginUser删除时，重新登录会查询user，此时如果redis中user存在，返回的是没有password的，会报登录失败
+			// 临时解决：缓存中loginUser不存在时，user缓存也清空。
+			// TODO loginUser和user缓存只留一个？
+			String username = jwtTokenUtil.getUsernameFromToken(request);
+			if (username != null)
+			{
+				redisCache.deleteObject(Constants.USER_KEY + username);
+			} else
+			{
+				// 记录日志
+				String url = request.getRequestURL().toString();
+				logger.debug("请求地址：" + url + "的时候token为空，未清空user缓存");
 			}
 		}
 		filterChain.doFilter(request, response);
