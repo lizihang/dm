@@ -24,7 +24,7 @@ public class DmRole extends BasePO
 	/** 角色名称 */
 	private              String roleName;
 	/** 状态 */
-	private              int    status;
+	private              String status;
 
 	public int getId()
 	{
@@ -56,12 +56,12 @@ public class DmRole extends BasePO
 		this.roleName = roleName;
 	}
 
-	public int getStatus()
+	public String getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(int status)
+	public void setStatus(String status)
 	{
 		this.status = status;
 	}

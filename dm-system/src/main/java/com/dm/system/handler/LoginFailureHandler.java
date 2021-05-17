@@ -51,36 +51,36 @@ public class LoginFailureHandler implements AuthenticationFailureHandler
 			// 用户名或密码错误
 			logger.info("[登录失败] - 用户名或密码错误！");
 			flag = false;
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户名或密码错误！");
+			result = Result.error(HttpStatus.FORBIDDEN.value(), "[登录失败] - 用户名或密码错误！");
 		} else if (exception instanceof BadCredentialsException)
 		{
 			// 用户名或密码错误
 			logger.info("[登录失败] - 用户名或密码错误！");
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "[登录失败] - 用户名或密码错误！");
+			result = Result.error(HttpStatus.FORBIDDEN.value(), "[登录失败] - 用户名或密码错误！");
 		} else if (exception instanceof AccountExpiredException)
 		{
 			// 账号过期
 			String msg = String.format("[登录失败] - 用户[%s]账号过期", username);
 			logger.info(msg);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
+			result = Result.error(HttpStatus.FORBIDDEN.value(), msg);
 		} else if (exception instanceof CredentialsExpiredException)
 		{
 			// 密码过期
 			String msg = String.format("[登录失败] - 用户[%s]密码过期", username);
 			logger.info(msg);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
+			result = Result.error(HttpStatus.FORBIDDEN.value(), msg);
 		} else if (exception instanceof DisabledException)
 		{
 			// 用户被禁用
 			String msg = String.format("[登录失败] - 用户[%s]被禁用", username);
 			logger.info(msg);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
+			result = Result.error(HttpStatus.FORBIDDEN.value(), msg);
 		} else if (exception instanceof LockedException)
 		{
 			// 用户被锁定
 			String msg = String.format("[登录失败] - 用户[%s]被锁定", username);
 			logger.info(msg);
-			result = Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg);
+			result = Result.error(HttpStatus.FORBIDDEN.value(), msg);
 		} else if (exception instanceof InternalAuthenticationServiceException)
 		{
 			// 内部错误

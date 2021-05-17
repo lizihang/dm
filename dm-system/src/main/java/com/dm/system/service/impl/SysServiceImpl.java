@@ -1,7 +1,12 @@
 package com.dm.system.service.impl;
 
+import com.dm.common.exception.DmException;
+import com.dm.common.util.StrUtil;
 import com.dm.system.dao.SysDAO;
+import com.dm.system.po.Dict;
+import com.dm.system.po.DictInfo;
 import com.dm.system.service.SysService;
+import com.dm.system.vo.DmDictQueryParams;
 import com.dm.system.vo.Menus;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +35,26 @@ public class SysServiceImpl implements SysService
 	public List<Menus> getMenus()
 	{
 		return sysDAO.getMenus();
+	}
+
+	@Override
+	public List<Dict> queryDictList(DmDictQueryParams params)
+	{
+		return sysDAO.queryDictList(params);
+	}
+
+	@Override
+	public Object queryDictTotal(DmDictQueryParams params)
+	{
+		return sysDAO.queryDictTotal(params);
+	}
+
+	@Override
+	public List<DictInfo> queryDictInfo(String dictId)
+	{
+		if (StrUtil.isEmpty(dictId)){
+			throw new DmException("字典id不能为空！");
+		}
+		return sysDAO.queryDictInfo(dictId);
 	}
 }

@@ -2,15 +2,16 @@ package com.dm.system.controller;
 
 import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
+import com.dm.system.po.DictInfo;
 import com.dm.system.service.SysService;
+import com.dm.system.vo.DmDictQueryParams;
 import com.dm.system.vo.Menus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 /**
  * <p>标题：系统相关功能Controller</p>
  * <p>功能：</p>
@@ -44,5 +45,31 @@ public class SysController
 	{
 		List<Menus> menus = sysService.getMenus();
 		return Result.success("获取系统菜单成功！", menus);
+	}
+
+	/**
+	 * 获取字典列表
+	 * @return
+	 */
+	@DmLog
+	@GetMapping("queryDictList")
+	public Result queryDictList(DmDictQueryParams params)
+	{
+		Map<String,Object> data = new HashMap<>();
+		data.put("list", sysService.queryDictList(params));
+		data.put("total", sysService.queryDictTotal(params));
+		return Result.success("查询字典列表成功", data);
+	}
+
+	/**
+	 * 获取字典列表
+	 * @return
+	 */
+	@DmLog
+	@GetMapping("queryDictInfo")
+	public Result queryDictInfo(@RequestParam String dictId)
+	{
+		List<DictInfo> data = sysService.queryDictInfo(dictId);
+		return Result.success("查询字典信息成功", data);
 	}
 }

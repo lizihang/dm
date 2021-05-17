@@ -16,15 +16,15 @@ import com.dm.common.vo.QueryParams;
  */
 public class DmUserQueryParams extends QueryParams
 {
-	private static final long   serialVersionUID = 1889549005275678384L;
+	private static final long    serialVersionUID = 1889549005275678384L;
 	/** 用户名 */
-	private              String username;
+	private              String  username;
 	/** 昵称 */
-	private              String nickname;
+	private              String  nickname;
 	/** 邮箱 */
-	private              String email;
+	private              String  email;
 	/** 状态 */
-	private              int    status;
+	private              Integer status;
 
 	public String getUsername()
 	{
@@ -56,12 +56,12 @@ public class DmUserQueryParams extends QueryParams
 		this.email = email;
 	}
 
-	public int getStatus()
+	public Integer getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(int status)
+	public void setStatus(Integer status)
 	{
 		this.status = status;
 	}

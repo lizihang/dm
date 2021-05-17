@@ -15,10 +15,10 @@ package com.dm.common.constants;
  */
 public class Constants
 {
-	public static final int     STATUS_CREATE       = 0;
-	public static final int     STATUS_NORMAL       = 1;
-	public static final int     STATUS_DISABLE      = 2;
-	public static final int     STATUS_DELETE       = 3;
+	public static final String     STATUS_CREATE       = "10";
+	public static final String     STATUS_NORMAL       = "20";
+	public static final String     STATUS_DISABLE      = "30";
+	public static final String     STATUS_DELETE       = "40";
 	/** 用户 redis key */
 	public static final String  USER_KEY            = "user:";
 	/** 是否检查权限 */

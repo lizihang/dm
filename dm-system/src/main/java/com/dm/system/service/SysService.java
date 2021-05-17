@@ -1,5 +1,8 @@
 package com.dm.system.service;
 
+import com.dm.system.po.Dict;
+import com.dm.system.po.DictInfo;
+import com.dm.system.vo.DmDictQueryParams;
 import com.dm.system.vo.Menus;
 
 import java.util.List;
@@ -19,4 +22,10 @@ import java.util.List;
 public interface SysService
 {
 	List<Menus> getMenus();
+
+	List<Dict> queryDictList(DmDictQueryParams params);
+
+	Object queryDictTotal(DmDictQueryParams params);
+
+	List<DictInfo> queryDictInfo(String dictId);
 }

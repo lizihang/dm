@@ -1,5 +1,6 @@
 package com.dm.system.vo;
 
+import com.dm.common.constants.Constants;
 import com.dm.user.po.DmUser;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -217,7 +218,7 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	@Override
 	public boolean isEnabled()
 	{
-		return user.getStatus() != 2;
+		return !Constants.STATUS_DISABLE.equals(user.getStatus());
 	}
 
 	/**

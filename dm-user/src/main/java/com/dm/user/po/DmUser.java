@@ -30,7 +30,7 @@ public class DmUser extends BasePO
 	/** 邮箱 */
 	private              String email;
 	/** 状态 */
-	private              int    status;
+	private              String status;
 
 	public int getId()
 	{
@@ -82,12 +82,12 @@ public class DmUser extends BasePO
 		this.email = email;
 	}
 
-	public int getStatus()
+	public String getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(int status)
+	public void setStatus(String status)
 	{
 		this.status = status;
 	}
