@@ -2,6 +2,7 @@ package com.dm.system.controller;
 
 import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
+import com.dm.system.po.Dict;
 import com.dm.system.po.DictInfo;
 import com.dm.system.service.SysService;
 import com.dm.system.vo.DmDictQueryParams;
@@ -62,7 +63,7 @@ public class SysController
 	}
 
 	/**
-	 * 获取字典列表
+	 * 获取字典信息
 	 * @return
 	 */
 	@DmLog
@@ -71,5 +72,29 @@ public class SysController
 	{
 		List<DictInfo> data = sysService.queryDictInfo(dictId);
 		return Result.success("查询字典信息成功", data);
+	}
+
+	/**
+	 * 新增字典
+	 * @return
+	 */
+	@DmLog
+	@PostMapping("addDict")
+	public Result addDict(@RequestBody Dict dict)
+	{
+		sysService.addDict(dict);
+		return Result.success("修改字典成功");
+	}
+
+	/**
+	 * 修改字典
+	 * @return
+	 */
+	@DmLog
+	@PostMapping("updateDict")
+	public Result updateDict(@RequestBody Dict dict)
+	{
+		sysService.updateDict(dict);
+		return Result.success("修改字典成功");
 	}
 }

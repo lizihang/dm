@@ -57,9 +57,15 @@
         m.dict_id m_dict_id, m.dict_name, m.status, m.remark, m.create_user, m.create_time, m.modify_user, m.modify_time,
         g.id, g.dict_id, g.dict_key, g.dict_value
         from
-        dm_sys_dict m,dm_sys_dictinfo g
+        dm_sys_dict m
+        left join
+        dm_sys_dictinfo g
+        on
+        m.dict_id = g.dict_id
         <where>
-            m.dict_id = g.dict_id
+            <if test="dictId != null">
+                and dict_id like CONCAT('%',#{dictId,jdbcType=VARCHAR},'%')
+            </if>
             <if test="dictName != null">
                 and dict_name like CONCAT('%',#{dictName,jdbcType=VARCHAR},'%')
             </if>
@@ -98,6 +104,26 @@
         </where>
     </select>
 
+    <insert id="addDict" parameterType="Dict" keyProperty="dict_id">
+        insert into dm_sys_dict
+        values(#{dictId},#{dictName},#{status},#{remark},#{createUser},#{createTime},#{modifyUser},#{modifyTime})
+    </insert>
+
+    <update id="updateDict" parameterType="Dict">
+        update dm_sys_dict
+        <set>
+            <if test="dictId != null">dict_id=#{dictId},</if>
+            <if test="dictName != null">dict_name=#{dictName},</if>
+            <if test="status != null">status=#{status},</if>
+            <if test="remark != null">remark=#{remark},</if>
+            <if test="modifyUser != null">modify_user=#{modifyUser},</if>
+            <if test="modifyTime != null">modify_time=#{modifyTime}</if>
+        </set>
+        <where>
+            dict_id=#{dictId}
+        </where>
+    </update>
+
     <select id="queryDictInfo" resultType="DictInfo" parameterType="string">
         select id,
                dict_id,
@@ -106,5 +132,6 @@
         from dm_sys_dictinfo
         where dict_id = #{dictId}
     </select>
+
 
 </mapper>

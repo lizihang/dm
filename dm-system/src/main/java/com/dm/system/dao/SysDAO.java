@@ -30,4 +30,8 @@ public interface SysDAO
 	Object queryDictTotal(DmDictQueryParams params);
 
 	List<DictInfo> queryDictInfo(String dictId);
+
+	void addDict(Dict dict);
+
+	void updateDict(Dict dict);
 }

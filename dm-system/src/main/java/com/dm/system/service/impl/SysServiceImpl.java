@@ -57,4 +57,16 @@ public class SysServiceImpl implements SysService
 		}
 		return sysDAO.queryDictInfo(dictId);
 	}
+
+	@Override
+	public void addDict(Dict dict)
+	{
+		sysDAO.addDict(dict);
+	}
+
+	@Override
+	public void updateDict(Dict dict)
+	{
+		sysDAO.updateDict(dict);
+	}
 }
