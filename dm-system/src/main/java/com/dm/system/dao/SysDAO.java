@@ -34,4 +34,8 @@ public interface SysDAO
 	void addDict(Dict dict);
 
 	void updateDict(Dict dict);
+
+	void deleteDict(String dictId);
+
+	void deleteDictInfo(String dictId);
 }

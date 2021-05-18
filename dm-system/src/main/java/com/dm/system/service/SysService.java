@@ -32,4 +32,6 @@ public interface SysService
 	void addDict(Dict dict);
 
 	void updateDict(Dict dict);
+
+	void deleteDict(String dictId);
 }

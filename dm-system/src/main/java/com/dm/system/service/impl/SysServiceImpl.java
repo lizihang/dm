@@ -8,6 +8,7 @@ import com.dm.system.po.DictInfo;
 import com.dm.system.service.SysService;
 import com.dm.system.vo.DmDictQueryParams;
 import com.dm.system.vo.Menus;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,6 +41,7 @@ public class SysServiceImpl implements SysService
 	@Override
 	public List<Dict> queryDictList(DmDictQueryParams params)
 	{
+		PageHelper.startPage(params.getPageNum(), params.getPageSize());
 		return sysDAO.queryDictList(params);
 	}
 
@@ -68,5 +70,14 @@ public class SysServiceImpl implements SysService
 	public void updateDict(Dict dict)
 	{
 		sysDAO.updateDict(dict);
+	}
+
+	@Override
+	public void deleteDict(String dictId)
+	{
+		// 1.先删除子表
+		sysDAO.deleteDictInfo(dictId);
+		// 2.删除主表
+		sysDAO.deleteDict(dictId);
 	}
 }

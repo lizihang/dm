@@ -133,5 +133,12 @@
         where dict_id = #{dictId}
     </select>
 
+    <delete id="deleteDict" parameterType="string">
+        delete from dm_sys_dict where dict_id = #{dictId}
+    </delete>
+
+    <delete id="deleteDictInfo" parameterType="string">
+        delete from dm_sys_dictinfo where dict_id = #{dictId}
+    </delete>
 
 </mapper>

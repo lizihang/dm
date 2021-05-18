@@ -83,7 +83,7 @@ public class SysController
 	public Result addDict(@RequestBody Dict dict)
 	{
 		sysService.addDict(dict);
-		return Result.success("修改字典成功");
+		return Result.success("新增字典成功");
 	}
 
 	/**
@@ -96,5 +96,14 @@ public class SysController
 	{
 		sysService.updateDict(dict);
 		return Result.success("修改字典成功");
+	}
+
+	@DmLog
+	@DeleteMapping("deleteDict/{dictId}")
+	public Result deleteDict(@PathVariable("dictId") String dictId)
+	{
+		sysService.deleteDict(dictId);
+		return Result.success("删除字典编号<"+dictId+">的字典成功！");
+
 	}
 }
