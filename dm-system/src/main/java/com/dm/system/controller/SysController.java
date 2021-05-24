@@ -37,6 +37,17 @@ public class SysController
 	SysService sysService;
 
 	/**
+	 * 验证token
+	 * @return
+	 */
+	@DmLog
+	@GetMapping("checkToken")
+	public Result checkToken()
+	{
+		return Result.success("验证token通过");
+	}
+
+	/**
 	 * 获取系统菜单
 	 * @return
 	 */
@@ -103,7 +114,6 @@ public class SysController
 	public Result deleteDict(@PathVariable("dictId") String dictId)
 	{
 		sysService.deleteDict(dictId);
-		return Result.success("删除字典编号<"+dictId+">的字典成功！");
-
+		return Result.success("删除字典编号<" + dictId + ">的字典成功！");
 	}
 }
