@@ -104,6 +104,11 @@ logging:
   level:
     com.dm:
 
+# TODO
+dm:
+  # 文件路径 示例（ Windows配置D:/dm/upload，Linux配置 /home/dm/upload）
+  profile: D:/dm/upload
+
 
 
 

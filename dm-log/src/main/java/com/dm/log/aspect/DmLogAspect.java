@@ -1,6 +1,7 @@
 package com.dm.log.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -61,7 +62,7 @@ public class DmLogAspect
 		// 打印请求的 IP
 		logger.info("IP             : {}", request.getRemoteAddr());
 		// 打印请求入参
-		logger.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()));
+		logger.info("Request Args   : {}", getArgsJsonString(joinPoint));
 	}
 
 	/**
@@ -106,6 +107,39 @@ public class DmLogAspect
 	{
 		logger.error(e.getMessage());
 		startTime.remove();
-		// TODO 待完善
+	}
+
+	/**
+	 * 对一些不能直接转json的参数进行特殊处理
+	 * @param joinPoint
+	 * @return
+	 */
+	private String getArgsJsonString(JoinPoint joinPoint)
+	{
+		try
+		{
+			return JSON.toJSONString(joinPoint.getArgs());
+		} catch (JSONException e)
+		{
+			return getArgsType(joinPoint.getArgs());
+		}
+	}
+
+	/**
+	 *
+	 * @param args
+	 * @return
+	 */
+	private String getArgsType(Object[] args)
+	{
+		String str = "";
+		for (Object arg : args)
+		{
+			String typeName = arg.getClass().getTypeName();
+			String paramName = arg.getClass().getName();
+			str += "请求参数名<" + paramName + ">，请求参数类型<" + typeName + ">;";
+			System.out.println(str);
+		}
+		return str;
 	}
 }
