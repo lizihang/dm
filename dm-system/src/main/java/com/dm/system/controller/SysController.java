@@ -151,7 +151,7 @@ public class SysController
 			try
 			{
 				file.transferTo(dest); //保存文件
-				return Result.success("文件长传成功", username + "/" + fileName);
+				return Result.success("文件上传成功", username + "/" + fileName);
 			} catch (IllegalStateException | IOException e)
 			{
 				e.printStackTrace();

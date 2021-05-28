@@ -138,8 +138,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		http.authorizeRequests()
 				// 放行接口
 				.antMatchers(SystemConstants.AUTH_WHITELIST).permitAll()
-				//
-				.antMatchers("/profile/**").anonymous()
 				// 除上面外的所有请求全部需要鉴权认证，使用注解方式
 				.anyRequest().authenticated()
 				// 异常处理(权限拒绝、登录失效等) 配置没有权限自定义处理类

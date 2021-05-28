@@ -144,6 +144,7 @@ public class JwtTokenUtil
 			username = claims.getSubject();
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			System.out.println("e = " + e.getMessage());
 		}
 		return username;

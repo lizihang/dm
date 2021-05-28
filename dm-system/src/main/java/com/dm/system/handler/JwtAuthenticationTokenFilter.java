@@ -73,7 +73,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 			{
 				// 记录日志
 				String url = request.getRequestURL().toString();
-				logger.debug("请求地址：" + url + "的时候token为空，未清空user缓存");
+				logger.info("请求地址：" + url + "的时候token为空，未清空user缓存");
 			}
 		}
 		filterChain.doFilter(request, response);
