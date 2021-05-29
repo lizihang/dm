@@ -2,8 +2,8 @@ package com.dm.system.handler;
 
 import com.dm.common.util.RedisCache;
 import com.dm.common.vo.Result;
-import com.dm.system.constants.SystemConstants;
 import com.dm.system.util.ServletUtil;
+import com.dm.system.constants.SystemConstants;
 import com.dm.system.vo.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;

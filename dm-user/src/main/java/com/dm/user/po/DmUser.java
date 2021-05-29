@@ -29,6 +29,8 @@ public class DmUser extends BasePO
 	private              String nickname;
 	/** 邮箱 */
 	private              String email;
+	/** 性别 */
+	private              int    gender;
 	/** 状态 */
 	private              String status;
 
@@ -82,6 +84,16 @@ public class DmUser extends BasePO
 		this.email = email;
 	}
 
+	public int getGender()
+	{
+		return gender;
+	}
+
+	public void setGender(int gender)
+	{
+		this.gender = gender;
+	}
+
 	public String getStatus()
 	{
 		return status;
@@ -95,6 +107,6 @@ public class DmUser extends BasePO
 	@Override
 	public String toString()
 	{
-		return "DmUser{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", nickname='" + nickname + '\'' + ", email='" + email + '\'' + ", status=" + status + "} " + super.toString();
+		return "DmUser{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", nickname='" + nickname + '\'' + ", email='" + email + '\'' + ", gender=" + gender + ", status='" + status + '\'' + "} " + super.toString();
 	}
 }
