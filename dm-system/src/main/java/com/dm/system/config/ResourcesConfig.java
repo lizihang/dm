@@ -2,7 +2,7 @@ package com.dm.system.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 /**
  * <p>标题：</p>
  * <p>功能：</p>
@@ -17,11 +17,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Configuration
-public class ResourcesConfig implements WebMvcConfigurer
+public class ResourcesConfig extends WebMvcConfigurationSupport
 {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry)
 	{
-		registry.addResourceHandler("/image/**").addResourceLocations("file:/D:/dm/upload");
+		// 路径最后一定要加"/"
+		registry.addResourceHandler("/avatar/**").addResourceLocations("file:/D:/dm/upload/avatar/");
+		super.addResourceHandlers(registry);
 	}
 }

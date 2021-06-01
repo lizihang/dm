@@ -9,13 +9,9 @@ import com.dm.system.vo.DmDictQueryParams;
 import com.dm.system.vo.Menus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +35,10 @@ import java.util.Map;
 @RequestMapping("system")
 public class SysController
 {
-	private static final Logger logger = LoggerFactory.getLogger(SysController.class);
+
 	@Resource
-	SysService sysService;
+	SysService   sysService;
+
 
 	/**
 	 * 验证token
@@ -122,41 +119,5 @@ public class SysController
 	{
 		sysService.deleteDict(dictId);
 		return Result.success("删除字典编号<" + dictId + ">的字典成功！");
-	}
-
-	@DmLog
-	@PostMapping("updateAvatar")
-	public Result updateAvatar(@RequestParam("avatar") MultipartFile file)
-	{
-		if (!file.isEmpty())
-		{
-			String fileName = file.getOriginalFilename();
-			int size = (int) file.getSize();
-			System.out.println(fileName + "-->" + size);
-			String path = "D:/dm/upload/avatar";
-			String username = "admin";
-			File dest = new File(path + "/" + username + "/" + fileName);
-			if (!dest.getParentFile().exists())
-			{
-				//判断文件父目录是否存在
-				boolean success = dest.getParentFile().mkdirs();
-				if (success)
-				{
-					logger.info("创建目录成功！" + dest.getAbsolutePath());
-				} else
-				{
-					logger.error("创建目录失败！" + dest.getAbsolutePath());
-				}
-			}
-			try
-			{
-				file.transferTo(dest); //保存文件
-				return Result.success("文件上传成功", username + "/" + fileName);
-			} catch (IllegalStateException | IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "上传文件不能为空！");
 	}
 }

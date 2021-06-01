@@ -60,6 +60,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 			}
 		}
+		// TODO 处理静态资源时，这个也报错，需要处理一下
 		if (ObjectUtil.isEmpty(loginUser))
 		{
 			// 当redis缓存中loginUser删除时，重新登录会查询user，此时如果redis中user存在，返回的是没有password的，会报登录失败

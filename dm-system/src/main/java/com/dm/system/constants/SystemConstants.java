@@ -38,6 +38,6 @@ public class SystemConstants
 			// swagger2相关
 			// "/swagger-ui.html", "/webjars/**", "/v2/**", "/swagger-resources/**"
 			// 结束符
-			,"/image/**"
+			,"/avatar/**"
 	};
 }
