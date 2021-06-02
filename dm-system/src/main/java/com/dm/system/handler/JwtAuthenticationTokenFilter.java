@@ -3,6 +3,7 @@ package com.dm.system.handler;
 import com.dm.common.constants.Constants;
 import com.dm.common.util.ObjectUtil;
 import com.dm.common.util.RedisCache;
+import com.dm.common.util.StrUtil;
 import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.constants.SystemConstants;
 import com.dm.system.vo.LoginUser;
@@ -45,6 +46,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException
 	{
+		String url = request.getRequestURL().toString();
+		logger.info("请求地址url:" + url);
 		LoginUser loginUser = jwtTokenUtil.getLoginUser(request);
 		if (ObjectUtil.isNotEmpty(loginUser) && ObjectUtil.isEmpty(SecurityContextHolder.getContext().getAuthentication()))
 		{
@@ -60,22 +63,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter
 				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 			}
 		}
-		// TODO 处理静态资源时，这个也报错，需要处理一下
-		if (ObjectUtil.isEmpty(loginUser))
+		String token = jwtTokenUtil.getToken(request);
+		if (StrUtil.isNotEmpty(token) && ObjectUtil.isEmpty(loginUser))
 		{
 			// 当redis缓存中loginUser删除时，重新登录会查询user，此时如果redis中user存在，返回的是没有password的，会报登录失败
 			// 临时解决：缓存中loginUser不存在时，user缓存也清空。
 			// TODO loginUser和user缓存只留一个？
 			String username = jwtTokenUtil.getUsernameFromToken(request);
-			if (username != null)
-			{
-				redisCache.deleteObject(Constants.USER_KEY + username);
-			} else
-			{
-				// 记录日志
-				String url = request.getRequestURL().toString();
-				logger.info("请求地址：" + url + "的时候token为空，未清空user缓存");
-			}
+			redisCache.deleteObject(Constants.USER_KEY + username);
 		}
 		filterChain.doFilter(request, response);
 	}

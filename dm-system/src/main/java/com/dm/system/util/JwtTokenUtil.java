@@ -96,7 +96,7 @@ public class JwtTokenUtil
 	 * @param request 请求
 	 * @return token
 	 */
-	private String getToken(HttpServletRequest request)
+	public String getToken(HttpServletRequest request)
 	{
 		String token = request.getHeader(SystemConstants.TOKEN_HEADER);
 		if (StrUtil.isNotEmpty(token) && token.startsWith(SystemConstants.TOKEN_PREFIX))

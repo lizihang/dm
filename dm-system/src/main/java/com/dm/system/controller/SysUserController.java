@@ -62,7 +62,8 @@ public class SysUserController
 			int size = (int) file.getSize();
 			System.out.println(fileName + "-->" + size);
 			String path = "D:/dm/upload/avatar/";
-			DmUser user = jwtTokenUtil.getLoginUser(ServletUtil.getRequest()).getUser();
+			LoginUser loginUser = jwtTokenUtil.getLoginUser(ServletUtil.getRequest());
+			DmUser user = loginUser.getUser();
 			String username = user.getUsername();
 			String avatar = username + "/" + fileName;
 			File dest = new File(path + avatar);
@@ -85,10 +86,11 @@ public class SysUserController
 				// 2.更新用户avatar字段
 				user.setAvatar(avatar);
 				userService.updateUser(user);
+				// TODO
 				// 3.更新缓存
 				// 4.更新token
 				// 5.返回结果
-				return Result.success("头像上传成功", avatar);
+				return Result.success("头像上传成功", loginUser);
 			} catch (IllegalStateException | IOException e)
 			{
 				e.printStackTrace();

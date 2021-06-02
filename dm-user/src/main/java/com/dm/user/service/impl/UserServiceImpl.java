@@ -112,6 +112,7 @@ public class UserServiceImpl implements UserService
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 		}
 		// 1.更新数据库
+		user.setModifyTime(DateUtil.getServerDate());
 		userDAO.update(user);
 		// 2.更新缓存
 		String key = Constants.USER_KEY + user.getUsername();
