@@ -1,21 +1,21 @@
-package com.dm.user.dao;
+package com.dm.system.dao;
 
-import com.dm.user.po.DmUser;
-import com.dm.user.vo.DmUserQueryParams;
+import com.dm.system.po.DmUser;
+import com.dm.system.param.DmUserQueryParams;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 /**
- * <p>标题：用户DAO</p>
+ * <p>标题：</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：用户增删改查
+ * 其他说明：
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年10月13日 17:04</p>
- * <p>类全名：com.dm.user.dao.UserDAO</p>
+ * <p>创建日期：2021年06月08日 19:02</p>
+ * <p>类全名：com.dm.system.dao.UserDAO</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Mapper

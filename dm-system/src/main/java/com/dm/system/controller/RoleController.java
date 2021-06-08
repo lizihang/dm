@@ -1,10 +1,10 @@
-package com.dm.user.controller;
+package com.dm.system.controller;
 
 import com.dm.common.vo.Result;
 import com.dm.log.annotation.DmLog;
-import com.dm.user.po.DmRole;
-import com.dm.user.service.RoleService;
-import com.dm.user.vo.DmRoleQueryParams;
+import com.dm.system.param.DmRoleQueryParams;
+import com.dm.system.po.DmRole;
+import com.dm.system.service.RoleService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +20,8 @@ import java.util.Map;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2021年02月24日 16:09</p>
- * <p>类全名：com.dm.user.controller.RoleController</p>
+ * <p>创建日期：2021年06月08日 19:18</p>
+ * <p>类全名：com.dm.system.controller.RoleController</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @CrossOrigin //解决跨域问题

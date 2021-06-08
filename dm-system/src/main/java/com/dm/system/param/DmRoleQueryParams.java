@@ -1,4 +1,4 @@
-package com.dm.user.vo;
+package com.dm.system.param;
 
 import com.dm.common.vo.QueryParams;
 /**
@@ -10,8 +10,8 @@ import com.dm.common.vo.QueryParams;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2021年02月24日 15:46</p>
- * <p>类全名：com.dm.user.vo.DmRoleQueryParams</p>
+ * <p>创建日期：2021年06月08日 19:15</p>
+ * <p>类全名：com.dm.system.param.DmRoleQueryParams</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public class DmRoleQueryParams extends QueryParams

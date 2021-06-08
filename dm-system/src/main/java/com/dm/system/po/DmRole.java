@@ -1,4 +1,4 @@
-package com.dm.user.po;
+package com.dm.system.po;
 
 import com.dm.common.po.BasePO;
 /**
@@ -10,8 +10,8 @@ import com.dm.common.po.BasePO;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2021年02月23日 11:17</p>
- * <p>类全名：com.dm.user.po.DmRole</p>
+ * <p>创建日期：2021年06月08日 19:17</p>
+ * <p>类全名：com.dm.system.po.DmRole</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public class DmRole extends BasePO

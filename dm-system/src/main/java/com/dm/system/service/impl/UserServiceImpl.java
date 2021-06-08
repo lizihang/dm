@@ -1,12 +1,12 @@
-package com.dm.user.service.impl;
+package com.dm.system.service.impl;
 
 import com.dm.common.constants.Constants;
 import com.dm.common.util.DateUtil;
 import com.dm.common.util.RedisCache;
-import com.dm.user.dao.UserDAO;
-import com.dm.user.po.DmUser;
-import com.dm.user.service.UserService;
-import com.dm.user.vo.DmUserQueryParams;
+import com.dm.system.dao.UserDAO;
+import com.dm.system.po.DmUser;
+import com.dm.system.service.UserService;
+import com.dm.system.param.DmUserQueryParams;
 import com.github.pagehelper.PageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年10月13日 17:05</p>
- * <p>类全名：com.dm.user.service.impl.UserServiceImpl</p>
+ * <p>创建日期：2021年06月08日 18:59</p>
+ * <p>类全名：com.dm.system.service.impl.UserServiceImpl</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Service

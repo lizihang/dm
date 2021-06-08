@@ -1,20 +1,20 @@
-package com.dm.user.service;
+package com.dm.system.service;
 
-import com.dm.user.po.DmUser;
-import com.dm.user.vo.DmUserQueryParams;
+import com.dm.system.po.DmUser;
+import com.dm.system.param.DmUserQueryParams;
 
 import java.util.List;
 /**
  * <p>标题：用户service</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：处理用户登录，用户注册，用户修改
+ * 其他说明：
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2020年10月13日 17:05</p>
- * <p>类全名：com.dm.user.service.UserService</p>
+ * <p>创建日期：2021年06月08日 18:58</p>
+ * <p>类全名：com.dm.system.service.UserService</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public interface UserService

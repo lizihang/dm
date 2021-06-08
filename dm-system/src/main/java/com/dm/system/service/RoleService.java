@@ -1,7 +1,7 @@
-package com.dm.user.service;
+package com.dm.system.service;
 
-import com.dm.user.po.DmRole;
-import com.dm.user.vo.DmRoleQueryParams;
+import com.dm.system.param.DmRoleQueryParams;
+import com.dm.system.po.DmRole;
 
 import java.util.List;
 /**
@@ -13,8 +13,8 @@ import java.util.List;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2021年02月24日 15:45</p>
- * <p>类全名：com.dm.user.service.RoleService</p>
+ * <p>创建日期：2021年06月08日 19:16</p>
+ * <p>类全名：com.dm.system.service.RoleService</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public interface RoleService
@@ -55,6 +55,4 @@ public interface RoleService
 	 * @param id id
 	 */
 	void deleteRoleById(int id);
-
-
 }

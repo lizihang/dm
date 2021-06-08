@@ -1,10 +1,10 @@
-package com.dm.user.service.impl;
+package com.dm.system.service.impl;
 
 import com.dm.common.constants.Constants;
-import com.dm.user.dao.RoleDAO;
-import com.dm.user.po.DmRole;
-import com.dm.user.service.RoleService;
-import com.dm.user.vo.DmRoleQueryParams;
+import com.dm.system.dao.RoleDAO;
+import com.dm.system.param.DmRoleQueryParams;
+import com.dm.system.po.DmRole;
+import com.dm.system.service.RoleService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +20,8 @@ import java.util.List;
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
- * <p>创建日期：2021年02月24日 15:50</p>
- * <p>类全名：com.dm.user.service.impl.RoleServiceImpl</p>
+ * <p>创建日期：2021年06月08日 19:17</p>
+ * <p>类全名：com.dm.system.service.impl.RoleServiceImpl</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Service
