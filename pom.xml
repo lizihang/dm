@@ -18,7 +18,6 @@
 
 	<modules>
 		<module>dm-common</module>
-		<module>dm-user</module>
 		<module>dm-log</module>
 		<module>dm-system</module>
 		<module>dm-quartz</module>

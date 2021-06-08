@@ -1,9 +1,9 @@
 package com.dm.system.service.impl;
 
+import com.dm.system.po.DmUser;
+import com.dm.system.service.UserService;
 import com.dm.system.util.JwtTokenUtil;
 import com.dm.system.vo.LoginUser;
-import com.dm.user.po.DmUser;
-import com.dm.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

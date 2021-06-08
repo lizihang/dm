@@ -2,7 +2,7 @@ package com.dm.system.dao;
 
 import com.dm.system.po.Dict;
 import com.dm.system.po.DictInfo;
-import com.dm.system.vo.DmDictQueryParams;
+import com.dm.system.param.DmDictQueryParams;
 import com.dm.system.vo.Menus;
 import org.apache.ibatis.annotations.Mapper;
 

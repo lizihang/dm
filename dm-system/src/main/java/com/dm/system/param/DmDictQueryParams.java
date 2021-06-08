@@ -1,4 +1,4 @@
-package com.dm.system.vo;
+package com.dm.system.param;
 
 import com.dm.common.vo.QueryParams;
 /**
@@ -11,7 +11,7 @@ import com.dm.common.vo.QueryParams;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2021年05月17日 16:11</p>
- * <p>类全名：com.dm.system.vo.DmDictQueryParams</p>
+ * <p>类全名：com.dm.system.param.DmDictQueryParams</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 public class DmDictQueryParams extends QueryParams

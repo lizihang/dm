@@ -1,7 +1,7 @@
 package com.dm.system.vo;
 
 import com.dm.common.constants.Constants;
-import com.dm.user.po.DmUser;
+import com.dm.system.po.DmUser;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -71,7 +71,6 @@ public class LoginUser implements UserDetails, CredentialsContainer
 	{
 	}
 
-	//TODO 其他参数的构造器
 	public LoginUser(DmUser user)
 	{
 		this.user = user;

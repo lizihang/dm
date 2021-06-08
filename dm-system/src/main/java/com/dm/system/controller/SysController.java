@@ -5,10 +5,9 @@ import com.dm.log.annotation.DmLog;
 import com.dm.system.po.Dict;
 import com.dm.system.po.DictInfo;
 import com.dm.system.service.SysService;
-import com.dm.system.vo.DmDictQueryParams;
+import com.dm.system.util.ValidateCodeUtil;
+import com.dm.system.param.DmDictQueryParams;
 import com.dm.system.vo.Menus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,7 +20,8 @@ import java.util.Map;
  * <pre>
  * 其他说明：
  * 功能：
- * 1.系统菜单的增删改查
+ * 1.获取验证码
+ * 2.验证token
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
@@ -35,10 +35,26 @@ import java.util.Map;
 @RequestMapping("system")
 public class SysController
 {
-
 	@Resource
-	SysService   sysService;
+	SysService sysService;
 
+	/**
+	 * 生成验证码
+	 */
+	@DmLog
+	@GetMapping("/getCodeImg")
+	public Result getCodeImg()
+	{
+		//直接调用静态方法，返回验证码对象
+		ValidateCodeUtil.Validate v = ValidateCodeUtil.getRandomCode();
+		Map<String,Object> data = new HashMap<>();
+		if (v != null)
+		{
+			data.put("validCode", v.getValue().toLowerCase());
+			data.put("validStr", v.getBase64Str());
+		}
+		return Result.success("获取验证码成功", data);
+	}
 
 	/**
 	 * 验证token

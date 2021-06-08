@@ -1,4 +1,4 @@
-package com.dm.system.vo;
+package com.dm.po;
 
 import org.springframework.stereotype.Component;
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2021年05月10日 22:03</p>
- * <p>类全名：com.dm.system.vo.ESUser</p>
+ * <p>类全名：com.dm.po.ESUser</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Component

@@ -1,7 +1,7 @@
 package com.dm.elasticsearch;
 
 import com.alibaba.fastjson.JSON;
-import com.dm.system.vo.ESUser;
+import com.dm.po.ESUser;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;

@@ -6,10 +6,11 @@ import com.dm.system.dao.SysDAO;
 import com.dm.system.po.Dict;
 import com.dm.system.po.DictInfo;
 import com.dm.system.service.SysService;
-import com.dm.system.vo.DmDictQueryParams;
+import com.dm.system.param.DmDictQueryParams;
 import com.dm.system.vo.Menus;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @Service
+@Transactional
 public class SysServiceImpl implements SysService
 {
 	@Resource

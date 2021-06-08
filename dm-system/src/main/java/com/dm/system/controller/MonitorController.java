@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 /**
- * <p>标题：</p>
+ * <p>标题：监控controller</p>
  * <p>功能：</p>
  * <pre>
- * 其他说明：
+ * 其他说明：TODO 专门做个模块
  * </pre>
  * <p>作者：lizh</p>
  * <p>审核：</p>
  * <p>重构：</p>
  * <p>创建日期：2020年12月08日 15:02</p>
- * <p>类全名：com.dm.system.controller.SysUserOnlineController</p>
+ * <p>类全名：com.dm.system.controller.MonitorController</p>
  * 查看帮助：<a href="" target="_blank"></a>
  */
 @CrossOrigin
 @RestController
 @RequestMapping("/monitor/online")
-public class SysUserOnlineController
+public class MonitorController
 {
 	@Resource
 	RedisCache redisCache;
