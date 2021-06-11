@@ -32,7 +32,7 @@ public class SystemConstants
 	/**==================== 不需要权限的 ====================*/
 	public static final String[] AUTH_WHITELIST        = {
 			// 登录相关
-			"/getCodeImg", "/user/register",
+			"/system/getCodeImg", "/user/register",
 			// swagger3相关
 			"/swagger-ui/**", "/v3/**", "/swagger-resources/**"
 			// swagger2相关

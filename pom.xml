@@ -257,6 +257,12 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<!-- 解决多环境打包时，yml文件@active-profile@报错 -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+		</dependency>
+
 		<!-- 测试 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -276,6 +282,21 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<active-profile>dev</active-profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<active-profile>pro</active-profile>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<!--
@@ -292,6 +313,15 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<!-- 解决多环境打包时，yml文件@active-profile@报错 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<delimiters>@</delimiters>
+					<useDefaultDelimiters>false</useDefaultDelimiters>
 				</configuration>
 			</plugin>
 		</plugins>
