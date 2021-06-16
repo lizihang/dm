@@ -7,7 +7,6 @@
 - IntelliJ IDEA 2019.3 (IntelliJ IDEA 2020.3.3)
 - Mysql 5.7.17
 - SpringBoot 2.3.4.RELEASE
-- Zookeeper 3.4.10
 - ElasticSearch 7.12.1
 
 ## 运行方式
@@ -27,9 +26,6 @@
 |dm-log              |通过SpringAOP实现的日志服务，自定义注解@DmLog        | |
 |dm-quartz           |SpringBoot整合Quartz实现定时任务   | |
 |dm-system           |系统模块                          | |
-|dm-dubbo-api        |分布式服务接口                     | |
-|dm-dubbo-consumer   |分布式服务消费者                   | |
-|dm-dubbo-provider   |分布式服务提供者                   | |
 
 
 ## SpringBoot整合文档
@@ -47,5 +43,3 @@
 ### [06-SpringBoot整合Quartz](/document/技术文档/06-SpringBoot整合Quartz.md)
 
 ### [07-SpringBoot整合ElasticSearch](/document/技术文档/07-SpringBoot整合ElasticSearch.md)   
-
-### [分布式Demo](/document/技术文档/分布式Demo.md)
